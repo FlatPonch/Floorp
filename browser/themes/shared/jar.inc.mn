@@ -564,3 +564,5 @@
   skin/classic/browser/privatebrowsing/favicon.svg             (../shared/privatebrowsing/favicon.svg)
 
   skin/classic/browser/syncedtabs/sidebar.css                  (../shared/syncedtabs/sidebar.css)
+
+  skin/classic/browser/install-ssb.svg                         (../shared/install-ssb.svg)

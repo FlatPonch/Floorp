@@ -2330,6 +2330,9 @@ pref("app.normandy.onsync_skew_sec", 600);
  // pref("app.shield.optoutstudies.enabled", false);
 #endif
 
+// Web apps support
+pref("browser.ssb.enabled", false);
+
 // Multi-lingual preferences:
 //  *.enabled - Are langpacks available for the build of Firefox?
 //  *.downloadEnabled - Langpacks are allowed to be downloaded from AMO. AMO only serves
