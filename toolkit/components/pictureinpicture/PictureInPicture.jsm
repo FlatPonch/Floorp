@@ -362,9 +362,11 @@ var PictureInPicture = {
 
     // set attribute which shows pip icon in tab
     let tab = parentWin.gBrowser.getTabForBrowser(browser);
-    tab.setAttribute("pictureinpicture", true);
+    if(tab) {
+      tab.setAttribute("pictureinpicture", true);
 
-    tab.addEventListener("TabSwapPictureInPicture", this);
+      tab.addEventListener("TabSwapPictureInPicture", this);
+    }
 
     let pipId = gNextWindowID.toString();
     win.setupPlayer(pipId, wgp, videoData.videoRef);

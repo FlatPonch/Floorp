@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-const { XPCOMUtils } = ChromeUtils.import(
+ const { XPCOMUtils } = ChromeUtils.import(
   "resource://gre/modules/XPCOMUtils.jsm"
 );
 
@@ -19,6 +19,40 @@ XPCOMUtils.defineLazyScriptGetter(
   "PrintUtils",
   "chrome://global/content/printUtils.js"
 );
+
+XPCOMUtils.defineLazyScriptGetter(
+  this,
+  ["openContextMenu", "nsContextMenu"],
+  "chrome://browser/content/nsContextMenu.js"
+);
+
+XPCOMUtils.defineLazyServiceGetters(this, {
+  BrowserHandler: ["@mozilla.org/browser/clh;1", "nsIBrowserHandler"],
+});
+
+const { CommonUtils } = ChromeUtils.import(
+  "resource://services-common/utils.js"
+);
+
+makeURI = CommonUtils.makeURI;
+
+XPCOMUtils.defineLazyModuleGetters(this, {
+  E10SUtils: "resource://gre/modules/E10SUtils.jsm",
+  SpellCheckHelper: "resource://gre/modules/InlineSpellChecker.jsm",
+  LoginManagerChild: "resource://gre/modules/LoginManagerChild.jsm",
+  WebNavigationFrames: "resource://gre/modules/WebNavigationFrames.jsm",
+  PrivateBrowsingUtils: "resource://gre/modules/PrivateBrowsingUtils.jsm",
+  SelectionUtils: "resource://gre/modules/SelectionUtils.jsm",
+  InlineSpellCheckerContent:
+    "resource://gre/modules/InlineSpellCheckerContent.jsm",
+  ContentDOMReference: "resource://gre/modules/ContentDOMReference.jsm",
+});
+
+const { AppConstants } = ChromeUtils.import(
+  "resource://gre/modules/AppConstants.jsm"
+);
+
+var gMultiProcessBrowser = window.docShell.QueryInterface(Ci.nsILoadContext).useRemoteTabs;
 
 let gSSBBrowser = null;
 var gSSB = null;
