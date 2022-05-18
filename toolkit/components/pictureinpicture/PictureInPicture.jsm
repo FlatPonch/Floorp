@@ -239,10 +239,13 @@ var PictureInPicture = {
     let gBrowser = browser.ownerGlobal.gBrowser;
     let tab = gBrowser.getTabForBrowser(browser);
 
-    // focus the tab's window
-    tab.ownerGlobal.focus();
+    if(tab) {
+      // focus the tab's window
+      tab.ownerGlobal.focus();
 
-    gBrowser.selectedTab = tab;
+      gBrowser.selectedTab = tab;
+    }
+
     await this.closeSinglePipWindow({ reason: "unpip", actorRef: pipActor });
   },
 
