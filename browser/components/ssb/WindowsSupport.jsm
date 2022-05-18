@@ -76,15 +76,19 @@ const WindowsSupport = {
     }
 
     let desktop = Services.dirsvc.get("Desk", Ci.nsIFile);
-    let link = OS.Path.join(desktop.path, `${ssb.name}.lnk`);
+    let path = OS.Path.join(desktop.path, `${ssb.name}.lnk`);
+    let name = `${ssb.name}.lnk`;
 
     shellService.createShortcut(
       Services.dirsvc.get("XREExeF", Ci.nsIFile),
       ["-profile", OS.Constants.Path.profileDir, "-start-ssb", ssb.id],
       ssb.name,
       iconFile,
+      0,
       buildGroupId(ssb.id),
-      new File(link)
+      "Desktop",
+      name,
+      path
     );
   },
 
