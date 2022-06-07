@@ -10346,12 +10346,6 @@ document.head.appendChild(script);
 }
 */
 
-if (Services.prefs.getBoolPref("floorp.multitab.bottommode", false)) {
-var firefox = document.createElement('script');
-firefox.src = "chrome://userchromejs/content/multitab.uc.js"; 
-document.head.appendChild(firefox); 
-}
-
 var firefox = document.createElement('script');
 firefox.src = "chrome://userchromejs/content/chromecss.uc.js"; 
 document.head.appendChild(firefox); 
