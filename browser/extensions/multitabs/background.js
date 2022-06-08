@@ -228,12 +228,6 @@ async function startup() {
   });
 }
 
-browser.runtime.onInstalled.addListener(details => {
-  if (details.reason === 'install') {
-    browser.tabs.create({url: browser.runtime.getManifest().homepage_url});
-  }
-});
-
 browser.theme.onUpdated.addListener(async details => {
   if ((await browser.storage.local.get('fitLightness')).fitLightness !== false) {
     // Re-apply options, so the lightness settings fit the new theme
