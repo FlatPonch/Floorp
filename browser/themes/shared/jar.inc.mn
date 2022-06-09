@@ -25,7 +25,7 @@
   skin/classic/browser/customcss/classic_firefox_menu_button.css            (../shared/theme/customcss/classic_firefox_menu_button.css)
 
 # Lepton (Waterfox)
-# please read "browser\themes\shared\theme\lepton\CREDITS"
+# please see "browser\themes\shared\theme\lepton\CREDITS"
 
   skin/classic/browser/lepton/userChrome.css                                (../shared/theme/lepton/userChrome.css)
   skin/classic/browser/lepton/userContent.css                               (../shared/theme/lepton/userContent.css)
@@ -343,8 +343,10 @@
 
 # photon
   skin/classic/browser/photon/photonChrome.css                (../shared/theme/photon/photonChrome.css)
-  skin/classic/browser/photon/photon-recover.css              (../shared/theme/photon/photon-recover.css)
   skin/classic/browser/photon/photonContent.css               (../shared/theme/photon/photonContent.css)
+
+  skin/classic/browser/photon/photonChrome-multitab.css       (../shared/theme/photon/photonChrome-multitab.css)
+  skin/classic/browser/photon/photonContent-multitab.css       (../shared/theme/photon/photonContent-multitab.css)
   skin/classic/browser/photon/photon.svg                      (../shared/theme/photon/photon.svg)
   skin/classic/browser/photon/photon-folder.svg               (../shared/theme/photon/photon-folder.svg)
   skin/classic/browser/photon/photon-folder-open.svg          (../shared/theme/photon/photon-folder-open.svg)

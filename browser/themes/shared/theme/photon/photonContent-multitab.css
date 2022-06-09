@@ -4,6 +4,8 @@
 /* Control Bar Size */
 @supports -moz-bool-pref("userContent.player.size") {
   #controlsContainer {
+    --button-size: 32px !important;
+    /* Original: 30px */
     --controlBar-height: 40px;
     /* Original: 40px, Replace to this value */
   }
@@ -190,11 +192,11 @@
 }
 @supports -moz-bool-pref("userContent.player.icon") {
   #controlsContainer .fullscreenButton {
-    background-image: url("../icons/enter-fullscreen.svg") !important;
+    background-image: url("chrome://browser/skin/lepton/enter-fullscreen.svg") !important;
   }
 
   #controlsContainer .fullscreenButton[fullscreened] {
-    background-image: url("../icons/exit-fullscreen.svg") !important;
+    background-image: url("chrome://browser/skin/lepton/exit-fullscreen.svg") !important;
   }
 }
 @supports -moz-bool-pref("userContent.player.noaudio") {
@@ -494,12 +496,12 @@
   url("about:restartrequired"), url("chrome://browser/content/aboutRestartRequired.xhtml")
   {
     #errorPageContainer {
-      background-image: url("../icons/error-connection-failure.svg");
+      background-image: url("chrome://browser/skin/lepton/error-connection-failure.svg");
     }
   }
   @-moz-document url-prefix("about:neterror?e=dnsNotFound") {
     #errorPageContainer {
-      background-image: url("../icons/error-server-not-found.svg");
+      background-image: url("chrome://browser/skin/lepton/error-server-not-found.svg");
     }
   }
   @-moz-document url-prefix("about:neterror?e=malformedURI") {
@@ -510,14 +512,14 @@
   @-moz-document url-prefix("about:neterror?e=clockSkewError"),
   url-prefix("about:neterror?e=nssFailure") {
     #errorPageContainer {
-      background-image: url("../icons/blue-berror.svg");
+      background-image: url("chrome://browser/skin/lepton/blue-berror.svg");
       background-size: 18.5em;
     }
   }
   @-moz-document url("about:sessionrestore"), url("chrome://browser/content/aboutSessionRestore.xhtml")
   {
     .description-wrapper {
-      background-image: url("../icons/error-session-restore.svg");
+      background-image: url("chrome://browser/skin/lepton/error-session-restore.svg");
     }
   }
   @-moz-document url-prefix("about:neterror?e=fileNotFound") {
@@ -549,7 +551,7 @@
   {
     @media (min-width: 970px) {
       .title {
-        background-image: url("../icons/welcome-back.svg") !important;
+        background-image: url("chrome://browser/skin/lepton/welcome-back.svg") !important;
       }
     }
   }
@@ -1839,7 +1841,7 @@
       #editBMPanel_folderMenuList:not([selectedGuid="toolbar_____"], [selectedGuid="menu________"]),
       #editBMPanel_folderMenuList .folder-icon:not([id]),
       .downloadIconShow > .button-box > .button-icon {
-        list-style-image: url("../icons/folder.svg") !important;
+        list-style-image: url("chrome://browser/skin/lepton/folder.svg") !important;
       }
 
       /* Standard Folder - Open */
@@ -1847,7 +1849,7 @@
         .bookmark-item[container="true"]:not([query="true"], [tagContainer], [dayContainer])[open="true"],
       :-moz-any(#bookmarks-view, #historyTree, #editBMPanel_folderTree, #placesList, #placeContent)
         treechildren::-moz-tree-image(title, container, open) {
-        list-style-image: url("../icons/folder-open.svg") !important;
+        list-style-image: url("chrome://browser/skin/lepton/folder-open.svg") !important;
       }
 
       /*= Other Folder - Inbox Icon ================================================*/
@@ -1861,7 +1863,7 @@
         treechildren::-moz-tree-image(container, queryFolder_unfiled_____),
       #editBMPanel_unfiledRootItem,
       #editBMPanel_folderMenuList[selectedGuid="unfiled_____"] {
-        list-style-image: url("../icons/mail-inbox-all.svg") !important;
+        list-style-image: url("chrome://browser/skin/lepton/mail-inbox-all.svg") !important;
       }
 
       /* Other Folder - Open */
@@ -1872,7 +1874,7 @@
         treechildren::-moz-tree-image(container, open, OrganizerQuery_UnfiledBookmarks),
       :-moz-any(#bookmarks-view, #editBMPanel_folderTree, #placesList, #placeContent)
         treechildren::-moz-tree-image(container, open, queryFolder_unfiled_____) {
-        list-style-image: url("../icons/mail-inbox.svg") !important;
+        list-style-image: url("chrome://browser/skin/lepton/mail-inbox.svg") !important;
       }
 
       /*= Default Icon - Override ===================================================*/
@@ -1933,7 +1935,7 @@
         treechildren::-moz-tree-image(title, query, open, dayContainer),
       :-moz-any(#historyTree, #placesList, #placeContent)
         treechildren::-moz-tree-image(query, open, OrganizerQuery_history____v) {
-        list-style-image: url("../icons/history-reverse.svg") !important;
+        list-style-image: url("chrome://browser/skin/lepton/history-reverse.svg") !important;
       }
 
       /* Tag */
@@ -1941,7 +1943,7 @@
         .bookmark-item[container="true"][tagContainer="true"][open="true"],
       :-moz-any(#placesList, #placeContent) treechildren::-moz-tree-image(title, query, open, tagContainer),
       :-moz-any(#placesList, #placeContent) treechildren::-moz-tree-image(query, open, OrganizerQuery_tags_______v) {
-        list-style-image: url("../icons/tag-open.svg") !important;
+        list-style-image: url("chrome://browser/skin/lepton/tag-open.svg") !important;
       }
 
       /* Boomark */
@@ -1954,13 +1956,13 @@
       #bookmarksMenuPopup #bookmarksToolbarFolderMenu[open="true"],
       :-moz-any(#bookmarks-view, #editBMPanel_folderTree, #placesList, #placeContent)
         treechildren::-moz-tree-image(container, open, queryFolder_toolbar_____) {
-        list-style-image: url("../icons/bookmarksToolbar-open.svg") !important;
+        list-style-image: url("chrome://browser/skin/lepton/bookmarksToolbar-open.svg") !important;
       }
 
       /* Bookmark Menu */
       :-moz-any(#bookmarks-view, #editBMPanel_folderTree, #placesList, #placeContent)
         treechildren::-moz-tree-image(container, open, queryFolder_menu________) {
-        list-style-image: url("../icons/bookmarksMenu-open.svg") !important;
+        list-style-image: url("chrome://browser/skin/lepton/bookmarksMenu-open.svg") !important;
         /* or bookmarksMenu-open2.svg" */
       }
 
@@ -1981,11 +1983,11 @@
       }
 
       #viewMenu {
-        list-style-image: url("../icons/sort.svg") !important;
+        list-style-image: url("chrome://browser/skin/lepton/sort.svg") !important;
       }
 
       #maintenanceButton {
-        list-style-image: url("../icons/import-export.svg") !important;
+        list-style-image: url("chrome://browser/skin/lepton/import-export.svg") !important;
       }
 
       #clearDownloadsButton {
@@ -2036,14 +2038,14 @@
         background-image: var(--menuitem-image);
       }
 
-      /* For native context menus */
-      @supports -moz-bool-pref("widget.macos.native-context-menus") or -moz-bool-pref("widget.gtk.native-context-menus") {
+      /* For native context menus on macOS */
+      @supports -moz-bool-pref("widget.macos.native-context-menus") {
         :not(menu, #ContentSelectDropdown)
           > menupopup
-          > menuitem:not(.menuitem-iconic, .in-menulist, [type="checkbox"], [checked="true"]),
+          > menuitem:not(.menuitem-iconic, [type="checkbox"], [checked="true"], .in-menulist),
         :not(menu, #ContentSelectDropdown)
           > menupopup
-          > menu:not(.menu-iconic, .in-menulist, [type="checkbox"], [checked="true"]) {
+          > menu:not(.menu-iconic, [type="checkbox"], [checked="true"], .in-menulist) {
           list-style-image: var(--menuitem-image) !important;
         }
       }
@@ -2140,9 +2142,10 @@
         #placesContext menu:not(.menu-iconic, .in-menulist, [type="checkbox"], [checked="true"]) {
           padding-inline-end: var(--context-menu-background-padding) !important;
         }
+
+        /* text position */
         #placesContext menuitem:not(.menuitem-iconic, .in-menulist, [type="checkbox"], [checked="true"]) > .menu-text,
         #placesContext menu:not(.menu-iconic, .in-menulist, [type="checkbox"], [checked="true"]) > .menu-text {
-          /* text position */
           padding-inline-start: var(--context-menu-mac-padding) !important;
         }
 
@@ -2157,12 +2160,12 @@
       /* Icon lists */
       /*= placeContext =============================================================*/
       #placesContext_open {
-        --menuitem-image: url("../icons/link-square.svg");
+        --menuitem-image: url("chrome://browser/skin/lepton/link-square.svg");
       }
 
       #placesContext_openBookmarkContainer\:tabs,
       #placesContext_openBookmarkLinks\:tabs {
-        --menuitem-image: url("../icons/movetowindow-16.svg");
+        --menuitem-image: url("chrome://browser/skin/lepton/movetowindow-16.svg");
       }
 
       #placesContext_open\:newtab,
@@ -2193,11 +2196,11 @@
       }
 
       #placesContext_deleteHost {
-        --menuitem-image: url("../icons/eye-hide.svg");
+        --menuitem-image: url("chrome://browser/skin/lepton/eye-hide.svg");
       }
 
       #placesContext_sortBy\:name {
-        --menuitem-image: url("../icons/text-sort-ascending.svg");
+        --menuitem-image: url("chrome://browser/skin/lepton/text-sort-ascending.svg");
       }
 
       #placesContext_cut {
@@ -2205,7 +2208,7 @@
       }
 
       #placesContext_copy {
-        --menuitem-image: url("../icons/edit-copy.svg");
+        --menuitem-image: url("chrome://browser/skin/lepton/edit-copy.svg");
       }
 
       #placesContext_paste_group {
@@ -2221,12 +2224,12 @@
       }
       @supports -moz-bool-pref("userChrome.icon.library") {
         #placesContext_new\:folder {
-          --menuitem-image: url("../icons/folder.svg");
+          --menuitem-image: url("chrome://browser/skin/lepton/folder.svg");
         }
       }
 
       #placesContext_new\:separator {
-        --menuitem-image: url("../icons/vertical-line.svg");
+        --menuitem-image: url("chrome://browser/skin/lepton/vertical-line.svg");
       }
 
       #placesContext_paste {
@@ -2239,7 +2242,7 @@
 
       #show-other-bookmarks_PersonalToolbar {
         /* checkbox */
-        --menuitem-image: url("../icons/star-line-horizontal.svg");
+        /* --menuitem-image: url("chrome://browser/skin/lepton/star-line-horizontal.svg"); */
       }
 
       #placesContext_showAllBookmarks {
@@ -2247,7 +2250,7 @@
       }
 
       .openintabs-menuitem {
-        --menuitem-image: url("../icons/movetowindow-16.svg");
+        --menuitem-image: url("chrome://browser/skin/lepton/movetowindow-16.svg");
       }
 
       /*= organizeButtonPopup ======================================================*/
@@ -2260,16 +2263,16 @@
       }
       @supports -moz-bool-pref("userChrome.icon.library") {
         #newfolder {
-          --menuitem-image: url("../icons/folder.svg");
+          --menuitem-image: url("chrome://browser/skin/lepton/folder.svg");
         }
       }
 
       #newseparator {
-        --menuitem-image: url("../icons/vertical-line.svg");
+        --menuitem-image: url("chrome://browser/skin/lepton/vertical-line.svg");
       }
 
       #orgUndo {
-        --menuitem-image: url("../icons/undo.svg");
+        --menuitem-image: url("chrome://browser/skin/lepton/undo.svg");
       }
 
       #orgCut {
@@ -2277,7 +2280,7 @@
       }
 
       #orgCopy {
-        --menuitem-image: url("../icons/edit-copy.svg");
+        --menuitem-image: url("chrome://browser/skin/lepton/edit-copy.svg");
       }
 
       #orgPaste {
@@ -2289,7 +2292,7 @@
       }
 
       #orgSelectAll {
-        --menuitem-image: url("../icons/select-all-on.svg");
+        --menuitem-image: url("chrome://browser/skin/lepton/select-all-on.svg");
       }
 
       #orgClose {
@@ -2302,7 +2305,7 @@
       }
 
       #viewSort {
-        --menuitem-image: url("../icons/text-sort-ascending.svg");
+        --menuitem-image: url("chrome://browser/skin/lepton/text-sort-ascending.svg");
       }
 
       /*= maintenanceButtonPopup ===================================================*/
@@ -2357,6 +2360,7 @@
           --organizer-toolbar-field-focus-box-shadow: unset;
           --organizer-pane-field-border-color: ThreeDShadow;
         }
+
         @media not all and (prefers-contrast) {
           :root {
             --organizer-color: var(--in-content-page-color);
@@ -2385,6 +2389,7 @@
             --organizer-toolbar-field-focus-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.23);
             --organizer-pane-field-border-color: color-mix(in srgb, currentColor 41%, transparent);
           }
+
           @media (-moz-toolbar-prefers-color-scheme: dark), (prefers-color-scheme: dark) {
             :root {
               --organizer-color: rgb(251, 251, 254);
@@ -2400,7 +2405,6 @@
             }
           }
         }
-
         /*- Toolbar & Menus ------------------------------------------------------*/
         #placesToolbar {
           appearance: none !important;
@@ -2410,18 +2414,22 @@
           padding: 4px !important;
           padding-inline-end: 6px !important;
         }
+
         #placesToolbar > toolbarbutton {
           appearance: none !important;
           padding: 5px !important;
           border-radius: 4px !important;
         }
+
         #placesToolbar > toolbarbutton[disabled] {
           opacity: 0.6 !important;
         }
+
         #placesToolbar > toolbarbutton:not([disabled]):hover {
           background-color: var(--organizer-hover-background) !important;
           color: var(--organizer-hover-color) !important;
         }
+
         #placesToolbar > toolbarbutton:not([disabled]):hover:active {
           background-color: var(--organizer-selected-background) !important;
         }
@@ -2436,6 +2444,7 @@
         #placesMenu {
           margin-inline-start: 6px !important;
         }
+
         #placesMenu > menu {
           appearance: none !important;
           color: var(--organizer-color) !important;
@@ -2444,16 +2453,19 @@
           padding-inline-start: 5px !important;
           margin-inline-end: 2px !important;
         }
+
         #placesMenu > menu[_moz-menuactive="true"],
         #placesMenu > menu:hover {
           background-color: var(--organizer-hover-background) !important;
           color: var(--organizer-hover-color) !important;
         }
+
         #placesMenu > menu:hover:active,
         #placesMenu > menu[open] {
           background-color: var(--organizer-selected-background) !important;
           color: var(--organizer-selected-color) !important;
         }
+
         #placesMenu > menu > .menubar-text {
           margin-block: 0 !important;
           /* override menu.css */
@@ -2544,6 +2556,7 @@
           background-color: var(--organizer-hover-background) !important;
           color: var(--organizer-color) !important;
         }
+
         treecol:not([hideheader="true"], [sortable="false"]):hover:active,
         treecolpicker:hover:active {
           background-color: var(--organizer-selected-background) !important;
@@ -2574,31 +2587,38 @@
         treechildren::-moz-tree-row {
           background-color: transparent !important;
         }
+
         treechildren::-moz-tree-row(hover) {
           background-color: var(--organizer-hover-background) !important;
         }
+
         treechildren::-moz-tree-row(selected) {
           background-color: var(--organizer-selected-background) !important;
           color: var(--organizer-selected-color) !important;
           border: 1px solid transparent !important;
         }
+
         treechildren::-moz-tree-image(hover),
         treechildren::-moz-tree-twisty(hover),
         treechildren::-moz-tree-cell-text(hover) {
           color: var(--organizer-hover-color) !important;
         }
+
         treechildren::-moz-tree-image(selected),
         treechildren::-moz-tree-twisty(selected),
         treechildren::-moz-tree-cell-text(selected) {
           color: var(--organizer-selected-color) !important;
         }
+
         treechildren::-moz-tree-separator {
           height: 1px !important;
           border-color: var(--organizer-separator-color) !important;
         }
+
         treechildren::-moz-tree-separator(hover) {
           border-color: var(--organizer-hover-color) !important;
         }
+
         treechildren::-moz-tree-separator(selected) {
           border-color: var(--organizer-selected-color) !important;
         }
@@ -2622,34 +2642,36 @@
           border-radius: 4px !important;
           color: var(--organizer-color) !important;
           background-color: var(--organizer-content-background) !important;
+          list-style-image: url("chrome://global/skin/icons/arrow-down-12.svg");
           -moz-context-properties: fill !important;
           fill: currentColor !important;
         }
+
         #editBookmarkPanelRows .expander-up:hover,
         #editBookmarkPanelRows .expander-down:hover {
           background-color: var(--organizer-hover-background) !important;
           color: var(--organizer-hover-color) !important;
         }
+
         #editBookmarkPanelRows .expander-up:hover:active,
         #editBookmarkPanelRows .expander-down:hover:active {
           background-color: var(--organizer-selected-background) !important;
           color: var(--organizer-selected-color) !important;
         }
+
         #editBookmarkPanelRows .expander-up:focus-visible,
         #editBookmarkPanelRows .expander-down:focus-visible {
           outline: 2px solid var(--organizer-outline-color) !important;
           outline-offset: -1px !important;
         }
-        #editBookmarkPanelRows .expander-up > .button-box,
-        #editBookmarkPanelRows .expander-down > .button-box {
-          padding: 0 !important;
-        }
 
         #editBookmarkPanelRows .expander-up {
           list-style-image: url("chrome://global/skin/icons/arrow-up-12.svg");
         }
-        #editBookmarkPanelRows .expander-down {
-          list-style-image: url("chrome://global/skin/icons/arrow-down-12.svg");
+
+        #editBookmarkPanelRows .expander-up > .button-box,
+        #editBookmarkPanelRows .expander-down > .button-box {
+          padding: 0 !important;
         }
 
         #places input {
@@ -2660,10 +2682,12 @@
           min-height: 20px !important;
           padding-inline: 4px !important;
         }
+
         #places input:focus {
           outline: 2px solid var(--organizer-outline-color) !important;
           outline-offset: -1px !important;
         }
+
         #places input:not(:read-write):focus {
           outline: none !important;
         }
@@ -2680,13 +2704,16 @@
           border: 1px solid var(--organizer-border-color) !important;
           border-radius: 4px !important;
         }
+
         #editBMPanel_tagsSelectorRow > richlistbox > richlistitem {
           border: 1px solid transparent !important;
         }
+
         #editBMPanel_tagsSelectorRow > richlistbox > richlistitem:hover {
           background-color: var(--organizer-hover-background) !important;
           color: var(--organizer-hover-color) !important;
         }
+
         #editBMPanel_tagsSelectorRow > richlistbox > richlistitem[selected] {
           background-color: var(--organizer-selected-background) !important;
           color: var(--organizer-selected-color) !important;
@@ -2697,21 +2724,32 @@
           /* margin-inline-start: 0 !important; */
           appearance: none !important;
         }
+
         menuitem[type="radio"] > .menu-iconic-left > .menu-iconic-icon {
           appearance: none !important;
           width: 16px !important;
           height: 16px !important;
+          padding: 0 !important;
           border: 1px solid var(--in-content-box-border-color) !important;
           border-radius: 100% !important;
-          padding: 0 !important;
-          margin-inline: 0 6px !important;
           margin-block: 2px !important;
           /* extend the vertical clicktarget */
+          margin-inline: 0 6px !important;
           background-color: var(--in-content-button-background) !important;
           background-position: center !important;
           flex-shrink: 0 !important;
           /* avoid shrinking inside flex container */
         }
+
+        menuitem[type="radio"]:not([disabled="true"]):hover > .menu-iconic-left > .menu-iconic-icon {
+          background-color: var(--in-content-button-background-hover) !important;
+          color: var(--in-content-button-text-color-hover) !important;
+        }
+
+        menuitem[type="radio"]:not([disabled="true"]):hover:active > .menu-iconic-left > .menu-iconic-icon {
+          background-color: var(--in-content-button-background-active) !important;
+        }
+
         menuitem[type="radio"] > .menu-iconic-left[checked="true"] > .menu-iconic-icon {
           -moz-context-properties: fill !important;
           fill: currentColor !important;
@@ -2722,22 +2760,18 @@
           /* Style the button also when printing with "Print Backgrounds" unchecked */
           color-adjust: exact !important;
         }
-        menuitem[type="radio"]:not([disabled="true"]):hover > .menu-iconic-left > .menu-iconic-icon {
-          background-color: var(--in-content-button-background-hover) !important;
-          color: var(--in-content-button-text-color-hover) !important;
-        }
-        menuitem[type="radio"]:not([disabled="true"]):hover:active > .menu-iconic-left > .menu-iconic-icon {
-          background-color: var(--in-content-button-background-active) !important;
-        }
+
         menuitem[type="radio"]:not([disabled="true"])[checked="true"]:hover > .menu-iconic-left > .menu-iconic-icon {
           background-color: var(--in-content-primary-button-background-hover) !important;
           color: var(--in-content-primary-button-text-color-hover) !important;
         }
+
         menuitem[type="radio"]:not([disabled="true"])[checked="true"]:hover:active
           > .menu-iconic-left
           > .menu-iconic-icon {
           background-color: var(--in-content-primary-button-background-active) !important;
         }
+
         menuitem[type="radio"] > .menu-iconic-text {
           margin-inline: 0 8px !important;
           padding-inline-start: 0 !important;
@@ -2747,6 +2781,10 @@
         menuitem[type="radio"][disabled="true"],
         menuitem[type="checkbox"][disabled="true"] {
           color: inherit !important;
+        }
+
+        menuitem[type="radio"][disabled="true"],
+        menuitem[type="checkbox"][disabled="true"] {
           opacity: 0.5 !important;
         }
 
@@ -2757,49 +2795,67 @@
           -moz-box-align: center !important;
           margin: 0px 2px !important;
         }
+
+        menuitem[type="checkbox"] > .menu-iconic-left > .menu-iconic-icon {
+          margin-inline-end: 2px !important;
+        }
+
+        menuitem[type="checkbox"] > .menu-iconic-text {
+          margin: 1px 0 !important;
+        }
+
+        menuitem[type="checkbox"][disabled="true"] {
+          opacity: 0.4 !important;
+        }
+
         menuitem[type="checkbox"] > .menu-iconic-left > .menu-iconic-icon {
           appearance: none !important;
-          width: 16px !important;
-          height: 16px !important;
-          border: 1px solid currentColor !important;
-          border-radius: 2px !important;
           color: var(--checkbox-border-color, ThreeDDarkShadow) !important;
           background-color: var(--checkbox-unchecked-bgcolor, Field) !important;
+          border: 1px solid currentColor !important;
+          border-radius: 2px !important;
           margin-inline-end: 6px !important;
-          /* or 2px */
-          margin-block: 2px !important;
-          /* From common.css */
         }
-        menuitem[type="checkbox"] > .menu-iconic-left[checked="true"] > .menu-iconic-icon {
-          -moz-context-properties: fill !important;
-          fill: currentColor !important;
-          color: var(--checkbox-checked-color, -moz-accent-color-foreground) !important;
-          border-color: var(--checkbox-checked-border-color, transparent) !important;
-          background-color: var(--checkbox-checked-bgcolor, -moz-accent-color) !important;
-          background-image: url("chrome://global/skin/icons/check.svg") !important;
-          background-position: center !important;
-          background-repeat: no-repeat !important;
-          /* Style the button also when printing with "Print Backgrounds" unchecked */
-          color-adjust: exact !important;
+
+        menuitem[type="checkbox"] > .menu-iconic-left > .menu-iconic-icon {
+          height: 16px !important;
+          width: 16px !important;
         }
+
         menuitem[type="checkbox"]:not([disabled="true"]):hover > .menu-iconic-left > .menu-iconic-icon {
           background-color: var(
             --checkbox-unchecked-hover-bgcolor,
             color-mix(in srgb, -moz-accent-color 4%, Field)
           ) !important;
         }
+
         menuitem[type="checkbox"]:not([disabled="true"]):hover:active > .menu-iconic-left > .menu-iconic-icon {
           background-color: var(
             --checkbox-unchecked-active-bgcolor,
             color-mix(in srgb, -moz-accent-color 8%, Field)
           ) !important;
         }
+
+        menuitem[type="checkbox"] > .menu-iconic-left[checked="true"] > .menu-iconic-icon {
+          border-color: var(--checkbox-checked-border-color, transparent) !important;
+          background-color: var(--checkbox-checked-bgcolor, -moz-accent-color) !important;
+          background-image: url("chrome://global/skin/icons/check.svg") !important;
+          background-position: center !important;
+          background-repeat: no-repeat !important;
+          -moz-context-properties: fill !important;
+          fill: currentColor !important;
+          color: var(--checkbox-checked-color, -moz-accent-color-foreground) !important;
+          /* Style the button also when printing with "Print Backgrounds" unchecked */
+          color-adjust: exact !important;
+        }
+
         menuitem[type="checkbox"]:not([disabled="true"]):hover > .menu-iconic-left[checked="true"] > .menu-iconic-icon {
           background-color: var(
             --checkbox-checked-hover-bgcolor,
             color-mix(in srgb, currentColor 12.5%, -moz-accent-color)
           ) !important;
         }
+
         menuitem[type="checkbox"]:not([disabled="true"]):hover:active
           > .menu-iconic-left[checked="true"]
           > .menu-iconic-icon {
@@ -2808,19 +2864,23 @@
             color-mix(in srgb, currentColor 25%, -moz-accent-color)
           ) !important;
         }
+
         menuitem[type="checkbox"]:focus > .menu-iconic-left > .menu-iconic-icon {
           outline: 2px solid var(--focus-outline-color, -moz-accent-color) !important;
           outline-offset: var(--focus-outline-offset, 2px) !important;
         }
+
         @media (prefers-contrast) {
           menuitem[type="checkbox"]:not([disabled="true"]) > .menu-iconic-left > .menu-iconic-icon {
             /* color will set the border-color on the check due to how HCM works for in-content pages. */
             color: var(--checkbox-checked-border-color, color-mix(in srgb, -moz-accent-color 4%, Field)) !important;
           }
+
           menuitem[type="checkbox"] > .menu-iconic-left[checked="true"] {
             color: var(--checkbox-checked-border-color, currentColor) !important;
             fill: var(--checkbox-checked-color, -moz-accent-color-foreground) !important;
           }
+
           menuitem[type="checkbox"]:not([disabled="true"]):hover:active
             > .menu-iconic-left[checked="true"]
             > .menu-iconic-icon,
@@ -2831,11 +2891,9 @@
             fill: var(--checkbox-checked-border-color-hover, -moz-accent-color-foreground) !important;
           }
         }
-        menuitem[type="checkbox"] > .menu-iconic-text {
-          margin: 1px 0 !important;
-        }
-        menuitem[type="checkbox"][disabled="true"] {
-          opacity: 0.4 !important;
+        /* From common.css */
+        menuitem[type="checkbox"] > .menu-iconic-left > .menu-iconic-icon {
+          margin-block: 2px !important;
         }
 
         /*- Menu Separtor --------------------------------------------------------*/
@@ -2845,8 +2903,8 @@
           min-height: 0;
           border-top: 1px solid var(--in-content-box-border-color, ThreeDDarkShadow);
           border-bottom: none;
-          padding: 0;
           margin: var(--panel-separator-margin, 6px);
+          padding: 0;
         }
       }
     }
