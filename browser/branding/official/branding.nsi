@@ -21,7 +21,7 @@
 ; set the update channel to beta.
 !define OFFICIAL
 !define URLStubDownloadX86 ""
-!define URLStubDownloadAMD64 "https://github.com/Floorp-Projects/Floorp/releases/download/10.0.0b13/floorp-.win64.installer.exe"
+!define URLStubDownloadAMD64 "https://github.com/Floorp-Projects/Floorp/releases/latest/download/floorp.win64.installer.exe"
 !define URLStubDownloadAArch64 ""
 !define URLManualDownload ""
 !define URLSystemRequirements "https://www.mozilla.org/firefox/system-requirements/"
