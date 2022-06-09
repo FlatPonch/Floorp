@@ -10024,7 +10024,6 @@ switch(floorpinterfacenum){
    var Tag = document.createElement('style');
    Tag.innerText = ThemeCSS.PhotonUI;
    document.getElementsByTagName('head')[0].insertAdjacentElement('beforeend',Tag);
-   Services.prefs.setIntPref("browser.uidensity", 0);
    
    if (!Services.prefs.getBoolPref("floorp.enable.multitab", false)) {
     var Tag = document.createElement('style')
@@ -10063,17 +10062,6 @@ switch(floorpinterfacenum){
      document.getElementsByTagName('head')[0].insertAdjacentElement('beforeend',Tag);
      break;
 
-}
-
-
-// Photon 対応
-if(floorpinterfacenum === 3) {
-     Services.prefs.setBoolPref("browser.compactmode.show", false);
-     Services.prefs.setIntPref("browser.uidensity", 0);
-}
-
-else{
- Services.prefs.setBoolPref("browser.compactmode.show", true);
 }
 
 /*------------------------------------------------------------- カスタムCSSのコーナー ------------------------------------------------------------------------------*/
