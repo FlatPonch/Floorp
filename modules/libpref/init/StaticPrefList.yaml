@@ -222,7 +222,7 @@
 - name: accessibility.cache.enabled
   type: bool
 #ifdef ANDROID
-  value: true
+  value: @IS_NOT_RELEASE_OR_BETA@
 #else
   value: false
 #endif
@@ -8372,7 +8372,7 @@
 # Whether to draw images in CSS backgrounds if we only have a partial frame.
 - name: layout.display_partial_background_images
   type: bool
-  value: true
+  value: @IS_NIGHTLY_BUILD@
   mirror: always
 
 #---------------------------------------------------------------------------

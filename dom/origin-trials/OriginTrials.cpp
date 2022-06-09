@@ -30,20 +30,20 @@ LazyLogModule sOriginTrialsLog("OriginTrials");
 // prod.pub is the EcdsaP256 public key from the production key managed in
 // Google Cloud. See:
 //
-//   https://github.com/emilio/origin-trial-token/blob/main/tools/README.md#get-the-public-key
+//   https://github.com/mozilla/origin-trial-token/blob/main/tools/README.md#get-the-public-key
 //
 // for how to get the public key.
 //
 // See also:
 //
-//   https://github.com/emilio/origin-trial-token/blob/main/tools/README.md#sign-a-token-using-gcloud
+//   https://github.com/mozilla/origin-trial-token/blob/main/tools/README.md#sign-a-token-using-gcloud
 //
 // for how to sign using this key.
 //
 // test.pub is the EcdsaP256 public key from this key pair:
 //
-//  * https://github.com/emilio/origin-trial-token/blob/64f03749e2e8c58f811f67044cecc7d6955fd51a/tools/test-keys/test-ecdsa.pkcs8
-//  * https://github.com/emilio/origin-trial-token/blob/64f03749e2e8c58f811f67044cecc7d6955fd51a/tools/test-keys/test-ecdsa.pub
+//  * https://github.com/mozilla/origin-trial-token/blob/64f03749e2e8c58f811f67044cecc7d6955fd51a/tools/test-keys/test-ecdsa.pkcs8
+//  * https://github.com/mozilla/origin-trial-token/blob/64f03749e2e8c58f811f67044cecc7d6955fd51a/tools/test-keys/test-ecdsa.pub
 //
 #include "keys.inc"
 
@@ -56,15 +56,20 @@ bool VerifySignature(const uint8_t* aSignature, uintptr_t aSignatureLen,
   MOZ_RELEASE_ASSERT(aSignatureLen == 64);
   LOG("VerifySignature()\n");
 
-  const unsigned char* key = StaticPrefs::dom_origin_trials_test_key_enabled()
-                                 ? kTestKey
-                                 : kProdKey;
+  const unsigned char* key =
+      StaticPrefs::dom_origin_trials_test_key_enabled() ? kTestKey : kProdKey;
 
   static_assert(sizeof(kTestKey) == sizeof(kProdKey));
   const SECItem rawKey{siBuffer, const_cast<unsigned char*>(key),
                        sizeof(kProdKey)};
   MOZ_RELEASE_ASSERT(rawKey.data[0] == EC_POINT_FORM_UNCOMPRESSED);
-  UniqueSECKEYPublicKey pubKey = dom::CreateECPublicKey(&rawKey, kEcAlgorithm);
+
+  // Key verification takes a lot of time when verifying tokens, and it is
+  // unnecessary work since the keys are trusted.
+  const bool kVerifyValid = false;
+
+  UniqueSECKEYPublicKey pubKey =
+      dom::CreateECPublicKey(&rawKey, kEcAlgorithm, kVerifyValid);
   if (NS_WARN_IF(!pubKey)) {
     LOG("  Failed to create public key?");
     return false;
