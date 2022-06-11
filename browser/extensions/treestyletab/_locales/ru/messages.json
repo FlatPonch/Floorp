@@ -1,9 +1,9 @@
 {
-  "extensionName": { "message": "Tree-shaped vertical tabs" },
+  "extensionName": { "message": "Tree Style Tab" },
   "extensionDescription": { "message": "Показывает вкладки вертикальным древовидным списком." },
 
-  "sidebarTitle": { "message": "Tree-shaped vertical tabs" },
-  "sidebarToggleDescription": { "message": "Переключить боковую панель \"Tree-shaped vertical tabs\" " },
+  "sidebarTitle": { "message": "Tree Style Tab" },
+  "sidebarToggleDescription": { "message": "Переключить боковую панель \"Tree Style Tab\" " },
 
   "command_tabMoveUp":             { "message": "Переместить текущую вкладку вверх" },
   "command_treeMoveUp":            { "message": "Переместить текущее дерево вверх" },
@@ -29,28 +29,16 @@
   "command_increaseSubPanel":      { "message": "Увеличить размер суб-панели" },
   "command_decreaseSubPanel":      { "message": "Уменьшить размер суб-панели" },
 
-  "tab_closebox_aria_label": { "message": "Закрыть вкладку #$ID$",
-    "placeholders": {
-      "id": { "content": "$1", "example": "1" }
-    }},
   "tab_closebox_tab_tooltip": { "message": "Закрыть вкладку" },
   "tab_closebox_tab_tooltip_multiselected": { "message": "Закрыть вкладки" },
   "tab_closebox_tree_tooltip": { "message": "Закрыть дерево" },
-  "tab_soundButton_aria_label": { "message": "Выключить звук вкладки #$ID$",
-    "placeholders": {
-      "id": { "content": "$1", "example": "1" }
-    }},
   "tab_soundButton_muted_tooltip": { "message": "Включить звук вкладки" },
   "tab_soundButton_muted_tooltip_multiselected": { "message": "Включить звук вкладок" },
   "tab_soundButton_playing_tooltip": { "message": "Выключить звук вкладки" },
   "tab_soundButton_playing_tooltip_multiselected": { "message": "Выключить звук вкладок" },
-  "tab_twisty_aria_label": { "message": "Свернуть/развернуть дерево #$ID$",
-    "placeholders": {
-      "id": { "content": "$1", "example": "1" }
-    }},
   "tab_twisty_expanded_tooltip": { "message": "Свернуть дерево" },
   "tab_twisty_collapsed_tooltip": { "message": "Развернуть дерево" },
-  "tab_tree_tooltip": { "message": "$TREE$\n  ...и больше $COUNT$ вкладок",
+  "tab_tree_tooltip": { "message": "$TREE$\n  ...и $COUNT$ больше вкладок",
     "placeholders": {
       "tree": { "content": "$1", "example": "* Tree\n  * Style\n    * Tab" },
       "count": { "content": "$2", "example": "3" }
@@ -179,19 +167,19 @@
   "syncAvailable_notification_title":   { "message": "Теперь вкладки можно отправлять на другие устройства с TST." },
   "syncAvailable_notification_message": { "message": "Вкладки можно переносить между вашими устройствами. Нажмите кнопку, чтобы присвоить этому устройству уникальное имя." },
   "syncAvailable_notification_message_linux": { "message": "Вкладки можно переносить между вашими устройствами. Нажмите кнопку, чтобы присоить этому устройству уникальное имя." },
-  "sentTabs_notification_title":            { "message": "\u200b" },
+  "sentTabs_notification_title":            { "message": "" },
   "sentTabs_notification_message":          { "message": "Вкладки отправлены на $DEVICE$",
     "placeholders": {
       "DEVICE": { "content": "$1", "example": "Firefox на устройстве X" }
     }},
-  "sentTabs_notification_title_multiple":   { "message": "\u200b" },
+  "sentTabs_notification_title_multiple":   { "message": "" },
   "sentTabs_notification_message_multiple": { "message": "Вкладки отправлены на $DEVICE$",
     "placeholders": {
       "DEVICE": { "content": "$1", "example": "Firefox на устройстве X" }
     }},
-  "sentTabsToAllDevices_notification_title":            { "message": "\u200b" },
+  "sentTabsToAllDevices_notification_title":            { "message": "" },
   "sentTabsToAllDevices_notification_message":          { "message": "Вкладка отправлена на все устройства" },
-  "sentTabsToAllDevices_notification_title_multiple":   { "message": "\u200b" },
+  "sentTabsToAllDevices_notification_title_multiple":   { "message": "" },
   "sentTabsToAllDevices_notification_message_multiple": { "message": "Вкладки отправлены на все устройства" },
   "receiveTabs_notification_title":            { "message": "Вкладка из $DEVICE$",
     "placeholders": {
@@ -212,21 +200,14 @@
       "REST": { "content": "$3", "example": "3" }
     }},
 
-  "sidebarPositionRighsideNotification_message":   { "message": "TST определил положение панели как \"Справа\". Хотите переключить вид панели для этого положения?" },
-  "sidebarPositionRighsideNotification_rightside": { "message": "Применить вид для положения Справа" },
-  "sidebarPositionRighsideNotification_leftside":  { "message": "Сохранить вид для положения Слева" },
-
-  "sidebarPositionOptionNotification_title":   { "message": "Внешний вид для положения панели сохранен" },
-  "sidebarPositionOptionNotification_message": { "message": "Это можно изменить в секцим настроек TST \"Внешний вид\"." },
-
-  "startup_notification_title_installed":   { "message": "Новым пользователям Tree-shaped vertical tabs" },
+  "startup_notification_title_installed":   { "message": "Новым пользователям Tree Style Tab" },
   "startup_notification_message_installed": { "message": "Дополнительные разрешения требуются для взаимодействия с пользователем. Щелкните здесь, чтобы предоставить их." },
   "startup_notification_message_installed_linux": { "message": "Для более естественного взаимодействия с пользователем требуются некоторые дополнительные разрешения. Нажмите кнопку, чтобы предоставить их." },
-  "startup_notification_title_updated":     { "message": "Изменения в Tree-shaped vertical tabs" },
+  "startup_notification_title_updated":     { "message": "Изменения в Tree Style Tab" },
   "startup_notification_message_updated":   { "message": "Изменения могут повлиять на ваши предпочтения. Щелкните здесь, чтобы увидеть описания." },
   "startup_notification_message_updated_linux":   { "message": "Некоторые изменения могут повлиять на ваши предпочтения. Нажмите кнопку, чтобы посмотреть список изменений." },
 
-  "message_startup_description_1": { "message": "Tree-shaped vertical tabs возрожден на основе технологий WebExtensions для Firefox 57 и более поздних версий. Вертикальная панель вкладок доступна в качестве одной из боковых панелей. Если вы ещё не видите её, нажмите " },
+  "message_startup_description_1": { "message": "Tree Style Tab возрожден на основе технологий WebExtensions для Firefox 57 и более поздних версий. Вертикальная панель вкладок доступна в качестве одной из боковых панелей. Если вы ещё не видите её, нажмите " },
   "message_startup_description_key": { "message": "кнопку \"F1\" " },
   "message_startup_description_2": { "message": " либо " },
   "message_startup_description_3": { "message": " кнопку на панели инструментов, чтобы активировать боковую панель." },
@@ -252,12 +233,12 @@
   "message_startup_userChromeCss_description_3": { "message": "." },
 
   "api_requestedPermissions_title": { "message": "Запрос дополнительных разрешений" },
-  "api_requestedPermissions_message": { "message": "⚠Аддон \"$NAME$\" запрашивает выполнение операции:\n\n$PERMISSIONS$\n\nЧерез API Tree-shaped vertical tabs. Нажмите здесь, чтобы предоставить разрешение.",
+  "api_requestedPermissions_message": { "message": "⚠Аддон \"$NAME$\" запрашивает выполнение операции:\n\n$PERMISSIONS$\n\nЧерез API Tree Style Tab. Нажмите здесь, чтобы предоставить разрешение.",
     "placeholders": {
       "NAME":        { "content": "$1", "example": "foobar" },
       "PERMISSIONS": { "content": "$2", "example": "tabs" }
     }},
-  "api_requestedPermissions_message_linux": { "message": "⚠Аддон \"$NAME$\" запрашивает выполнение операции:\n\n$PERMISSIONS$\n\nЧерез API Tree-shaped vertical tabs. Нажмите кнопку, чтобы предоставить разрешение.",
+  "api_requestedPermissions_message_linux": { "message": "⚠Аддон \"$NAME$\" запрашивает выполнение операции:\n\n$PERMISSIONS$\n\nЧерез API Tree Style Tab. Нажмите кнопку, чтобы предоставить разрешение.",
     "placeholders": {
       "NAME":        { "content": "$1", "example": "foobar" },
       "PERMISSIONS": { "content": "$2", "example": "tabs" }
@@ -316,7 +297,7 @@
   "context_openAllBookmarksWithStructureRecursively_label": { "message": "Открыть все с подпапками" },
 
 
-  "config_title": { "message": "Настройки Tree-shaped vertical tabs в новой вкладке" },
+  "config_title": { "message": "Открыть настройки Tree Style Tab в новой вкладке" },
 
   "config_showExpertOptions_label": { "message": "Режим эксперта" },
   "config_openOptionsInTab_label": { "message": "Открыть эту страницу в широком представлении " },
@@ -326,8 +307,11 @@
   "config_sidebarPosition_caption": { "message": "Позиция содержимого боковой панели:" },
   "config_sidebarPosition_left": { "message": "Слева" },
   "config_sidebarPosition_right": { "message": "Справа" },
-  "config_sidebarPosition_auto": { "message": "Автоопределение" },
   "config_sidebarPosition_description": { "message": "* Эта настройка не меняет положение боковой панели. Если нужно переместить саму панель, то в меню заголовка боковой панели выберите \"Переместить боковую панель...\"." },
+
+  "config_sidebarDirection_caption": { "message": "Стиль направления текста:" },
+  "config_sidebarDirection_ltr": { "message": "Слева направо" },
+  "config_sidebarDirection_rtl": { "message": "Справа налево" },
 
   "config_style_caption": { "message": "Тема" },
   "config_style_proton": { "message": "Протон" },
@@ -357,11 +341,6 @@
   "config_suppressGapFromShownOrHiddenToolbarOnNewTab_label": { "message": "Пустые новые вкладки в Firefox 85 и новее" },
   "config_suppressGapFromShownOrHiddenToolbarOnlyOnMouseOperation_label": { "message": "Только при срабатывании мыши на боковой панели." },
   "config_showDialogInSidebar_label": { "message": "Показать диалоги на боковой панели, если возможно" },
-
-  "config_iconColor_caption": { "message": "Цвет значка панели:" },
-  "config_iconColor_auto":    { "message": "Авто" },
-  "config_iconColor_bright":  { "message": "для светлой темы" },
-  "config_iconColor_dark":    { "message": "для темной темы" },
 
 
   "config_context_caption": { "message": "Контекстное меню" },
@@ -507,8 +486,8 @@
   "config_tabsFromSameFolderMinThresholdPercentage_before": { "message": "Рассматривать все новые вкладки как открытые из одной папки закладок, если более " },
   "config_tabsFromSameFolderMinThresholdPercentage_after": { "message": "% вкладок имеют соответствующую закладку в общей папке закладок" },
   "config_autoGroupNewTabsFromOthers_label": { "message": "Автогруппировать вкладки, открытые одновременно не из закладок" },
-  "config_tabBunchesDetectionDelayOnNewWindow_before": { "message": "Автогруппировать вкладки открытые в течении" },
-  "config_tabBunchesDetectionDelayOnNewWindow_after": { "message": "мс, при открытии нового окна, в составе вкладок открытых как \"домашняя страница\"." },
+  "config_autoGroupNewTabsDelayOnNewWindow_before": { "message": "Автогруппировать вкладки открытые в течении" },
+  "config_autoGroupNewTabsDelayOnNewWindow_after": { "message": "мс, при открытии нового окна, в составе вкладок открытых как \"домашняя страница\"." },
   "config_warnOnAutoGroupNewTabs_label": { "message": "Подтверждать группировку вкладок" },
   "config_warnOnAutoGroupNewTabsWithListing_label": { "message": "Группировать список вкладок в диалоге подтверждения" },
 
@@ -556,7 +535,7 @@
   "config_treeDoubleClickBehavior_none":                { "message": "Ничего не делать" },
 
   "config_parentTabOperationBehaviorMode_caption":           { "message": "Если родительская вкладка закрыта или перемещена" },
-  "config_parentTabOperationBehaviorMode_noteForPermanentlyConsistentBehaviors": { "message": "Независимо от того, как вы настроили этот раздел, в боковой панели есть несколько констант поведения:\n･ Закрытие родительской вкладки вместе со свернутым деревом: Закрыть все дерево\n･ Перемещение родительской вкладки вместе со свернутым деревом: Переместить все дерево\n･ Перемещение родительской вкладки вместе с развернутым деревом: Ведет себя в соответствии с настройками раздела \"Перетягивание\" " },
+  "config_parentTabOperationBehaviorMode_noteForPermanentlyConsistentBehaviors": { "message": "Независимо от того, как вы настроили этот раздел, в боковой панели есть несколько констант поведения;\n･ Закрытие родительской вкладки вместе со свернутым деревом: Закрыть все дерево\n･ Перемещение родительской вкладки вместе со свернутым деревом: Переместить все дерево\n･ Перемещкние родительской вкладки вместе с развернутым деревом: Ведет себя в соответствии с настройками раздела \"Перетягивание\" " },
 
   "config_parentTabOperationBehaviorMode_parallel": { "message": "Рекомендуется тем, кто все еще использует нативную панель вкладок Firefox" },
   "config_closeParentBehavior_insideSidebar":       { "message": "Если родительская вкладка с развернутым деревом закрывается через боковую панель," },
@@ -564,8 +543,8 @@
   "config_moveParentBehavior_outsideSidebar":       { "message": "Если родительская вкладка (независимо от состояния ее дерева) перемещается в нативной панели вкладок Firefox, сочетанием клавиш или другим аддоном," },
 
   "config_parentTabOperationBehaviorMode_consistent":             { "message": "Рекомендуется для тех, кто не используют нативную панель вкладок Firefox" },
-  "config_parentTabOperationBehaviorMode_consistent_caption":    { "message": "Независимо от видимости боковой панели, для любой операции:" },
-  "config_parentTabOperationBehaviorMode_consistent_notes":       { "message": "Вкладки ведут себя так, как указано выше, даже при действиях в нативной панели вкладок Firefox, по сочетанию клавиш или из других аддонов." },
+  "_config_parentTabOperationBehaviorMode_consistent_caption":    { "message": "Независимо от видимости боковой панели, для любой операции:" },
+  "config_parentTabOperationBehaviorMode_consistent_notes":       { "message": "Вкладки ведут себя так, как указано выше, даже при действиях в нативной панели вкладок Firefox, по сочетанию клавиш или из других аддонов," },
 
   "config_parentTabOperationBehaviorMode_custom":                { "message": "Свое" },
   "config_closeParentBehavior_insideSidebar_expanded_caption":   { "message": "Закрыть: Если родительская вкладка с развернутым деревом закрывается через боковую панель," },
@@ -629,7 +608,6 @@
   "config_autoExpandOnLongHoverDelay_after":  { "message": "мс при перетягивании" },
   "config_autoExpandOnLongHoverRestoreIniitalState_label":  { "message": "Автосворачивать такие деревья после завершения перетягивания" },
   "config_autoExpandIntelligently_label":  { "message": "Свернуть другие деревья, когда свернутое дерево авторазворачивается" },
-  "config_ignoreTabDropNearSidebarArea_label":  { "message": "Не отделять вкладку от окна, если она отпущена в области боковой панели (снимите, если \"privacy.resistFingerprinting\"=\"true\")" },
 
 
   "config_more_caption": { "message": "Больше..." },
@@ -709,9 +687,9 @@
 
   "config_debug_caption": { "message": "Разработка" },
 
-  "config_link_startupPage_label": { "message": "Стартовая страница Tree-shaped vertical tabs" },
-  "config_link_groupPage_label":   { "message": "Страница группы вкладок Tree-shaped vertical tabs" },
-  "config_link_tabbarPage_label":   { "message": "Панель Tree-shaped vertical tabs во вкладке" },
+  "config_link_startupPage_label": { "message": "Открыть стартовую страницу Tree Style Tab" },
+  "config_link_groupPage_label":   { "message": "Открыть страницу группы вкладок Tree Style Tab" },
+  "config_link_tabbarPage_label":   { "message": "Открыть панель вкладок Tree Style Tab на странице" },
 
   "config_runTests_label": { "message": "Запустить автоматические тесты" },
   "config_runBenchmark_label": { "message": "Запустить бенчмарк" },
@@ -721,15 +699,13 @@
   "config_debug_label": { "message": "Режим отладки" },
   "config_log_caption":               { "message": "Детальное логирование" },
   "config_logTimestamp_label": { "message": "Лог с отметками времени" },
-  "config_logFor_common":     { "message": "Запись логов из общих модулей" },
-  "config_logFor_background": { "message": "Запись логов из фоновых модулей" },
-  "config_logFor_sidebar":    { "message": "Запись логов из модулей боковой панели" },
+  "config_logFor_common":     { "message": "Печать логов из общих модулей" },
+  "config_logFor_background": { "message": "Печать логов из фоновых модулей" },
+  "config_logFor_sidebar":    { "message": "Печать логов из модулей боковой панели" },
   "config_loggingQueries_label": { "message": "Лог запросов вкладок" },
   "config_loggingConnectionMessages_label": { "message": "Лог внутренних сообщений" },
   "config_showLogsButton_label": { "message": "Показать журналы" },
   "config_simulateSVGContextFill_label": { "message": "Активировать обходной путь для бага 1388193 и бага 1421329 для симуляции SVG иконок ( * Это может увеличить нагрузку на процессор. Для деактивации переключите \"svg.context-properties.content.enabled\" в \"about:config\", пока эти баги не будут исправлены.)" },
-  "config_staticARIALabel_label": { "message": "Использовать статическую метку ARIA для вкладок" },
-  "config_staticARIALabel_description": { "message": " * Попробуйте отметить это, если ваша система распознавания речи пропускает вкладки после некоторых операций с ними." },
   "config_useCachedTree_label": { "message": "Оптимизация восстановления дерева с помощью кэша" },
   "config_useCachedTree_description": { "message": "* Попробуйте снять флажок и установить повторно, чтобы обновить кэш, если поведение дерева нестабильно." },
   "config_acceleratedTabCreation_label": { "message": "Ускорение операций с повторно открытыми вкладками ( * ПРИМЕЧАНИЕ: Возможно вы увидите нестабильную работу вкладок.)" },
@@ -751,8 +727,8 @@
   "config_requestPermissions_bookmarks_context": { "message": "Включить контекстное меню закладок" },
   "config_requestPermissions_tabHide":   { "message": "Разрешить показывать / скрывать отдельные вкладки ( * Вы должны снять/поставить этот флажок перед запуском тестов, чтобы убедиться, что разрешение получено)" },
 
-  "config_requestPermissions_fallbackToToolbarButton_title": { "message": "Нажмите \"Tree-shaped vertical tabs\" кнопку панели инструментов" },
-  "config_requestPermissions_fallbackToToolbarButton_message": { "message": "Из-за бага Firefox, вы не сможете запросить разрешение на этой странице. Нажмите \"Tree-shaped vertical tabs\" кнопку на панели инструментов, чтобы получить разрешение." },
+  "config_requestPermissions_fallbackToToolbarButton_title": { "message": "Нажмите \"Tree Style Tab\" кнопку панели инструментов" },
+  "config_requestPermissions_fallbackToToolbarButton_message": { "message": "Из-за бага Firefox, вы не сможете запросить разрешение на этой странице. Нажмите \"Tree Style Tab\" кнопку на панели инструментов, чтобы получить разрешение." },
 
   "config_all_caption": { "message": "Все конфигурации" },
 

@@ -1,9 +1,9 @@
 {
-  "extensionName": { "message": "Tree-shaped vertical tabs" },
+  "extensionName": { "message": "Tree Style Tab" },
   "extensionDescription": { "message": "Affiche les onglets sous forme d'arbre." },
 
-  "sidebarTitle": { "message": "Tree-shaped vertical tabs" },
-  "sidebarToggleDescription": { "message": "Activer/Désactiver le panneau « Tree-shaped vertical tabs »" },
+  "sidebarTitle": { "message": "Tree Style Tab" },
+  "sidebarToggleDescription": { "message": "Activer/Désactiver le panneau « Tree Style Tab »" },
 
   "command_indent":                { "message": "Indenter l'onglet courant" },
   "command_outdent":               { "message": "Désindenter l'onglet courant" },
@@ -136,7 +136,7 @@
   "bookmarkFolderChooser_blank":         { "message": "(sans titre)" },
   "bookmarkFolderChooser_useThisFolder": { "message": "Utiliser ce dossier" },
 
-  "message_startup_description_1": { "message": "La barre d'onglets de Tree-shaped vertical tabs est l'un des choix possibles pour le panneau latéral. Si vous ne le voyez pas encore, appuyez sur la " },
+  "message_startup_description_1": { "message": "La barre d'onglets de Tree Style Tab est l'un des choix possibles pour le panneau latéral. Si vous ne le voyez pas encore, appuyez sur la " },
   "message_startup_description_key": { "message": "touche « F1 »" },
   "message_startup_description_2": { "message": " ou cliquez sur le bouton " },
   "message_startup_description_3": { "message": " dans la barre d'outils, pour activer le panneau latéral." },
@@ -146,7 +146,7 @@
   "message_startup_requestPermissions_allUrls":   { "message": "Ne pas déplier les arbres repliés et ignorer les descendants repliés lorsque vous changez d'onglet courant via des raccourcis claviers" },
 
   "message_startup_userChromeCss_notify": { "message": "Comment cacher la barre d'onglets du haut et l'entête du panneau latéral ?" },
-  "message_startup_userChromeCss_description_1": { "message": "À cause de restrictions de WebExtensions, Tree-shaped vertical tabs ne peut pas modifier la barre d'onglets du haut ou l'entête du panneau latéral de Firefox. Si vous voulez les modifier, consultez les " },
+  "message_startup_userChromeCss_description_1": { "message": "À cause de restrictions de WebExtensions, Tree Style Tab ne peut pas modifier la barre d'onglets du haut ou l'entête du panneau latéral de Firefox. Si vous voulez les modifier, consultez les " },
   "message_startup_userChromeCss_description_link_label": { "message": "exemples de personnalisation via userChrome.css" },
   "message_startup_userChromeCss_description_link_uri": { "message": "https://github.com/piroor/treestyletab/wiki/Code-snippets-for-custom-style-rules#for-userchromecss" },
   "message_startup_userChromeCss_description_2": { "message": ". Mais " },
@@ -154,7 +154,7 @@
   "message_startup_userChromeCss_description_3": { "message": "." },
 
   "api_requestedPermissions_title": { "message": "Requiert des permissions supplémentaires" },
-  "api_requestedPermissions_message": { "message": "⚠L'extension « $NAME$ » demande pour l'opération suivante :\n\n$PERMISSIONS$\n\nvia l'API de Tree-shaped vertical tabs. Cliquez ici si vous voulez l'y autoriser.",
+  "api_requestedPermissions_message": { "message": "⚠L'extension « $NAME$ » demande pour l'opération suivante :\n\n$PERMISSIONS$\n\nvia l'API de Tree Style Tab. Cliquez ici si vous voulez l'y autoriser.",
     "placeholders": {
       "NAME":        { "content": "$1", "example": "foobar" },
       "PERMISSIONS": { "content": "$2", "example": "tabs" }
@@ -193,7 +193,7 @@
   "context_unpinnedTab_label": { "message": "Désépinglé (pour tester un menu type bouton radio)" },
 
 
-  "config_title": { "message": "Options de Tree-shaped vertical tabs" },
+  "config_title": { "message": "Options de Tree Style Tab" },
 
   "config_appearance_caption": { "message": "Apparence" },
 
@@ -201,6 +201,10 @@
   "config_sidebarPosition_left": { "message": "À gauche" },
   "config_sidebarPosition_right": { "message": "À droite" },
   "config_sidebarPosition_description": { "message": "*Cette configuration ne changera pas la position du panneau latéral lui-même. Vous devez sur le bouton dans l'entête du panneau latéral et cliquer sur « déplacer le panneau latéral à droite » manuellement." },
+
+  "config_sidebarDirection_caption": { "message": "Style pour la direction du texte :" },
+  "config_sidebarDirection_ltr": { "message": "De gauche à droite" },
+  "config_sidebarDirection_rtl": { "message": "De droite à gauche" },
 
   "config_style_caption": { "message": "Thème" },
   "config_style_photon": { "message": "Simple" },
@@ -314,8 +318,8 @@
 
   "config_autoGroupNewTabs_before": { "message": "Grouper automatiquement les onglets ouverts durant" },
   "config_autoGroupNewTabs_after": { "message": "msec" },
-  "config_tabBunchesDetectionDelayOnNewWindow_before": { "message": "Mais ne pas grouper les nouveaux onglets ouverts durant" },
-  "config_tabBunchesDetectionDelayOnNewWindow_after": { "message": "msec quand une nouvelle fenêtre est ouverte, s'ils font partie des onglets ouverts comme « Page d'accueil »." },
+  "config_autoGroupNewTabsDelayOnNewWindow_before": { "message": "Mais ne pas grouper les nouveaux onglets ouverts durant" },
+  "config_autoGroupNewTabsDelayOnNewWindow_after": { "message": "msec quand une nouvelle fenêtre est ouverte, s'ils font partie des onglets ouverts comme « Page d'accueil »." },
   "config_warnOnAutoGroupNewTabs_label": { "message": "Confirmer le groupement d'onglets" },
 
   "config_autoGroupNewTabsFromPinned_label": { "message": "Grouper automatiquement les onglets ouverts depuis le même onglet épinglé" },
@@ -422,7 +426,7 @@
   "helper_addons_list_link_uri": { "message": "https://github.com/piroor/treestyletab/blob/master/README.md#addons-that-extend-tst" },
 
   "config_externaladdonpermissions_label": { "message": "Permissions pour les appels d'API depuis d'autres extensions" },
-  "config_externaladdonpermissions_description": { "message": "Les extensions autoriseés ici peuvent avoir accès aux données détaillées des onglets ou aux onglets dans les fenêtres de navigation privée, <em>via les permissions de Tree-shaped vertical tabs</em>, même si l'extension elle-même n'est pas autorisée par Firefox à y accéder. <em>Ne donnez pas de permissions à des extensions si vous ne leur faites pas confiance.</em>" },
+  "config_externaladdonpermissions_description": { "message": "Les extensions autoriseés ici peuvent avoir accès aux données détaillées des onglets ou aux onglets dans les fenêtres de navigation privée, <em>via les permissions de Tree Style Tab</em>, même si l'extension elle-même n'est pas autorisée par Firefox à y accéder. <em>Ne donnez pas de permissions à des extensions si vous ne leur faites pas confiance.</em>" },
   "config_externalAddonPermissions_header_name": { "message": "Nom de l'extension" },
   "config_externalAddonPermissions_header_permissions": { "message": "Opérations spéciales autorisées" },
   "config_externalAddonPermissions_header_incognito": { "message": "Notifier par messages depuis les fenêtres de navigation privée" },
@@ -457,8 +461,8 @@
   "config_requestPermissions_allUrls_ctrlTabTracking":   { "message": "Ne pas déplier l'arbre et ignorer les descendants repliés, lorsque vous changez d'onglet courant via des raccourcis claviers. (*Vous devez autoriser l'exécution de scripts sur les pages web.)" },
   "config_requestPermissions_tabHide":   { "message": "Autoriser à montrer/masquer des onglets individuels (*Vous devez décocher et recocher ceci avant de lancer des tests, pour s'assurer que la permission a vraiment été accordée.)" },
 
-  "config_requestPermissions_fallbackToToolbarButton_title": { "message": "Cliquez sur le bouton « Tree-shaped vertical tabs » dans la barre d'outils" },
-  "config_requestPermissions_fallbackToToolbarButton_message": { "message": "À cause d'un bug de Firefox, vous ne pouvez pas demander de permissions depuis cet écran. Cliquez sur le bouton « Tree-shaped vertical tabs » de la barre d'outils pour accorder les permissions." },
+  "config_requestPermissions_fallbackToToolbarButton_title": { "message": "Cliquez sur le bouton « Tree Style Tab » dans la barre d'outils" },
+  "config_requestPermissions_fallbackToToolbarButton_message": { "message": "À cause d'un bug de Firefox, vous ne pouvez pas demander de permissions depuis cet écran. Cliquez sur le bouton « Tree Style Tab » de la barre d'outils pour accorder les permissions." },
 
   "config_all_caption": { "message": "Tous les paramètres" },
 

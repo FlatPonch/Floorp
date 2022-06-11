@@ -377,21 +377,16 @@ function getMouseEventDetail(event, tab) {
 }
 
 function getOriginalExtraContentsTarget(event) {
-  try {
-    let target = event.originalTarget;
-    if (target && target.nodeType != Node.ELEMENT_NODE)
-      target = target.parentNode;
+  let target = event.originalTarget;
+  if (target && target.nodeType != Node.ELEMENT_NODE)
+    target = target.parentNode;
 
-    const extraContents = target.closest(`.extra-item`);
-    if (extraContents)
-      return {
-        owners: new Set([extraContents.dataset.owner]),
-        target: target.outerHTML
-      };
-  }
-  catch(_error) {
-    // this may happen by mousedown on scrollbar
-  }
+  const extraContents = target.closest(`.extra-item`);
+  if (extraContents)
+    return {
+      owners: new Set([extraContents.dataset.owner]),
+      target: target.outerHTML
+    };
 
   return {
     owners: new Set(),
@@ -794,7 +789,7 @@ function updateMultiselectionByTabClick(tab, event) {
 
       // for better performance, we should not call browser.tabs.update() for each tab.
       const indices = mapAndFilter(highlightedTabIds,
-                                   id => id == activeTab.id ? undefined : Tab.get(id).index);
+                                   id => id != activeTab.id && Tab.get(id).index || undefined);
       if (highlightedTabIds.has(activeTab.id))
         indices.unshift(activeTab.index);
       browser.tabs.highlight({
@@ -865,7 +860,7 @@ function updateMultiselectionByTabClick(tab, event) {
 
       // for better performance, we should not call browser.tabs.update() for each tab.
       const indices = mapAndFilter(highlightedTabIds,
-                                   id => id == activeTab.id ? undefined : Tab.get(id).index);
+                                   id => id != activeTab.id && Tab.get(id).index || undefined);
       if (highlightedTabIds.has(activeTab.id))
         indices.unshift(activeTab.index);
       browser.tabs.highlight({
@@ -1007,8 +1002,7 @@ async function onDblClick(event) {
     if (!allowed)
       return;
 
-    if (!EventUtils.isEventFiredOnClosebox(event) && // closebox action is already processed by onclick listener, so we should not handle it here!
-        configs.treeDoubleClickBehavior != Constants.kTREE_DOUBLE_CLICK_BEHAVIOR_NONE) {
+    if (configs.treeDoubleClickBehavior != Constants.kTREE_DOUBLE_CLICK_BEHAVIOR_NONE) {
       switch (configs.treeDoubleClickBehavior) {
         case Constants.kTREE_DOUBLE_CLICK_BEHAVIOR_TOGGLE_COLLAPSED:
           event.stopPropagation();

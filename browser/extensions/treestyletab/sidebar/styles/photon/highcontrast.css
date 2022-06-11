@@ -7,7 +7,7 @@
 @import url("base.css");
 
 :root {
-  --tab-like-surface: ButtonFace;
+  --tab-like-surface: ThreeDFace;
   --tab-surface-regular: var(--tab-like-surface);
   --tab-surface-active: Highlight;
   --tab-surface-hover: var(--tab-like-surface);
@@ -28,8 +28,8 @@
 }
 
 #background::after {
-  background: GrayText;
-  opacity: 0.5;
+  background: CaptionText;
+  opacity: 0.35;
 
   bottom: 0;
   content: "";
@@ -46,7 +46,7 @@
 
 /* Tab */
 
-tab-item-substance,
+tab-item,
 .after-tabs button,
 .after-tabs [role="button"] {
   background: var(--tab-surface);
@@ -57,7 +57,7 @@ tab-item * {
   color: var(--tab-text);
 }
 
-tab-item:not(.collapsed) tab-item-substance:hover,
+tab-item:not(.collapsed):hover,
 .after-tabs button:hover,
 .after-tabs [role="button"]:hover,
 #subpanel-selector-anchor:hover {
@@ -109,10 +109,10 @@ tab-item.active tab-closebox:hover::before {
 }
 
 /* macOS workaround */
-:root.platform-mac.left #tabbar.overflow tab-item:not(.pinned) tab-item-substance {
+:root.platform-mac.left #tabbar.overflow tab-item:not(.pinned) {
   padding-left: var(--scrollbar-placeholder-size); /* it will be enough larger than the default padding */
 }
-:root.platform-mac.right #tabbar.overflow tab-item:not(.pinned) tab-item-substance {
+:root.platform-mac.right #tabbar.overflow tab-item:not(.pinned) {
   padding-right: var(--scrollbar-placeholder-size); /* it will be enough larger than the default padding */
 }
 

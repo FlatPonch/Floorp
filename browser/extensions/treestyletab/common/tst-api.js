@@ -77,8 +77,6 @@ export const kNOTIFY_TAB_MOUSEUP    = 'tab-mouseup';
 export const kNOTIFY_TABBAR_CLICKED = 'tabbar-clicked'; // for backward compatibility
 export const kNOTIFY_TABBAR_MOUSEDOWN = 'tabbar-mousedown';
 export const kNOTIFY_TABBAR_MOUSEUP = 'tabbar-mouseup';
-export const kNOTIFY_TABBAR_OVERFLOW  = 'tabbar-overflow';
-export const kNOTIFY_TABBAR_UNDERFLOW = 'tabbar-underflow';
 export const kNOTIFY_NEW_TAB_BUTTON_CLICKED   = 'new-tab-button-clicked';
 export const kNOTIFY_NEW_TAB_BUTTON_MOUSEDOWN = 'new-tab-button-mousedown';
 export const kNOTIFY_NEW_TAB_BUTTON_MOUSEUP   = 'new-tab-button-mouseup';
@@ -193,8 +191,8 @@ const mAddons = new Map();
 let mScrollLockedBy    = {};
 let mGroupingBlockedBy = {};
 
-const mIsBackend  = location.href.startsWith(browser.runtime.getURL('background/background.html'));
-const mIsFrontend = location.href.startsWith(browser.runtime.getURL('sidebar/sidebar.html'));
+const mIsBackend  = location.href.startsWith(browser.extension.getURL('background/background.html'));
+const mIsFrontend = location.href.startsWith(browser.extension.getURL('sidebar/sidebar.html'));
 
 export class TreeItem {
   constructor(tab, options = {}) {
@@ -502,8 +500,6 @@ export async function initAsBackend() {
     bypassPermissionCheck: true
   });
   browser.runtime.onConnectExternal.addListener(port => {
-    if (!configs.APIEnabled)
-      return;
     const sender = port.sender;
     mConnections.set(sender.id, port);
     port.onMessage.addListener(message => {
@@ -847,8 +843,6 @@ export async function initAsFrontend() {
     await wait(10);
   }
   browser.runtime.onMessageExternal.addListener((message, sender) => {
-    if (!configs.APIEnabled)
-      return;
     if (message &&
         typeof message == 'object' &&
         typeof message.type == 'string') {
@@ -923,7 +917,6 @@ export async function notifyScrolled(params = {}) {
     type: kNOTIFY_SCROLLED,
     tab:  tab && allTreeItems.find(treeItem => treeItem.tab.id == tab.id),
     tabs: allTreeItems,
-    overflow: params.overflow,
     window,
     windowId: window,
 
@@ -989,9 +982,6 @@ export function getListenersForMessageType(type, { targets, except } = {}) {
 }
 
 export async function sendMessage(message, options = {}) {
-  if (!configs.APIEnabled)
-    return [];
-
   const listenerAddons = getListenersForMessageType(message.type, options);
   const tabProperties = options.tabProperties || [];
   log(`sendMessage: sending message for ${message.type}: `, {
@@ -1035,7 +1025,7 @@ function* spawnMessages(targets, params) {
     const allowedMessage = await sanitizeMessage(message, { id, tabProperties });
 
     try {
-      const result = await browser.runtime.sendMessage(id, allowedMessage);
+      const result = await browser.runtime.sendMessage(id, allowedMessage).catch(ApiTabs.createErrorHandler());
       return {
         id,
         result
@@ -1138,10 +1128,13 @@ export async function getTargetTabs(message, sender) {
 }
 
 async function getTabsFromWrongIds(ids, sender) {
-  const window = await browser.windows.getLastFocused({
-    populate: true
-  }).catch(ApiTabs.createErrorHandler());
-  const activeWindow = TabsStore.windows.get(window.id) || window;
+  let activeWindow = [];
+  if (ids.some(id => typeof id != 'number')) {
+    const window = await browser.windows.getLastFocused({
+      populate: true
+    }).catch(ApiTabs.createErrorHandler());
+    activeWindow = TabsStore.windows.get(window.id);
+  }
   const tabs = await Promise.all(ids.map(id => getTabFromWrongId({ id, activeWindow, sender }).catch(error => {
     console.error(error);
     return null;
@@ -1168,12 +1161,6 @@ async function getTabFromWrongId({ id, activeWindow, sender }) {
     case 'active':
     case 'current':
       return baseTab;
-
-    case 'parent':
-      return baseTab.$TST.parent;
-
-    case 'root':
-      return baseTab.$TST.rootTab;
 
     case 'next':
       return baseTab.$TST.nextTab;

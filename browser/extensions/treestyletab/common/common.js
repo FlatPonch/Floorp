@@ -10,7 +10,10 @@ import EventListenerManager from '/extlib/EventListenerManager.js';
 
 import * as Constants from './constants.js';
 
-export const DEVICE_SPECIFIC_CONFIG_KEYS = mapAndFilter(`
+const localKeys = mapAndFilter(`
+  accelKey
+  baseIndent
+  cachedExternalAddons
   chunkedSyncDataLocal0
   chunkedSyncDataLocal1
   chunkedSyncDataLocal2
@@ -19,30 +22,6 @@ export const DEVICE_SPECIFIC_CONFIG_KEYS = mapAndFilter(`
   chunkedSyncDataLocal5
   chunkedSyncDataLocal6
   chunkedSyncDataLocal7
-  lastConfirmedToCloseTabs
-  lastDragOverSidebarOwnerWindowId
-  lastDraggedTabs
-  loggingConnectionMessages
-  loggingQueries
-  migratedBookmarkUrls
-  requestingPermissions
-  requestingPermissionsNatively
-  syncAvailableNotified
-  syncDeviceInfo
-  syncDevicesLocalCache
-  syncEnabled
-  syncLastMessageTimestamp
-  syncOtherDevicesDetected
-`.trim().split('\n'), key => {
-  key = key.trim();
-  return key && key.indexOf('//') != 0 && key;
-});
-
-const localKeys = DEVICE_SPECIFIC_CONFIG_KEYS.concat(mapAndFilter(`
-  APIEnabled
-  accelKey
-  baseIndent
-  cachedExternalAddons
   colorScheme
   debug
   enableLinuxBehaviors
@@ -52,14 +31,22 @@ const localKeys = DEVICE_SPECIFIC_CONFIG_KEYS.concat(mapAndFilter(`
   grantedExternalAddonPermissions
   grantedRemovingTabIds
   incognitoAllowedExternalAddons
+  lastConfirmedToCloseTabs
+  lastDraggedTabs
   logFor
+  loggingConnectionMessages
+  loggingQueries
   logTimestamp
   maximumDelayForBug1561879
+  migratedBookmarkUrls
   minimumIntervalToProcessDragoverEvent
   minIndent
   notifiedFeaturesVersion
   optionsExpandedGroups
   optionsExpandedSections
+  requestingPermissions
+  requestingPermissionsNatively
+  sidebarDirection
   sidebarPosition
   sidebarVirtuallyClosedWindows
   sidebarVirtuallyOpenedWindows
@@ -67,22 +54,26 @@ const localKeys = DEVICE_SPECIFIC_CONFIG_KEYS.concat(mapAndFilter(`
   style
   subMenuCloseDelay
   subMenuOpenDelay
+  syncOtherDevicesDetected
+  syncAvailableNotified
+  syncDeviceInfo
+  syncDevicesLocalCache
+  syncLastMessageTimestamp
   testKey
   userStyleRulesFieldHeight
   userStyleRulesFieldTheme
 `.trim().split('\n'), key => {
   key = key.trim();
   return key && key.indexOf('//') != 0 && key;
-}));
+});
 
 export const configs = new Configs({
   optionsExpandedSections: ['section-appearance'],
   optionsExpandedGroups: [],
 
   // appearance
-  sidebarPosition: Constants.kTABBAR_POSITION_AUTO,
-  sidebarPositionRighsideNotificationShown: false,
-  sidebarPositionOptionNotificationTimeout: 20 * 1000,
+  sidebarPosition: Constants.kTABBAR_POSITION_LEFT,
+  sidebarDirection: Constants.kTABBAR_DIRECTION_LTR,
 
   style:
     /^Mac/i.test(navigator.platform) ? 'sidebar' :
@@ -92,7 +83,6 @@ export const configs = new Configs({
       })(),
   colorScheme: /^Linux/i.test(navigator.platform) ? 'system-color' : 'photon' ,
   iconColor: 'auto',
-  indentLine: 'auto',
 
   unrepeatableBGImageAspectRatio: 4,
 
@@ -196,22 +186,20 @@ export const configs = new Configs({
   tabDragBehaviorShift: Constants.kDRAG_BEHAVIOR_MOVE | Constants.kDRAG_BEHAVIOR_ENTIRE_TREE | Constants.kDRAG_BEHAVIOR_ALLOW_BOOKMARK,
   showTabDragBehaviorNotification: true,
   guessDraggedNativeTabs: true,
-  ignoreTabDropNearSidebarArea: true,
 
   fixupTreeOnTabVisibilityChanged: false,
-  fixupOrderOfTabsFromOtherDevice: true,
 
   scrollToExpandedTree: true,
 
   spreadMutedStateOnlyToSoundPlayingTabs: true,
 
 
-  // tab bunches
-  tabBunchesDetectionTimeout: 100,
-  tabBunchesDetectionDelayOnNewWindow: 500,
+  // grouping
   autoGroupNewTabsFromBookmarks: true,
   tabsFromSameFolderMinThresholdPercentage: 50,
   autoGroupNewTabsFromOthers: false,
+  autoGroupNewTabsTimeout: 100,
+  autoGroupNewTabsDelayOnNewWindow: 500,
   autoGroupNewTabsFromPinned: true,
   groupTabTemporaryStateForNewTabsFromBookmarks: Constants.kGROUP_TAB_TEMPORARY_STATE_PASSIVE,
   groupTabTemporaryStateForNewTabsFromOthers: Constants.kGROUP_TAB_TEMPORARY_STATE_PASSIVE,
@@ -297,7 +285,6 @@ export const configs = new Configs({
   // subpanel
   lastSelectedSubPanelProviderId: null,
   lastSubPanelHeight: 0,
-  maxSubPanelSizeRatio: 0.66,
 
 
   // misc.
@@ -333,7 +320,6 @@ export const configs = new Configs({
   allowDragNewTabButton: true,
   newTabButtonDragGestureModifiers: 'shift',
   migratedBookmarkUrls: [],
-  lastDragOverSidebarOwnerWindowId: null,
   notifiedFeaturesVersion: 0,
 
   useCachedTree: true,
@@ -422,8 +408,6 @@ export const configs = new Configs({
 
 
   debug:     false,
-  syncEnabled: true,
-  APIEnabled: true,
   logTimestamp: true,
   loggingQueries: false,
   logFor: { // git grep configs.logFor | grep -v common.js | cut -d "'" -f 2 | sed -e "s/^/    '/" -e "s/$/': false,/"
@@ -433,7 +417,7 @@ export const configs = new Configs({
     'background/browser-action-menu': false,
     'background/commands': false,
     'background/context-menu': false,
-    'background/handle-tab-bunches': false,
+    'background/handle-group-tabs': false,
     'background/handle-misc': false,
     'background/handle-moved-tabs': false,
     'background/handle-new-tabs': false,
@@ -521,8 +505,6 @@ export const configs = new Configs({
   userStyleRules5: '',
   userStyleRules6: '',
   userStyleRules7: '',
-  autoGroupNewTabsTimeout: null, // migrated to tabBunchesDetectionTimeout
-  autoGroupNewTabsDelayOnNewWindow: null, // migrated to tabBunchesDetectionDelayOnNewWindow
 
 
   configsVersion: 0,
@@ -530,17 +512,6 @@ export const configs = new Configs({
   testKey: 0 // for tests/utils.js
 }, {
   localKeys
-});
-
-configs.$addLocalLoadedObserver((key, value) => {
-  switch (key) {
-    case 'syncEnabled':
-      configs.sync = !!value;
-      return;
-
-    default:
-      return;
-  }
 });
 
 // cleanup old data
@@ -794,10 +765,6 @@ export async function notify({ icon, title, message, timeout, url } = {}) {
   });
 }
 
-export function compareAsNumber(a, b) {
-  return a - b;
-}
-
 
 // Helper functions for optimization
 // Originally implemented by @bb010g at
@@ -885,11 +852,7 @@ export async function sha1sum(string) {
 }
 
 export function sanitizeForHTMLText(text) {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+  return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
 export function sanitizeAccesskeyMark(label) {

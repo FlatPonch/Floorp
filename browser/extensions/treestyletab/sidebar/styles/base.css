@@ -19,10 +19,6 @@
   --faviconized-tab-size: 28px;
   --svg-small-icon-size: 16px;
   --new-tab-button-anchor-size: 1.5em;
-  --after-tabs-area-size: 0px;
-  --pinned-tabs-area-size: 0px;
-  --subpanel-area-size: 0px;
-  --subpanel-content-size: auto;
 
   --color-animation: 0.25s ease-out;
   --indent-animation: var(--indent-duration) ease-out;
@@ -77,7 +73,6 @@
 
   --tab-background-z-index:            10;
   --tab-extra-contents-behind-z-index: 20;
-  --tab-indent-z-index:                90;
   --tab-base-z-index:                  100;
   --tab-favicon-z-index:               200;
   --tab-burster-z-index:               4000;
@@ -92,8 +87,8 @@
 
 tab-item {
   --tab-current-size: var(--tab-size);
-  --attention-marker-x-offset: calc(0px - ((var(--tab-current-size) - var(--favicon-size)) / 2));
-  --attention-marker-y-offset: calc(0px - ((var(--tab-current-size) - var(--favicon-size)) / 2));
+  --attention-marker-x-offset: calc(0px - ((var(--tab-current-size) - var(--favicon-size)) / 2) + ((var(--tab-current-size) - var(--faviconized-tab-size)) / 2));
+  --attention-marker-y-offset: calc(0px - ((var(--tab-current-size) - var(--favicon-size)) / 2) + ((var(--tab-current-size) - var(--faviconized-tab-size))));
   --attention-marker-gradient: radial-gradient(circle farthest-corner at 50% calc(100% - 14% + 1px),
                                                var(--tab-highlighted-glow) 0,
                                                var(--tab-highlighted-glow) 7%,
@@ -109,10 +104,6 @@ tab-item {
                                                      var(--tab-highlighted-glow) 10%,
                                                      rgba(255, 255, 255, 0) 23%);
   */
-}
-tab-item.faviconized {
-  --attention-marker-x-offset: calc(0px - ((var(--tab-current-size) - var(--favicon-size)) / 2) + ((var(--tab-current-size) - var(--faviconized-tab-size)) / 2));
-  --attention-marker-y-offset: calc(0px - ((var(--tab-current-size) - var(--favicon-size)) / 2) + ((var(--tab-current-size) - var(--faviconized-tab-size))));
 }
 
 tab-item:focus {
@@ -136,14 +127,15 @@ tab-item.faviconized:focus tab-favicon {
 
 /* Show internal tab id in the debug mode */
 :root.debug tab-item::after {
-  bottom: 0;
   content: attr(data-tab-id) !important; /* override definition for the highlighting marker */
   opacity: 0.65;
-  pointer-events: none;
-  position: absolute;
-  right: 0;
   text-align: right;
   z-index: var(--tab-favicon-z-index);
+}
+:root.debug tab-item.faviconized::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 
 /* This is required to prevent dragging of images (ex. favicon).
@@ -174,7 +166,6 @@ tab-sound-button */ {
 /* tabbar */
 
 :root, body {
-  color-scheme: light dark;
   font: message-box; /* this is same to Firefox's UI. */
 }
 
@@ -194,7 +185,6 @@ tab-sound-button */ {
 }
 
 #tabbar-container {
-  bottom: var(--subpanel-area-size);
   top: var(--visual-gap-offset);
 }
 :root.hover-on-top-edge:hover #tabbar-container {
@@ -203,12 +193,11 @@ tab-sound-button */ {
 }
 
 #tabbar {
-  margin-top: var(--pinned-tabs-area-size);
+  --removed-tabs-count: 0;
   position: absolute;
 }
 
 #tabbar.overflow {
-  bottom: var(--after-tabs-area-size);
   overflow-y: scroll;
 }
 
@@ -300,40 +289,28 @@ ul {
 /* tabs */
 
 tab-item {
-  align-items: stretch;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: stretch;
-  line-height: 1;
-  list-style: none;
-  margin: 0;
-  max-width: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  position: relative;
-}
-
-tab-item-substance {
   align-items: center;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
+  left: 0;
   line-height: 1;
+  list-style: none;
   margin: var(--tab-margin-top) var(--tab-margin-right) var(--tab-margin-bottom) var(--tab-margin-left);
+  /* margin-top: 0; *//* don't set for animation */
   max-width: 100%;
   overflow: hidden;
   opacity: 1;
-  pointer-events: auto;
   position: relative;
+  top: 0;
 }
 
-:root.left tab-item-substance {
+:root.left tab-item {
   margin-left: calc(var(--tab-margin-left) + var(--tab-indent));
 }
 
-:root.right tab-item-substance {
+:root.right tab-item {
   margin-right: calc(var(--tab-margin-right) + var(--tab-indent));
 }
 
@@ -342,8 +319,7 @@ tab-item * {
   vertical-align: middle;
 }
 
-tab-item > *,
-tab-item > * > * {
+tab-item > * {
   position: relative;
   z-index: var(--tab-base-z-index);
 }
@@ -359,15 +335,12 @@ tab-item.hidden {
 }
 
 :root.animation tab-item.animation-ready,
-:root.animation tab-item.animation-ready tab-item-substance,
 :root.animation .after-tabs button,
 :root.animation .after-tabs [role="button"] {
   transition: var(--tab-animation);
 }
 :root.animation tab-item.animation-ready:not(.expanding),
-:root.animation tab-item.animation-ready:not(.expanding) tab-item-substance,
-:root.animation tab-item.animation-ready.expanding.moving,
-:root.animation tab-item.animation-ready.expanding.moving tab-item-substance {
+:root.animation tab-item.animation-ready.expanding.moving {
   transition: var(--tab-animation),
               var(--tab-indent-animation);
 }
@@ -376,21 +349,16 @@ tab-item.removing,
 tab-item:not(.pinned).collapsed,
 tab-item.duplicating {
   margin-top: calc(0px - var(--tab-current-size) - var(--tab-margin-bottom));
+  opacity: 0;
   pointer-events: none;
   z-index: var(--invisible-z-index);
 }
-tab-item.removing tab-item-substance,
-tab-item:not(.pinned).collapsed tab-item-substance,
-tab-item.duplicating tab-item-substance {
-  opacity: 0;
-}
 
 tab-item:not(.pinned).collapsed.collapsed-completely {
-  visibility: hidden;
+  visibility: collapse;
 }
 
-tab-item.duplicating,
-tab-item.duplicating tab-item-substance {
+tab-item.duplicating {
   transition: none;
 }
 
@@ -414,7 +382,6 @@ tab-item .burster,
 tab-item.faviconized.unread tab-favicon::before,
 tab-item.attention tab-favicon::before,
 tab-item .background,
-tab-item .extra-items-container.indent,
 tab-item .extra-items-container.behind,
 tab-item .extra-items-container.front,
 .newtab-button .extra-items-container {
@@ -433,17 +400,6 @@ tab-item .extra-items-container,
   flex-wrap: nowrap;
   justify-content: flex-start;
   overflow: hidden;
-}
-
-tab-item .extra-items-container.indent {
-  width: var(--tab-indent);
-  z-index: var(--tab-indent-z-index);
-}
-:root.left tab-item .extra-items-container.indent {
-  right: auto;
-}
-:root.right tab-item .extra-items-container.indent {
-  left: auto;
 }
 
 tab-item .extra-items-container.front {
@@ -511,6 +467,8 @@ tab-item .extra-items-container.behind {
 /* pinned tabs */
 
 tab-item.pinned {
+  border-top: none;
+  border-left: none;
   bottom: var(--pinned-position-bottom);
   left: var(--pinned-position-left);
   margin: 0;
@@ -519,28 +477,17 @@ tab-item.pinned {
   top: calc(var(--pinned-position-top) + var(--visual-gap-offset));
   z-index: var(--over-tabs-z-index);
 }
-tab-item.pinned tab-item-substance {
-  border-top: none;
-  border-left: none;
-  margin: 0;
-}
 
 tab-item.pinned:not(.in-visible-area) {
-  pointer-events: none;
-}
-tab-item.pinned:not(.in-visible-area) tab-item-substance {
   opacity: 0;
+  pointer-events: none;
 }
 
 :root.hover-on-top-edge:hover tab-item.pinned {
+  transition: var(--visual-gap-hover-animation);
   top: var(--pinned-position-top) !important;
 }
-:root.hover-on-top-edge:hover tab-item.pinned,
-:root.hover-on-top-edge:hover tab-item.pinned tab-item-substance {
-  transition: var(--visual-gap-hover-animation);
-}
-:root.hover-on-top-edge.animation:hover tab-item.pinned,
-:root.hover-on-top-edge.animation:hover tab-item.pinned tab-item-substance {
+:root.hover-on-top-edge.animation:hover tab-item.pinned {
   transition: var(--tab-animation),
               var(--visual-gap-hover-animation);
 }
@@ -556,14 +503,11 @@ tab-item.faviconized {
   max-height: var(--tab-current-size);
   max-width: var(--tab-current-size);
   width: var(--tab-current-size);
-}
-tab-item.faviconized tab-item-substance {
   padding: calc((var(--tab-current-size) - var(--favicon-size)) / 2);
 }
 
 tab-item.pinned tab-closebox,
-tab-item.faviconized tab-twisty,
-tab-item.faviconized .extra-items-container.indent {
+tab-item.faviconized tab-twisty {
   display: none;
 }
 
@@ -580,21 +524,17 @@ tab-item.faviconized tab-label * {
   top: 0;
 }
 
-tab-item.faviconized.unread:not(.active) tab-item-substance:not(:hover) tab-favicon::before,
-tab-item.attention tab-item-substance:not(:hover) tab-favicon::before {
+tab-item.faviconized.unread:not(.active):not(:hover) tab-favicon::before,
+tab-item.attention:not(:hover) tab-favicon::before {
   background-image: var(--attention-marker-gradient);
 }
 
-tab-item.faviconized.unread:not(.active) tab-item-substance:hover tab-favicon::before,
-tab-item.attention tab-item-substance:hover tab-favicon::before {
+tab-item.faviconized.unread:not(.active):hover tab-favicon::before,
+tab-item.attention:hover tab-favicon::before {
   background-image: var(--attention-marker-gradient-hover);
 }
 
-tab-item.attention tab-label {
-  font-weight: bold;
-}
-
-tab-item.faviconized.active:not([data-drop-position]) tab-item-substance {
+tab-item.faviconized.active:not([data-drop-position]) {
   /* For high contrast mode */
   outline: 2px solid transparent;
   outline-offset: -2px;
@@ -616,7 +556,8 @@ tab-item tab-label {
 :root[data-label-overflow="fade"] tab-item tab-label.overflow {
   mask-image: linear-gradient(to left, transparent 0, black 2em);
 }
-:root[data-label-overflow="fade"] tab-item tab-label.overflow.rtl {
+:root[data-label-overflow="fade"] tab-item tab-label.overflow:dir(rtl),
+:root[data-label-overflow="fade"].rtl tab-item tab-label.overflow {
   direction: rtl;
   mask-image: linear-gradient(to right, transparent 0, black 2em);
 }
@@ -769,7 +710,7 @@ tab-item.faviconized .contextual-identity-marker {
   text-align: center;
 }
 
-.newtab-button::after {
+.newtab-button::before {
   -moz-context-properties: fill;
   background: url("./icons/new-16.svg") no-repeat center / 100%;
   content: "";
@@ -779,7 +720,7 @@ tab-item.faviconized .contextual-identity-marker {
   opacity: var(--button-opacity);
   width: var(--svg-small-icon-size);
 }
-:root.simulate-svg-context-fill .newtab-button::after {
+:root.simulate-svg-context-fill .newtab-button::before {
   background: var(--tab-text);
   mask: url("./icons/new-16.svg") no-repeat center / 100%;
 }
@@ -849,8 +790,8 @@ tab-item.faviconized .contextual-identity-marker {
   margin: 0.125em;
 }
 
-.newtab-action-selector-anchor::after,
-.contextual-identities-selector-anchor::after,
+.newtab-action-selector-anchor::before,
+.contextual-identities-selector-anchor::before,
 #subpanel-selector-anchor::after {
   -moz-context-properties: fill;
   background: url("./icons/ArrowheadDown.svg") no-repeat center / 60%;
@@ -864,8 +805,8 @@ tab-item.faviconized .contextual-identity-marker {
   max-width: var(--favicon-size);
   width: var(--svg-small-icon-size);
 }
-:root.simulate-svg-context-fill .newtab-action-selector-anchor::after,
-:root.simulate-svg-context-fill .contextual-identities-selector-anchor::after,
+:root.simulate-svg-context-fill .newtab-action-selector-anchor::before,
+:root.simulate-svg-context-fill .contextual-identities-selector-anchor::before,
 :root.simulate-svg-context-fill #subpanel-selector-anchor::after {
   background: var(--tab-text);
   mask: url("./icons/ArrowheadDown.svg") no-repeat center / 60%;
@@ -909,16 +850,11 @@ tab-item.faviconized .contextual-identity-marker {
 
 #subpanel-container {
   top: auto;
-  height: var(--subpanel-area-size);
-}
-
-#subpanel-container.collapsed iframe#subpanel {
-  visibility: collapse;
 }
 
 iframe#subpanel {
   border: none;
-  height: var(--subpanel-content-size);
+  height: auto;
   margin: 0;
   max-height: none;
   max-width: 100%;

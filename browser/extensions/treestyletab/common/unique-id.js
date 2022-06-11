@@ -82,12 +82,6 @@ Yak
 Zapus
 `.toLowerCase().trim().split(/\s+/);
 
-let mReadyToDetectDuplicatedTab = false;
-
-export function readyToDetectDuplicatedTab() {
-  mReadyToDetectDuplicatedTab = true;
-}
-
 export async function request(tabOrId, options = {}) {
   if (typeof options != 'object')
     options = {};
@@ -107,13 +101,8 @@ export async function request(tabOrId, options = {}) {
   let originalTabId = null;
   let duplicated    = false;
   if (!options.forceNew) {
-    // https://github.com/piroor/treestyletab/issues/2845
-    // This delay may break initial restoration of tabs, so we should
-    // ignore it until all restoration processes are finished.
-    if (mReadyToDetectDuplicatedTab &&
-        configs.delayForDuplicatedTabDetection > 0)
+    if (configs.delayForDuplicatedTabDetection > 0)
       await wait(configs.delayForDuplicatedTabDetection);
-
     let oldId = await browser.sessions.getTabValue(tab.id, Constants.kPERSISTENT_ID).catch(ApiTabs.createErrorHandler());
     if (oldId && !oldId.tabId) // ignore broken information!
       oldId = null;

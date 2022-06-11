@@ -10,7 +10,7 @@
 class Configs {
   constructor(
     defaults,
-    { logging, logger, localKeys, syncKeys, sync } = { syncKeys: [], logger: null }
+    { logging, logger, localKeys, syncKeys } = { syncKeys: [], logger: null }
   ) {
     this.$defaultLockedKeys = [];
     for (const key of Object.keys(defaults)) {
@@ -24,13 +24,10 @@ class Configs {
     this.$logging = logging || false;
     this.$logs = [];
     this.$logger = logger;
-    this.sync = sync === undefined ? true : !!sync;
     this._locked = new Set();
     this._lastValues = {};
     this._updating = new Map();
     this._observers = new Set();
-    this._changedObservers = new Set();
-    this._localLoadedObservers = new Set();
     this._syncKeys = localKeys ?
       Object.keys(defaults).filter(x => !localKeys.includes(x)) :
       (syncKeys || []);
@@ -41,35 +38,12 @@ class Configs {
     this._applyValues(this.$default);
   }
 
-  $addLocalLoadedObserver(observer) {
-    if (!this._localLoadedObservers.has(observer))
-      this._localLoadedObservers.add(observer);
-  }
-  $removeLocalLoadedObserver(observer) {
-    this._localLoadedObservers.delete(observer);
-  }
-
-  $addChangedObserver(observer) {
-    if (!this._changedObservers.has(observer))
-      this._changedObservers.add(observer);
-  }
-  $removeChangedObserver(observer) {
-    this._changedObservers.delete(observer);
-  }
-
   $addObserver(observer) {
-    // for backward compatibility
-    if (typeof observer == 'function')
-      this.$addChangedObserver(observer);
-    else if (!this._observers.has(observer))
+    if (!this._observers.has(observer))
       this._observers.add(observer);
   }
   $removeObserver(observer) {
-    // for backward compatibility
-    if (typeof observer == 'function')
-      this.$removeChangedObserver(observer);
-    else
-      this._observers.delete(observer);
+    this._observers.delete(observer);
   }
 
   _log(message, ...args) {
@@ -101,10 +75,6 @@ class Configs {
           try {
             const localValues = await browser.storage.local.get(null); // keys must be "null" to get only stored values
             this._log('load: successfully loaded local storage');
-            const observers = [...this._observers, ...this._localLoadedObservers];
-            for (const [key, value] of Object.entries(localValues)) {
-              this.$notifyToObservers(key, value, observers, 'onLocalLoaded');
-            }
             return localValues;
           }
           catch(e) {
@@ -194,9 +164,7 @@ class Configs {
       }
       this._log('load: locked state is applied');
       browser.storage.onChanged.addListener(this._onChanged.bind(this));
-      if (this.sync &&
-          (this._syncKeys ||
-           this._syncKeys.length > 0)) {
+      if (this._syncKeys || this._syncKeys.length > 0) {
         try {
           browser.storage.sync.get(this._syncKeys).then(syncedValues => {
             this._log('load: successfully loaded sync storage');
@@ -267,7 +235,7 @@ class Configs {
       this._log('save: failed', e);
     }
     try {
-      if (this.sync && this._syncKeys.includes(key))
+      if (this._syncKeys.includes(key))
         browser.storage.sync.set(update).then(() => {
           this._log('successfully synced', update);
         });
@@ -331,20 +299,19 @@ class Configs {
 
   _onChanged(changes) {
     this._log('_onChanged', changes);
-    const observers = [...this._observers, ...this._changedObservers];
     for (const [key, change] of Object.entries(changes)) {
       this._lastValues[key] = change.newValue;
-      this._updating.delete(key);
-      this.$notifyToObservers(key, change.newValue, observers, 'onChangeConfig');
+      this.$notifyToObservers(key);
     }
   }
 
-  $notifyToObservers(key, value, observers, observerMethod) {
-    for (const observer of observers) {
+  $notifyToObservers(key) {
+    this._updating.delete(key);
+    for (const observer of this._observers) {
       if (typeof observer === 'function')
-        observer(key, value);
-      else if (observer && typeof observer[observerMethod] === 'function')
-        observer[observerMethod](key, value);
+        observer(key);
+      else if (observer && typeof observer.onChangeConfig === 'function')
+        observer.onChangeConfig(key);
     }
   }
 };

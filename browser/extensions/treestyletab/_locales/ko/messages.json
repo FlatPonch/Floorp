@@ -1,6 +1,6 @@
 {
     "extensionName": {
-        "message": "Tree-shaped vertical tabs - 트리 스타일 탭",
+        "message": "Tree Style Tab - 트리 스타일 탭",
         "hash": "94c80eccdd67c127e1de28b71af57aee"
     },
     "extensionDescription": {
@@ -529,7 +529,7 @@
         "hash": "15adadb8434c4391c98fd1ce511e1ae0"
     },
     "startup_notification_title_installed": {
-        "message": "Tree-shaped vertical tabs을 처음 사용하시는 분들께",
+        "message": "Tree Style Tab을 처음 사용하시는 분들께",
         "hash": "0c5646cac16116fcc580e5205ea71c5c"
     },
     "startup_notification_message_installed": {
@@ -541,7 +541,7 @@
         "hash": "fe2b83e52716008824bf1f149e36c3ce"
     },
     "startup_notification_title_updated": {
-        "message": "Tree-shaped vertical tabs에 큰 변화가 생겼습니다.",
+        "message": "Tree Style Tab에 큰 변화가 생겼습니다.",
         "hash": "bad74c1a3abf3272d7982756202540a6"
     },
     "startup_notification_message_updated": {
@@ -553,7 +553,7 @@
         "hash": "1a8f82643a62400b741c436f79298d08"
     },
     "message_startup_description_1": {
-        "message": "Tree-shaped vertical tabs의 세로 탭 막대는 변경 가능한 사이드 바 중 하나입니다. 만약 표시되지 않을 경우,",
+        "message": "Tree Style Tab의 세로 탭 막대는 변경 가능한 사이드 바 중 하나입니다. 만약 표시되지 않을 경우,",
         "hash": "77072da9342e0bbfc72df3969455dc51"
     },
     "message_startup_description_key": {
@@ -613,7 +613,7 @@
         "hash": "991184685e856081ec9ee06431fda2d2"
     },
     "message_startup_userChromeCss_description_1": {
-        "message": "Tree-shaped vertical tabs은 Firefox의 WebExtensions만으로 탭바와 사이드바의 헤더를 제어할 수 없습니다. 이것들을 숨기고 싶은 경우",
+        "message": "Tree Style Tab은 Firefox의 WebExtensions만으로 탭바와 사이드바의 헤더를 제어할 수 없습니다. 이것들을 숨기고 싶은 경우",
         "hash": "2b5b9b8f63740c72ef3201e1f04c9c1a"
     },
     "message_startup_userChromeCss_description_link_label": {
@@ -641,7 +641,7 @@
         "hash": "00de8906635fae72f5a7f95466c14d54"
     },
     "api_requestedPermissions_message": {
-        "message": "⚠확장 기능 \"$NAME$\"이(가) Tree-shaped vertical tabs의 API를 이용하여 다음과 같은 행동을 수행하려합니다.\n\n$PERMISSIONS$\n\n허가할 경우, 이 글을 클릭하여 확장 기능에 권한을 허가해주시기 바랍니다.",
+        "message": "⚠확장 기능 \"$NAME$\"이(가) Tree Style Tab의 API를 이용하여 다음과 같은 행동을 수행하려합니다.\n\n$PERMISSIONS$\n\n허가할 경우, 이 글을 클릭하여 확장 기능에 권한을 허가해주시기 바랍니다.",
         "placeholders": {
             "NAME": { "content": "$1", "example": "foobar" },
             "PERMISSIONS": { "content": "$2", "example": "tabs" }
@@ -649,7 +649,7 @@
         "hash": "19fccbf5ec8b53a269aa021cdb5b5557"
     },
     "api_requestedPermissions_message_linux": {
-        "message": "⚠확장 기능 \"$NAME$\"이(가) Tree-shaped vertical tabs의 API를 이용하여 다음과 같은 행동을 수행하려합니다.\n\n$PERMISSIONS$\n\n허가할 경우, 버튼을 클릭하여 확장 기능에 권한을 허가해주시기 바랍니다.\n",
+        "message": "⚠확장 기능 \"$NAME$\"이(가) Tree Style Tab의 API를 이용하여 다음과 같은 행동을 수행하려합니다.\n\n$PERMISSIONS$\n\n허가할 경우, 버튼을 클릭하여 확장 기능에 권한을 허가해주시기 바랍니다.\n",
         "placeholders": {
             "NAME": { "content": "$1", "example": "foobar" },
             "PERMISSIONS": { "content": "$2", "example": "tabs" }
@@ -833,7 +833,7 @@
         "hash": "b977fd26ec4bf634094fe7b6a57a1759"
     },
     "config_title": {
-        "message": "Tree-shaped vertical tabs의 설정",
+        "message": "Tree Style Tab의 설정",
         "hash": "ac0a723c76133d1744f7fda57e510329"
     },
     "config_showExpertOptions_label": {
@@ -863,6 +863,18 @@
     "config_sidebarPosition_description": {
         "message": "※이 설정은 사이드바 자체의 위치를 변경하지 않습니다. 사이드바를 창 오른쪽으로 이동하려면 사이드바 헤더의 전환 메뉴에서 \"사이드바를 오른쪽으로 이동\"을 선택하세요.",
         "hash": "adbea9fc2751f205418a7f6b10e68b5f"
+    },
+    "config_sidebarDirection_caption": {
+        "message": "글씨 방향에 맞춘 스타일",
+        "hash": "df500379330e44d98c6ab41c6eb09f07"
+    },
+    "config_sidebarDirection_ltr": {
+        "message": "LTR",
+        "hash": "4fb680668e028ece5611db5ae4f2380c"
+    },
+    "config_sidebarDirection_rtl": {
+        "message": "RTL",
+        "hash": "f24b22d165c8a43ef76a792dedb56421"
     },
     "config_style_caption": {
         "message": "테마",
@@ -1464,11 +1476,11 @@
         "message": "북마크 이외에서 연속적으로 열린 탭은 자동으로 묶입니다.",
         "hash": "a8c3d0dacf027b072bdac938343c5131"
     },
-    "config_tabBunchesDetectionDelayOnNewWindow_before": {
+    "config_autoGroupNewTabsDelayOnNewWindow_before": {
         "message": "다만, 새 창이 열리고부터",
         "hash": "2eb9969ecbaf2144590626aa33b20dff"
     },
-    "config_tabBunchesDetectionDelayOnNewWindow_after": {
+    "config_autoGroupNewTabsDelayOnNewWindow_after": {
         "message": "밀리초 안에 열린 탭은 \"홈페이지\"의 일부로 간주해 묶지 않습니다.",
         "hash": "a6e268352f07d4449db8c955fca074d7"
     },
@@ -1897,7 +1909,7 @@
         "hash": "2bff160a32604afc72ae4f0072ae8a59"
     },
     "config_accelKey_auto": {
-        "message": "기본(macOS=⌘, 기타=Ctrl）",
+        "message": "기본(macOS=⌘, それ以外=Ctrl）",
         "hash": "59c4f47d4df6c72706f01f5b421a452a"
     },
     "config_accelKey_alt": {
@@ -2069,7 +2081,7 @@
         "hash": "aeb03789ab0fef10dbbec9f26318fc6c"
     },
     "config_externaladdonpermissions_description": {
-        "message": "여기에 체크한 확장 기능은 Firefox 자체가 그 확장 기능에 탭의 상새정보나 사생활 보호 창의 접근을 금지하고 있어도, <em>Tree-shaped vertical tabs의 권한으로</em> 접근할 수 있게 됩니다. <em>믿을 수 없는 확장 기능에는 절대 권한을 부여하지 마십시오.<em>",
+        "message": "여기에 체크한 확장 기능은 Firefox 자체가 그 확장 기능에 탭의 상새정보나 사생활 보호 창의 접근을 금지하고 있어도, <em>Tree Style Tab의 권한으로</em> 접근할 수 있게 됩니다. <em>믿을 수 없는 확장 기능에는 절대 권한을 부여하지 마십시오.<em>",
         "hash": "56449868ee71aab4e26da112b40cf642"
     },
     "config_externalAddonPermissions_header_name": {
@@ -2268,11 +2280,11 @@
         "hash": "c3ae3c72832dfedee6c48d0dc37eb954"
     },
     "tabContextMenu_pin_label": {
-        "message": "탭 고정(&P)",
+        "message": "탭 잠금(&P)",
         "hash": "84f0158295ff8a14fd6062c7ec19c77c"
     },
     "tabContextMenu_unpin_label": {
-        "message": "탭 고정 해제(&P)",
+        "message": "탭 잠금 해제(&P)",
         "hash": "60571db0ccb087c30009dadd2042ebd8"
     },
     "tabContextMenu_duplicate_label": {
@@ -2368,11 +2380,11 @@
         "hash": "c9aec61975e838ae00211e78c365ca82"
     },
     "tabContextMenu_pin_label_multiselected": {
-        "message": "탭 고정(&P)",
+        "message": "탭 잠금(&P)",
         "hash": "b32691b5170714cfdb1b406b5756149b"
     },
     "tabContextMenu_unpin_label_multiselected": {
-        "message": "탭 고정 해제(&P)",
+        "message": "탭 잠금 해제(&P)",
         "hash": "b6bb715b523238636abe60c06c9679e6"
     },
     "tabContextMenu_duplicate_label_multiselected": {

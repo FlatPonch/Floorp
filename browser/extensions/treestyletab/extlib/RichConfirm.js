@@ -697,9 +697,6 @@
       }
 
       setTimeout(() => {
-        if (!this.ui ||
-            !this.ui.classList)
-          return;
         // Apply overflow:auto after all contents are correctly rendered.
         this.ui.classList.add('shown');
       }, 10);
@@ -736,8 +733,8 @@
           // remove elements after animation is finished
           ui.parentNode.removeChild(ui);
           style.parentNode.removeChild(style);
+          resolve();
         }, 1000);
-        resolve();
       });
     }
 
@@ -1243,8 +1240,7 @@
               });
             });
 
-            if (typeof browser.tabs.setZoom == 'function')
-              await browser.tabs.setZoom(activeTab.id, 1);
+            await browser.tabs.setZoom(activeTab.id, 1);
             return this.showInTab(activeTab.id, {
               ...params,
               popup: true,

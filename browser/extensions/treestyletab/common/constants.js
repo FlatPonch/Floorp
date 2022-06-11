@@ -31,7 +31,6 @@ export const kCOMMAND_REMOVE_TABS_INTERNALLY         = 'treestyletab:remove-tabs
 export const kCOMMAND_UPDATE_LOADING_STATE           = 'treestyletab:update-loading-state';
 export const kCOMMAND_CONFIRM_TO_CLOSE_TABS          = 'treestyletab:confirm-to-close-tabs';
 export const kCOMMAND_SHOW_DIALOG                    = 'treestyletab:show-dialog';
-export const kCOMMAND_NOTIFY_BACKGROUND_READY        = 'treestyletab:notify-background-ready';
 export const kCOMMAND_NOTIFY_TAB_CREATING            = 'treestyletab:notify-tab-creating';
 export const kCOMMAND_NOTIFY_TAB_CREATED             = 'treestyletab:notify-tab-created';
 export const kCOMMAND_NOTIFY_TAB_UPDATED             = 'treestyletab:notify-tab-updated';
@@ -243,9 +242,11 @@ export const kCACHE_KEYS = [
 export const kCOUNTER_ROLE_ALL_TABS       = 1;
 export const kCOUNTER_ROLE_CONTAINED_TABS = 2;
 
-export const kTABBAR_POSITION_AUTO  = 0;
 export const kTABBAR_POSITION_LEFT  = 1;
 export const kTABBAR_POSITION_RIGHT = 2;
+
+export const kTABBAR_DIRECTION_LTR = 1;
+export const kTABBAR_DIRECTION_RTL = 2;
 
 export const kACTION_MOVE   = 1 << 0;
 export const kACTION_ATTACH = 1 << 10;
@@ -335,18 +336,18 @@ export const kTABBAR_UPDATE_REASON_TAB_MOVE      = 1 << 6;
 
 export const kDEFAULT_MIN_INDENT = 3;
 
-export const kGROUP_TAB_URI = browser.runtime.getURL('resources/group-tab.html');
+export const kGROUP_TAB_URI = browser.extension.getURL('resources/group-tab.html');
 export const kGROUP_TAB_DEFAULT_TITLE_MATCHER = new RegExp(`^${browser.i18n.getMessage('groupTab_label', '.+')}$`);
 export const kGROUP_TAB_FROM_PINNED_DEFAULT_TITLE_MATCHER = new RegExp(`^${browser.i18n.getMessage('groupTab_fromPinnedTab_label', '.+')}$`);
 export const kSHORTHAND_CUSTOM_URI = /^ext\+treestyletab:([^:?]+)(?:[:?](.*))?(#.*)?$/;
 export const kSHORTHAND_ABOUT_URI = /^about:treestyletab-([^?]+)/;
 export const kSHORTHAND_URIS = {
-  tabbar:  browser.runtime.getURL('sidebar/sidebar.html'),
+  tabbar:  browser.extension.getURL('sidebar/sidebar.html'),
   group:   kGROUP_TAB_URI,
-  options: browser.runtime.getURL('options/options.html?independent=true'),
-  startup: browser.runtime.getURL('resources/startup.html'),
-  testRunner:    browser.runtime.getURL('tests/runner.html'),
-  'test-runner': browser.runtime.getURL('tests/runner.html')
+  options: browser.extension.getURL('options/options.html?independent=true'),
+  startup: browser.extension.getURL('resources/startup.html'),
+  testRunner:    browser.extension.getURL('tests/runner.html'),
+  'test-runner': browser.extension.getURL('tests/runner.html')
 };
 
 export const kINSERTION_CONTEXT_MOVED = 1;
@@ -367,5 +368,5 @@ export const kSYNC_STORAGE_SAFE_QUOTA = 6 * 1024;
 
 export const kSYNC_DATA_TYPE_TABS = 'tabs';
 
-export const IS_BACKGROUND = location.href.startsWith(browser.runtime.getURL('background/background.html'));
-export const IS_SIDEBAR    = location.href.startsWith(browser.runtime.getURL('sidebar/sidebar.html'));
+export const IS_BACKGROUND = location.href.startsWith(browser.extension.getURL('background/background.html'));
+export const IS_SIDEBAR    = location.href.startsWith(browser.extension.getURL('sidebar/sidebar.html'));

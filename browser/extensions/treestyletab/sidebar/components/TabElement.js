@@ -21,7 +21,6 @@ import { kTAB_SOUND_BUTTON_ELEMENT_NAME } from './TabSoundButtonElement.js';
 import { kTAB_CLOSE_BOX_ELEMENT_NAME } from './TabCloseBoxElement.js';
 
 export const kTAB_ELEMENT_NAME = 'tab-item';
-export const kTAB_SUBSTANCE_ELEMENT_NAME = 'tab-item-substance';
 
 export const TabInvalidationTarget = Object.freeze({
   Twisty:      1 << 0,
@@ -104,60 +103,51 @@ export class TabElement extends HTMLElement {
     // We preserve this class for backward compatibility with other addons.
     this.classList.add(kTAB_CLASS_NAME);
 
-    const extraItemsContainerIndent = document.createElement('span');
-    extraItemsContainerIndent.classList.add(Constants.kEXTRA_ITEMS_CONTAINER);
-    extraItemsContainerIndent.classList.add('indent');
-    this.appendChild(extraItemsContainerIndent);
-
-    const substance = document.createElement(kTAB_SUBSTANCE_ELEMENT_NAME);
-    substance.setAttribute('draggable', true);
-    this.appendChild(substance);
-
     const background = document.createElement('span');
     background.classList.add(Constants.kBACKGROUND);
-    substance.appendChild(background);
+    this.appendChild(background);
 
     const label = document.createElement(kTAB_LABEL_ELEMENT_NAME);
-    substance.appendChild(label);
+    this.appendChild(label);
 
     const twisty = document.createElement(kTAB_TWISTY_ELEMENT_NAME);
-    substance.insertBefore(twisty, label);
+    this.insertBefore(twisty, label);
 
     const favicon = document.createElement(kTAB_FAVICON_ELEMENT_NAME);
-    substance.insertBefore(favicon, label);
+    this.insertBefore(favicon, label);
 
     const counter = document.createElement(kTAB_COUNTER_ELEMENT_NAME);
-    substance.appendChild(counter);
+    this.appendChild(counter);
 
     const soundButton = document.createElement(kTAB_SOUND_BUTTON_ELEMENT_NAME);
-    substance.appendChild(soundButton);
+    this.appendChild(soundButton);
 
     const closebox = document.createElement(kTAB_CLOSE_BOX_ELEMENT_NAME);
-    substance.appendChild(closebox);
+    this.appendChild(closebox);
 
     const burster = document.createElement('span');
     burster.classList.add(Constants.kBURSTER);
-    substance.appendChild(burster);
+    this.appendChild(burster);
 
     const activeMarker = document.createElement('span');
     activeMarker.classList.add(Constants.kHIGHLIGHTER);
-    substance.appendChild(activeMarker);
+    this.appendChild(activeMarker);
 
     const identityMarker = document.createElement('span');
     identityMarker.classList.add(Constants.kCONTEXTUAL_IDENTITY_MARKER);
-    substance.appendChild(identityMarker);
+    this.appendChild(identityMarker);
 
     const extraItemsContainerBehind = document.createElement('span');
     extraItemsContainerBehind.classList.add(Constants.kEXTRA_ITEMS_CONTAINER);
     extraItemsContainerBehind.classList.add('behind');
-    substance.appendChild(extraItemsContainerBehind);
+    this.appendChild(extraItemsContainerBehind);
 
     const extraItemsContainerFront = document.createElement('span');
     extraItemsContainerFront.classList.add(Constants.kEXTRA_ITEMS_CONTAINER);
     extraItemsContainerFront.classList.add('front');
-    substance.appendChild(extraItemsContainerFront);
+    this.appendChild(extraItemsContainerFront);
 
-    this.removeAttribute('draggable');
+    this.setAttribute('draggable', true);
 
     this.initializeContents();
     this.invalidate(TabInvalidationTarget.All);
@@ -172,7 +162,7 @@ export class TabElement extends HTMLElement {
   }
 
   get initialized() {
-    return !!this._substanceElement;
+    return !!this._labelElement;
   }
 
   initializeContents() {
@@ -181,28 +171,21 @@ export class TabElement extends HTMLElement {
     if (this._labelElement) {
       if (!this._labelElement.owner) {
         this._labelElement.addOverflowChangeListener(() => {
-          if (!this.$TST ||
-              this.$TST.tab.pinned)
+          if (this.$TST.tab.pinned)
             return;
           this.invalidateTooltip();
         });
       }
       this._labelElement.owner = this;
     }
-    if (this._twistyElement) {
+    if (this._twistyElement)
       this._twistyElement.owner = this;
-      this._twistyElement.makeAccessible();
-    }
     if (this._counterElement)
       this._counterElement.owner = this;
-    if (this._soundButtonElement) {
+    if (this._soundButtonElement)
       this._soundButtonElement.owner = this;
-      this._soundButtonElement.makeAccessible();
-    }
-    if (this.closeBoxElement) {
+    if (this.closeBoxElement)
       this.closeBoxElement.owner = this;
-      this.closeBoxElement.makeAccessible();
-    }
   }
 
   // Elements restored from cache are initialized without bundled tabs.
@@ -219,10 +202,6 @@ export class TabElement extends HTMLElement {
   }
   set $TST(value) {
     return this._$TST = value;
-  }
-
-  get _substanceElement() {
-    return this.querySelector(kTAB_SUBSTANCE_ELEMENT_NAME);
   }
 
   get _twistyElement() {
@@ -253,12 +232,6 @@ export class TabElement extends HTMLElement {
     this._labelElement.value = this.dataset.title;
     this.favIconUrl = this._favIconUrl;
     this.setAttribute('aria-selected', this.classList.contains(Constants.kTAB_STATE_HIGHLIGHTED) ? 'true' : 'false');
-
-    // for convenience on customization with custom user styles
-    this._substanceElement.setAttribute(Constants.kAPI_TAB_ID, this.getAttribute(Constants.kAPI_TAB_ID));
-    this._substanceElement.setAttribute(Constants.kAPI_WINDOW_ID, this.getAttribute(Constants.kAPI_WINDOW_ID));
-    this._labelElement.setAttribute(Constants.kAPI_TAB_ID, this.getAttribute(Constants.kAPI_TAB_ID));
-    this._labelElement.setAttribute(Constants.kAPI_WINDOW_ID, this.getAttribute(Constants.kAPI_WINDOW_ID));
   }
 
   invalidate(targets) {
@@ -386,10 +359,6 @@ windowId = ${tab.windowId}
   }
 
   _initExtraItemsContainers() {
-    if (!this.extraItemsContainerIndentRoot) {
-      this.extraItemsContainerIndentRoot = this.querySelector(`.${Constants.kEXTRA_ITEMS_CONTAINER}.indent`).attachShadow({ mode: 'open' });
-      this.extraItemsContainerIndentRoot.itemById = new Map();
-    }
     if (!this.extraItemsContainerBehindRoot) {
       this.extraItemsContainerBehindRoot = this.querySelector(`.${Constants.kEXTRA_ITEMS_CONTAINER}.behind`).attachShadow({ mode: 'open' });
       this.extraItemsContainerBehindRoot.itemById = new Map();

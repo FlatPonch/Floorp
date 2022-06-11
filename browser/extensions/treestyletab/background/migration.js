@@ -10,7 +10,6 @@ import {
   configs,
   saveUserStyleRules,
   notify,
-  wait,
   isLinux,
   isMacOS,
 } from '/common/common.js';
@@ -22,8 +21,8 @@ function log(...args) {
   internalLogger('background/migration', ...args);
 }
 
-const kCONFIGS_VERSION = 25;
-const kFEATURES_VERSION = 9;
+const kCONFIGS_VERSION = 24;
+const kFEATURES_VERSION = 8;
 
 export function migrateConfigs() {
   switch (configs.configsVersion) {
@@ -250,12 +249,6 @@ export function migrateConfigs() {
           configs.treatTreeAsExpandedOnClosed_noSidebar === false) {
         configs.parentTabOperationBehaviorMode = Constants.kPARENT_TAB_OPERATION_BEHAVIOR_MODE_CUSTOM;
       }
-
-    case 24:
-      if (configs.autoGroupNewTabsTimeout !== null)
-        configs.tabBunchesDetectionTimeout = configs.autoGroupNewTabsTimeout;
-      if (configs.autoGroupNewTabsDelayOnNewWindow !== null)
-        configs.tabBunchesDetectionDelayOnNewWindow = configs.autoGroupNewTabsDelayOnNewWindow;
   }
   configs.configsVersion = kCONFIGS_VERSION;
 }
@@ -368,7 +361,7 @@ async function startBookmarksUrlAutoMigration() {
 
   browser.bookmarks.onChanged.addListener(async (id, changeInfo) => {
     if (changeInfo.url &&
-        changeInfo.url.startsWith(browser.runtime.getURL(''))) {
+        changeInfo.url.startsWith(browser.extension.getURL(''))) {
       const bookmark = await browser.bookmarks.get(id);
       if (Array.isArray(bookmark))
         bookmark.forEach(migrateBookmarkUrl);
@@ -377,14 +370,3 @@ async function startBookmarksUrlAutoMigration() {
     }
   });
 }
-
-configs.$loaded.then(() => {
-  configs.$addObserver(async key => {
-    // This may be triggered not only "reset all", but while importing of configs also.
-    // We should try initial migration after all configs are successfully imported.
-    await wait(100);
-    if (key == 'configsVersion' &&
-        configs.configsVersion == 0)
-      migrateConfigs();
-  });
-});

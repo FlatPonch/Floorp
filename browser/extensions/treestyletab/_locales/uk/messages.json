@@ -1,9 +1,9 @@
 {
-  "extensionName": { "message": "Tree-shaped vertical tabs" },
+  "extensionName": { "message": "Tree Style Tab" },
   "extensionDescription": { "message": "Показує вкладки вертикальним деревовидним списком." },
 
-  "sidebarTitle": { "message": "Tree-shaped vertical tabs" },
-  "sidebarToggleDescription": { "message": "Перемикання на бічну панель \"Tree-shaped vertical tabs\"." },
+  "sidebarTitle": { "message": "Tree Style Tab" },
+  "sidebarToggleDescription": { "message": "Перемикання на бічну панель \"Tree Style Tab\"." },
 
   "command_indent":                { "message": "Додати поточну вкладку до дерева" },
   "command_outdent":               { "message": "Від'єднати поточну вкладку від дерева" },
@@ -83,7 +83,7 @@
   "warnOnCloseTabs_close":     { "message": "Закрити вкладки" },
   "warnOnCloseTabs_cancel":    { "message": "Скасувати" },
 
-  "message_startup_description_1": { "message": "Tree-shaped vertical tabs відроджується на основі технологій WebExtensions для Firefox 57 і більш пізніх версій. Його вертикальна панель вкладок доступна в якості однієї із (списку) бічних панелей. Якщо ви ще не бачите її, натисніть " },
+  "message_startup_description_1": { "message": "Tree Style Tab відроджується на основі технологій WebExtensions для Firefox 57 і більш пізніх версій. Його вертикальна панель вкладок доступна в якості однієї із (списку) бічних панелей. Якщо ви ще не бачите її, натисніть " },
   "message_startup_description_key": { "message": " кнопку \"F1\" " },
   "message_startup_description_2": { "message": " або натисніть " },
   "message_startup_description_3": { "message": " кнопку на панелі інструментів щоб активувати бічну панель." },
@@ -129,6 +129,10 @@
   "config_sidebarPosition_left": { "message": "Ліворуч" },
   "config_sidebarPosition_right": { "message": "Праворуч" },
   "config_sidebarPosition_description": { "message": "*Ця конфігурація не змінює положення бічної панелі. Вам потрібно натиснути перемикач в заголовку бічної панелі і  натиснути \"Перемістити бічну панель вправо\"." },
+
+  "config_sidebarDirection_caption": { "message": "Стиль напрямку тексту:" },
+  "config_sidebarDirection_ltr": { "message": "Зліва направо" },
+  "config_sidebarDirection_rtl": { "message": "Справа наліво" },
 
   "config_scrollbarMode_caption": { "message": "Смуга прокрутки:" },
   "config_scrollbarMode_default": { "message": "За замовч." },
@@ -233,8 +237,8 @@
 
   "config_autoGroupNewTabs_before": { "message": "Автоматично групувати вкладки відкриті протягом" },
   "config_autoGroupNewTabs_after": { "message": "мс" },
-  "config_tabBunchesDetectionDelayOnNewWindow_before": { "message": "Але не об'єднувати нові вкладки, відкриті протягом" },
-  "config_tabBunchesDetectionDelayOnNewWindow_after": { "message": "мс коли нове вікно відкрито у складі відкритих вкладок як \"домашня сторінка\"." },
+  "config_autoGroupNewTabsDelayOnNewWindow_before": { "message": "Але не об'єднувати нові вкладки, відкриті протягом" },
+  "config_autoGroupNewTabsDelayOnNewWindow_after": { "message": "мс коли нове вікно відкрито у складі відкритих вкладок як \"домашня сторінка\"." },
 
   "config_autoGroupNewTabsFromPinned_label": { "message": "Автоматично групувати вкладки відкриті із однієї закріпленої вкладки" },
 
@@ -294,9 +298,9 @@
   "config_legacyConfigsNextMigrationVersion_currentLevel_before": { "message": "(Доступний рівень конфігурації " },
   "config_legacyConfigsNextMigrationVersion_currentLevel_after": { "message": " або менше)" },
   "config_importedConfigsFromLegacy_placeholder": { "message": "Вставити перенесені дані старої конфігурації сюди" },
-  "migration_configs_notification_title": { "message": "Tree-shaped vertical tabs: Конфігурації успішно перенесено" },
+  "migration_configs_notification_title": { "message": "Tree Style Tab: Конфігурації успішно перенесено" },
   "migration_configs_notification_message": { "message": "Застосовано конфігурації старої версії." },
-  "migration_configsFailed_notification_title": { "message": "Tree-shaped vertical tabs: Не вдалося перенести конфігурації" },
+  "migration_configsFailed_notification_title": { "message": "Tree Style Tab: Не вдалося перенести конфігурації" },
   "migration_configsFailed_notification_message": { "message": "Процес перенесення перервано через непередбачені проблеми." },
 
   "config_importedTreeStructureFromLegacy_label": { "message": "Перенесення старого дерева" },
@@ -305,7 +309,7 @@
   "config_migrateSessionStore_after":      { "message": "." },
   "config_migrateLegacyTreeStructure_label": { "message": "Перенесення дерева вкладок при наступному запуску" },
   "config_importedTreeStructureFromLegacy_placeholder": { "message": "Вставити перенесені дані старого дерева сюди" },
-  "migration_tree_notification_title": { "message": "Tree-shaped vertical tabs: Дерево вкладок успішно перенесено" },
+  "migration_tree_notification_title": { "message": "Tree Style Tab: Дерево вкладок успішно перенесено" },
   "migration_tree_notification_message_withSession": { "message": "$COUNT$ вікно(он) повністю відновлено, з інформацією попереднього сеансу.",
     "placeholders": {
       "count": { "content": "$1", "example": "2" }
@@ -314,7 +318,7 @@
     "placeholders": {
       "count": { "content": "$1", "example": "2" }
     }},
-  "migration_treeFailed_notification_title": { "message": "Tree-shaped vertical tabs: Не вдалося перенести дерево вкладок" },
+  "migration_treeFailed_notification_title": { "message": "Tree Style Tab: Не вдалося перенести дерево вкладок" },
   "migration_treeFailed_notification_message": { "message": "Процес міграції переривається через непередбачені проблеми." },
 
 
@@ -343,8 +347,8 @@
   "config_requestPermissions_bookmarks": { "message": "Дозволити читання та створення закладок" },
   "config_requestPermissions_allUrls_ctrlTabTracking":   { "message": "Не розгортати згорнуте дерево і пропускати згорнуті дочірні вкл., перемикаючи фокус вкладок з допомогою гарячих клавіш. (*Необхідно дозволити виконання скриптів на веб-сторінках.)" },
 
-  "config_requestPermissions_fallbackToToolbarButton_title": { "message": "Натисніть \"Tree-shaped vertical tabs\" кнопку панелі інструментів" },
-  "config_requestPermissions_fallbackToToolbarButton_message": { "message": "Через баґ Firefox, Ви не зможете запитати дозвіл на цій сторінці. Будь ласка, натисніть \"Tree-shaped vertical tabs\" кнопку панелі інструментів щоб отримати дозвіл." },
+  "config_requestPermissions_fallbackToToolbarButton_title": { "message": "Натисніть \"Tree Style Tab\" кнопку панелі інструментів" },
+  "config_requestPermissions_fallbackToToolbarButton_message": { "message": "Через баґ Firefox, Ви не зможете запитати дозвіл на цій сторінці. Будь ласка, натисніть \"Tree Style Tab\" кнопку панелі інструментів щоб отримати дозвіл." },
 
   "config_all_caption": { "message": "Всі Конфігурації" },
 

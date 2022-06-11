@@ -15,7 +15,6 @@ import {
   shouldApplyAnimation,
   loadUserStyleRules,
   isMacOS,
-  notify,
 } from '/common/common.js';
 import * as Constants from '/common/constants.js';
 import * as ApiTabs from '/common/api-tabs.js';
@@ -82,6 +81,7 @@ const mPromisedTargetWindow = new Promise((resolve, _reject) => {
 });
 
 const mTabBar                     = document.querySelector('#tabbar');
+const mAfterTabsForOverflowTabBar = document.querySelector('#tabbar ~ .after-tabs');
 const mStyleLoader                = document.querySelector('#style-loader');
 const mBrowserThemeDefinition     = document.querySelector('#browser-theme-definition');
 const mUserStyleRules             = document.querySelector('#user-style-rules');
@@ -231,6 +231,7 @@ export async function init() {
       configs.$addObserver(onConfigChange);
       onConfigChange('debug');
       onConfigChange('sidebarPosition');
+      onConfigChange('sidebarDirection');
       onConfigChange('showContextualIdentitiesSelector');
       onConfigChange('showNewTabActionSelector');
 
@@ -380,9 +381,17 @@ function applyUserStyleRules() {
 async function applyBrowserTheme(theme) {
   log('applying theme ', theme);
 
-  const browserThemeStyle = await BrowserTheme.generateThemeDeclarations(theme);
-  // Apply theme color at first, to use given colors as the base of following "face-*" colors.
-  mBrowserThemeDefinition.textContent = browserThemeStyle;
+  let browserThemeStyle = '';
+  if (!theme ||
+      !theme.colors) {
+    // Reset colors
+    mBrowserThemeDefinition.textContent = '';
+  }
+  else {
+    browserThemeStyle = await BrowserTheme.generateThemeDeclarations(theme);
+    // Apply theme color at first, to use given colors as the base of following "face-*" colors.
+    mBrowserThemeDefinition.textContent = browserThemeStyle;
+  }
 
   const baseColor = Color.parseCSSColor(window.getComputedStyle(document.querySelector('#dummy-tab-color-box'), null).backgroundColor);
   const highlightColor = Color.parseCSSColor(window.getComputedStyle(document.querySelector('#dummy-highlight-color-box'), null).backgroundColor);
@@ -395,10 +404,16 @@ async function applyBrowserTheme(theme) {
     --face-gradient-end: rgba(${baseColor.red}, ${baseColor.green}, ${baseColor.blue}, 0);
   }`;
 
-  mBrowserThemeDefinition.textContent = [
-    defaultColors,
-    browserThemeStyle
-  ].join('\n');
+  if (!theme ||
+      !theme.colors) {
+    mBrowserThemeDefinition.textContent = defaultColors;
+  }
+  else {
+    mBrowserThemeDefinition.textContent = [
+      defaultColors,
+      browserThemeStyle
+    ].join('\n');
+  }
 }
 
 function updateContextualIdentitiesStyle() {
@@ -509,11 +524,6 @@ export async function rebuildAll(importedTabs, cache) {
       let tab = nativeTabs[index];
       Tab.track(tab);
       tab = importedTabs[index] && Tab.import(importedTabs[index]) || tab;
-      if (!tab.$TST) {
-        console.log('FATAL ERROR: Imported tab is not untracked yet. Reload the sidebar to retry initialization. See also: https://github.com/piroor/treestyletab/issues/2986');
-        location.reload();
-        return;
-      }
       tab.$TST.unbindElement(); // The tab object can have old element already detached from the document, so we need to forget it.
       if (Date.now() - lastDraw > configs.intervalToUpdateProgressForBlockedUserOperation) {
         UserOperationBlocker.setProgress(Math.round(++count / maxCount * 33) + 33); // 2/3: re-track all tabs
@@ -557,7 +567,7 @@ const mImportedTabs = new Promise((resolve, _reject) => {
       log(`mImportedTabs (${windowId}): onBackgroundIsReady `, message && message.type, message && message.windowId);
       if (!message ||
           !message.type ||
-          message.type != Constants.kCOMMAND_NOTIFY_BACKGROUND_READY ||
+          message.type != Constants.kCOMMAND_PING_TO_SIDEBAR ||
           message.windowId != windowId)
         return;
       browser.runtime.onMessage.removeListener(onBackgroundIsReady);
@@ -682,54 +692,31 @@ function updateTabbarLayout({ reasons, timeout, justNow } = {}) {
       readableReasons.push('tab move');
   }
   log(`updateTabbarLayout reasons: ${readableReasons.join(',')}`);
-
-  let allTabsHeight;
-  const firstTab = Tab.getFirstUnpinnedTab(mTargetWindow);
-  if (firstTab) {
-    const lastTab = Tab.getLastUnpinnedTab(mTargetWindow);
-    if (!lastTab) {
-      log('Failed to update layout: missing last visible tab, retrying with delay');
-      reserveToUpdateTabbarLayout({ reasons, timeout });
-      return;
-    }
-    const range = document.createRange();
-    range.selectNodeContents(mTabBar);
-    range.setStartBefore(firstTab.$TST.element);
-    range.setEndAfter(lastTab.$TST.element);
-    allTabsHeight   = range.getBoundingClientRect().height;
-    range.detach();
-  }
-  else {
-    allTabsHeight = 0;
-  }
-  const visibleNewTabButtonInTabbar = document.querySelector('#tabbar:not(.overflow) .after-tabs .newtab-button-box');
-  const visibleNewTabButtonAfterTabbar = document.querySelector('#tabbar.overflow ~ .after-tabs .newtab-button-box');
-  const newTabButtonSize = (visibleNewTabButtonInTabbar || visibleNewTabButtonAfterTabbar).getBoundingClientRect().height;
-  const containerHeight = mTabBar.getBoundingClientRect().height - (visibleNewTabButtonInTabbar ? visibleNewTabButtonInTabbar.getBoundingClientRect().height : 0);
-  log('height: ', { container: containerHeight, allTabsHeight, newTabButtonSize });
-
-  document.documentElement.style.setProperty('--after-tabs-area-size', `${newTabButtonSize}px`);
-
-  const windowId = TabsStore.getCurrentWindowId();
-  const overflow = containerHeight < allTabsHeight;
+  const range = document.createRange();
+  range.selectNodeContents(mTabBar);
+  const containerHeight = mTabBar.getBoundingClientRect().height;
+  const contentHeight   = range.getBoundingClientRect().height;
+  log('height: ', { container: containerHeight, content: contentHeight });
+  const overflow = containerHeight < contentHeight;
   if (overflow && !mTabBar.classList.contains(Constants.kTABBAR_STATE_OVERFLOW)) {
     log('overflow');
     mTabBar.classList.add(Constants.kTABBAR_STATE_OVERFLOW);
-    TSTAPI.sendMessage({
-      type: TSTAPI.kNOTIFY_TABBAR_OVERFLOW,
-      windowId,
-    });
+    const range = document.createRange();
+    range.selectNode(mAfterTabsForOverflowTabBar.querySelector('.newtab-button-box'));
+    const offset = range.getBoundingClientRect().height;
+    range.detach();
+    mTabBar.style.bottom = `${offset}px`;
     nextFrame().then(() => {
       // Tab at the end of the tab bar can be hidden completely or
       // partially (newly opened in small tab bar, or scrolled out when
       // the window is shrunken), so we need to scroll to it explicitely.
-      const activeTab = Tab.getActiveTab(windowId);
+      const activeTab = Tab.getActiveTab(TabsStore.getCurrentWindowId());
       if (activeTab && !Scroll.isTabInViewport(activeTab)) {
         log('scroll to active tab on updateTabbarLayout');
         Scroll.scrollToTab(activeTab);
         return;
       }
-      const lastOpenedTab = Tab.getLastOpenedTab(windowId);
+      const lastOpenedTab = Tab.getLastOpenedTab(TabsStore.getCurrentWindowId());
       if (reasons & Constants.kTABBAR_UPDATE_REASON_TAB_OPEN &&
           !Scroll.isTabInViewport(lastOpenedTab)) {
         log('scroll to last opened tab on updateTabbarLayout ', reasons);
@@ -743,10 +730,7 @@ function updateTabbarLayout({ reasons, timeout, justNow } = {}) {
   else if (!overflow && mTabBar.classList.contains(Constants.kTABBAR_STATE_OVERFLOW)) {
     log('underflow');
     mTabBar.classList.remove(Constants.kTABBAR_STATE_OVERFLOW);
-    TSTAPI.sendMessage({
-      type: TSTAPI.kNOTIFY_TABBAR_UNDERFLOW,
-      windowId,
-    });
+    mTabBar.style.bottom = '';
   }
 
   if (justNow)
@@ -804,7 +788,7 @@ CollapseExpand.onUpdated.addListener((_tab, options) => {
   reserveToUpdateTabbarLayout({ reason });
 });
 
-async function onConfigChange(changedKey) {
+function onConfigChange(changedKey) {
   const rootClasses = document.documentElement.classList;
   switch (changedKey) {
     case 'debug': {
@@ -818,15 +802,34 @@ async function onConfigChange(changedKey) {
           tab.$TST.invalidateElement(TabInvalidationTarget.Tooltip);
         }
       }
-      rootClasses.toggle('debug', configs.debug);
+      if (configs.debug)
+        rootClasses.add('debug');
+      else
+        rootClasses.remove('debug');
     }; break;
 
-    case 'sidebarPosition': {
-      const isRight = await isSidebarRightSide();
-      rootClasses.toggle('right', isRight);
-      rootClasses.toggle('left', !isRight);
+    case 'sidebarPosition':
+      if (configs.sidebarPosition == Constants.kTABBAR_POSITION_RIGHT) {
+        rootClasses.add('right');
+        rootClasses.remove('left');
+      }
+      else {
+        rootClasses.add('left');
+        rootClasses.remove('right');
+      }
       Indent.update({ force: true });
-    }; break;
+      break;
+
+    case 'sidebarDirection':
+      if (configs.sidebarDirection == Constants.kTABBAR_DIRECTION_RTL) {
+        rootClasses.add('rtl');
+        rootClasses.remove('ltr');
+      }
+      else {
+        rootClasses.add('ltr');
+        rootClasses.remove('rtl');
+      }
+      break;
 
     case 'baseIndent':
     case 'minIndent':
@@ -849,15 +852,24 @@ async function onConfigChange(changedKey) {
       break;
 
     case 'showContextualIdentitiesSelector':
-      rootClasses.toggle(Constants.kTABBAR_STATE_CONTEXTUAL_IDENTITY_SELECTABLE, configs[changedKey]);
+      if (configs[changedKey])
+        rootClasses.add(Constants.kTABBAR_STATE_CONTEXTUAL_IDENTITY_SELECTABLE);
+      else
+        rootClasses.remove(Constants.kTABBAR_STATE_CONTEXTUAL_IDENTITY_SELECTABLE);
       break;
 
     case 'showNewTabActionSelector':
-      rootClasses.toggle(Constants.kTABBAR_STATE_NEWTAB_ACTION_SELECTABLE, configs[changedKey]);
+      if (configs[changedKey])
+        rootClasses.add(Constants.kTABBAR_STATE_NEWTAB_ACTION_SELECTABLE);
+      else
+        rootClasses.remove(Constants.kTABBAR_STATE_NEWTAB_ACTION_SELECTABLE);
       break;
 
     case 'simulateSVGContextFill':
-      rootClasses.toggle('simulate-svg-context-fill', configs[changedKey]);
+      if (configs[changedKey])
+        rootClasses.add('simulate-svg-context-fill');
+      else
+        rootClasses.remove('simulate-svg-context-fill');
       break;
 
     default:
@@ -865,56 +877,6 @@ async function onConfigChange(changedKey) {
         applyUserStyleRules();
       break;
   }
-}
-
-async function isSidebarRightSide() {
-  // This calculation logic is buggy for a window in a screen placed at
-  // left of the primary display and scaled. As the result, a sidebar
-  // placed at left can be mis-detected as placed at right. For safety
-  // I ignore such cases and always treat such cases as "left side placed".
-  // See also: https://github.com/piroor/treestyletab/issues/2984#issuecomment-901907503
-  if (window.screenX < 0 && window.devicePixelRatio > 1)
-    return false;
-  const mayBeRight = window.mozInnerScreenX - window.screenX > (window.outerWidth - window.innerWidth) / 2;
-  if (configs.sidebarPosition == Constants.kTABBAR_POSITION_AUTO &&
-      mayBeRight &&
-      !configs.sidebarPositionRighsideNotificationShown) {
-    if (mTargetWindow != (await browser.windows.getLastFocused({})).id)
-      return;
-
-    let result;
-    do {
-      result = await RichConfirm.show({
-        message: browser.i18n.getMessage('sidebarPositionRighsideNotification_message'),
-        buttons: [
-          browser.i18n.getMessage('sidebarPositionRighsideNotification_rightside'),
-          browser.i18n.getMessage('sidebarPositionRighsideNotification_leftside'),
-        ],
-      });
-    } while (result.buttonIndex < 0);
-
-    const notificationParams = {
-      title:   browser.i18n.getMessage('sidebarPositionOptionNotification_title'),
-      message: browser.i18n.getMessage('sidebarPositionOptionNotification_message'),
-      url:     `moz-extension://${location.host}/options/options.html#section-appearance`,
-      timeout: configs.sidebarPositionOptionNotificationTimeout,
-    };
-    configs.sidebarPositionRighsideNotificationShown = true;
-    switch (result.buttonIndex) {
-      case 0:
-        notify(notificationParams);
-        break;
-
-      case 1:
-      default:
-        configs.sidebarPosition = Constants.kTABBAR_POSITION_LEFT;
-        notify(notificationParams);
-        return;
-    }
-  }
-  return configs.sidebarPosition == Constants.kTABBAR_POSITION_AUTO ?
-    mayBeRight :
-    configs.sidebarPosition == Constants.kTABBAR_POSITION_RIGHT;
 }
 
 

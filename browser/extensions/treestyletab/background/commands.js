@@ -276,7 +276,7 @@ export async function outdent(tab, options = {}) {
       broadcast: true,
     });
     const insertAfter = parent.$TST.lastDescendant || parent;
-    await Tree.moveTabSubtreeAfter(tab, insertAfter, {
+    await TabsMove.moveTabAfter(tab, insertAfter, {
       broadcast: true,
     });
   }
@@ -296,10 +296,10 @@ async function performTabsDragDrop(params = {}) {
     windowId:            params.windowId,
     destinationWindowId: params.destinationWindowId,
     action:              params.action,
-    allowedActions:      params.allowedActions
+    allosedActions:      params.allosedActions
   }));
 
-  if (!(params.allowedActions & Constants.kDRAG_BEHAVIOR_MOVE) &&
+  if (!(params.allosedActions & Constants.kDRAG_BEHAVIOR_MOVE) &&
       !params.duplicate) {
     log('not allowed action');
     return;
@@ -553,11 +553,9 @@ async function attachTabsWithStructure(tabs, parent, options = {}) {
       await Tree.attachTabTo(tab, parent, memberOptions);
     else
       await Tree.detachTab(tab, memberOptions);
-    // The tree can remain being collapsed by other addons like TST Lock Tree Collapsed.
-    const collapsed = parent && parent.$TST.subtreeCollapsed;
     return Tree.collapseExpandTabAndSubtree(tab, {
       ...memberOptions,
-      collapsed,
+      collapsed: false
     });
   }));
 }
@@ -982,12 +980,17 @@ export async function openBookmarksWithStructure(items, { activeIndex = 0, disca
 
   const lastItemIndicesWithLevel = new Map();
   let lastMaxLevel = 0;
+  const containerMatcher = new RegExp(`#${configs.containerRedirectKey}-(.+)$`);
   const structure = items.reduce((result, item, index) => {
-    const { cookieStoreId, url } = ContextualIdentities.getIdFromBookmark(item);
-    if (cookieStoreId) {
-      item.cookieStoreId = cookieStoreId;
-      if (url)
-        item.url = url;
+    // Respect container type stored by Container Bookmarks
+    // https://addons.mozilla.org/firefox/addon/container-bookmarks/
+    const matchedContainer = item.url.match(containerMatcher);
+    if (matchedContainer) {
+      const cookieStoreId = ContextualIdentities.getIdFromName(decodeURIComponent(matchedContainer[matchedContainer.length-1]));
+      if (cookieStoreId) {
+        item.cookieStoreId = cookieStoreId;
+        item.url = item.url.replace(containerMatcher, '');
+      }
     }
 
     let level = 0;
@@ -1018,11 +1021,7 @@ export async function openBookmarksWithStructure(items, { activeIndex = 0, disca
   const windowId = TabsStore.getCurrentWindowId() || (await browser.windows.getCurrent()).id;
   const tabs = await TabsOpen.openURIsInTabs(
     // we need to isolate it - unexpected parameter like "index" will break the behavior.
-    items.map(bookmark => ({
-      url:           bookmark.url,
-      title:         bookmark.title,
-      cookieStoreId: bookmark.cookieStoreId,
-    })),
+    items.map(bookmark => ({ url: bookmark.url, title: bookmark.title })),
     {
       windowId,
       isOrphan:     true,

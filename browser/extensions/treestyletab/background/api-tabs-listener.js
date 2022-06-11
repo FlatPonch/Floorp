@@ -256,16 +256,6 @@ async function onUpdated(tabId, changeInfo, tab) {
 
     if ('url' in changeInfo) {
       changeInfo.previousUrl = updatedTab.url;
-      // On Linux (and possibly on some other environments) the initial page load
-      // sometimes produces "onUpdated" event with unchanged URL unexpectedly,
-      // so we should ignure such invalid (uneffective) URL changes.
-      // See also: https://github.com/piroor/treestyletab/issues/3078
-      if (changeInfo.url == 'about:blank' &&
-          changeInfo.previousUrl == changeInfo.url &&
-          changeInfo.status == 'loading') {
-        delete changeInfo.url;
-        delete changeInfo.previousUrl;
-      }
     }
     /*
       Updated openerTabId is not notified via tabs.onUpdated due to
@@ -356,11 +346,6 @@ async function onCreated(tab) {
     await mPromisedStarted;
 
   log('tabs.onCreated: ', dumpTab(tab));
-
-  // Cache the initial index for areTabsFromOtherDeviceWithInsertAfterCurrent()@handle-tab-bunches.js
-  // See also: https://github.com/piroor/treestyletab/issues/2419
-  tab.$indexOnCreated = tab.index;
-
   return onNewTabTracked(tab, { trigger: 'tabs.onCreated' });
 }
 
@@ -388,7 +373,7 @@ async function onNewTabTracked(tab, info) {
   tab.index = Math.max(0, Math.min(tab.index, window.tabs.size));
   tab.reindexedBy = `onNewTabTracked (${tab.index})`;
 
-  // New tab from a bookmark or external apps always have its URL as the title
+  // New tab from a bookmark always have its URL as the title
   // (but the scheme part is missing.)
   tab.$possibleInitialUrl = tab.title;
 
@@ -717,8 +702,6 @@ function checkRecycledTab(windowId) {
 }
 
 async function onRemoved(tabId, removeInfo) {
-  Tree.markTabIdAsUnattachable(tabId);
-
   if (mPromisedStarted)
     await mPromisedStarted;
 
@@ -821,9 +804,6 @@ async function onRemoved(tabId, removeInfo) {
   catch(e) {
     console.log(e);
     onCompleted();
-  }
-  finally {
-    Tree.clearUnattachableTabId(tabId);
   }
 }
 

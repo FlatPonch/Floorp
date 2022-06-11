@@ -30,13 +30,20 @@
                            name="sidebarPosition"
                            value="2">
               __MSG_config_sidebarPosition_right__</label>
-       <label class="has-radio inline"
-             ><input type="radio"
-                     name="sidebarPosition"
-                     value="0">
-              __MSG_config_sidebarPosition_auto__</label>
     </p>
     <p class="sub">__MSG_config_sidebarPosition_description__</p>
+    <p>__MSG_config_sidebarDirection_caption__
+       <label class="has-radio inline"
+             ><input type="radio"
+                     name="sidebarDirection"
+                     value="1">
+              __MSG_config_sidebarDirection_ltr__</label>
+       <label class="has-radio inline"
+             ><input type="radio"
+                     name="sidebarDirection"
+                     value="2">
+              __MSG_config_sidebarDirection_rtl__</label>
+    </p>
     <fieldset>
       <legend>__MSG_config_style_caption__</legend>
       <ul id="style-radiogroup">
@@ -578,7 +585,7 @@
                        class="require-bookmarks-permission"
                        data-request-permission-message="__MSG_config_autoGroupNewTabsFromBookmarks_tooltiptext__">
                 <span>__MSG_config_autoGroupNewTabsFromBookmarks_before__</span>
-                <input id="tabBunchesDetectionTimeout"
+                <input id="autoGroupNewTabsTimeout"
                        type="number"
                        size="3"
                        class="with-bookmarks-permission">
@@ -596,11 +603,11 @@
                  ><input id="autoGroupNewTabsFromOthers"
                          type="checkbox">
                   __MSG_config_autoGroupNewTabsFromOthers_label__</label></p>
-        <p class="sub"><label>__MSG_config_tabBunchesDetectionDelayOnNewWindow_before__
-                              <input id="tabBunchesDetectionDelayOnNewWindow"
+        <p class="sub"><label>__MSG_config_autoGroupNewTabsDelayOnNewWindow_before__
+                              <input id="autoGroupNewTabsDelayOnNewWindow"
                                      type="number"
                                      size="3">
-                              __MSG_config_tabBunchesDetectionDelayOnNewWindow_after__</label></p>
+                              __MSG_config_autoGroupNewTabsDelayOnNewWindow_after__</label></p>
         <p class="sub"><label class="has-checkbox"
                              ><input id="warnOnAutoGroupNewTabs"
                                      type="checkbox">
@@ -702,7 +709,7 @@
              ><input id="allUrlsPermissionGranted_ctrlTabTracking"
                      type="checkbox">
               __MSG_config_requestPermissions_allUrls_ctrlTabTracking__</label></p>
-    <div class="expert" id="ctrlTabSubItemsContainer">
+    <div class="expert">
       <p class="sub"><label class="has-checkbox"
                            ><input id="autoExpandOnTabSwitchingShortcuts"
                                    type="checkbox">
@@ -1019,7 +1026,7 @@
 
     <section id="section-drag">
     <h1>__MSG_config_drag_caption__</h1>
-    <fieldset class="tabDragBehaviorConfigs" id="tabDragBehaviorConfigsGroup">
+    <fieldset class="tabDragBehaviorConfigs">
       <legend>__MSG_config_tabDragBehavior_caption__</legend>
       <p>__MSG_config_tabDragBehavior_description__</p>
       <table>
@@ -1140,10 +1147,6 @@
                          ><input id="autoExpandIntelligently"
                                  type="checkbox">
                           __MSG_config_autoExpandIntelligently_label__</label></p>
-    <p><label class="has-checkbox"
-             ><input id="ignoreTabDropNearSidebarArea"
-                     type="checkbox">
-              __MSG_config_ignoreTabDropNearSidebarArea_label__</label></p>
     </div>
     </section>
 
@@ -1369,7 +1372,7 @@
           <p><label class="has-checkbox"><input id="logFor-background/browser-action-menu" type="checkbox">background/browser-action-menu</label></p>
           <p><label class="has-checkbox"><input id="logFor-background/commands" type="checkbox">background/commands</label></p>
           <p><label class="has-checkbox"><input id="logFor-background/context-menu" type="checkbox">background/context-menu</label></p>
-          <p><label class="has-checkbox"><input id="logFor-background/handle-tab-bunches" type="checkbox">background/handle-tab-bunches</label></p>
+          <p><label class="has-checkbox"><input id="logFor-background/handle-group-tabs" type="checkbox">background/handle-group-tabs</label></p>
           <p><label class="has-checkbox"><input id="logFor-background/handle-misc" type="checkbox">background/handle-misc</label></p>
           <p><label class="has-checkbox"><input id="logFor-background/handle-moved-tabs" type="checkbox">background/handle-moved-tabs</label></p>
           <p><label class="has-checkbox"><input id="logFor-background/handle-new-tabs" type="checkbox">background/handle-new-tabs</label></p>

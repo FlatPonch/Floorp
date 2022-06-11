@@ -40,7 +40,7 @@ function log(...args) {
   internalLogger('sidebar/sidebar-cache', ...args);
 }
 
-const kCONTENTS_VERSION = 29;
+const kCONTENTS_VERSION = 25;
 
 export const onRestored = new EventListenerManager();
 
@@ -221,7 +221,7 @@ function matcheSignatures(signatures) {
 }
 
 function signatureFromTabsCache(cachedTabs) {
-  const idMatcher = new RegExp(`\bid="tab-([^"]+)"`);
+  const idMatcher = new RegExp(`${Constants.kAPI_TAB_ID}="([^"]+)"`);
   const cookieStoreIdMatcher = new RegExp(/\bcontextual-identity-[^\s]+\b/);
   const incognitoMatcher = new RegExp(/\bincognito\b/);
   const pinnedMatcher = new RegExp(/\bpinned\b/);
@@ -253,6 +253,7 @@ export async function restoreTabsFromCache(cache, params = {}) {
   if (offset <= 0) {
     if (window.element)
       window.element.parentNode.removeChild(window.element);
+    mTabBar.setAttribute('style', cache.style);
   }
 
   const restored = (await MetricsData.addAsync('restoreTabsFromCache: restoring internally', restoreTabsFromCacheInternal({

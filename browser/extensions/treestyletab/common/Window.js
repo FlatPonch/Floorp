@@ -48,7 +48,7 @@ export default class Window {
       this.internalByMouseFocusCount =
       this.duplicatingTabsCount = 0;
 
-    this.preventToDetectTabBunchesUntil = Date.now() + configs.tabBunchesDetectionDelayOnNewWindow;
+    this.preventAutoGroupNewTabsUntil = Date.now() + configs.autoGroupNewTabsDelayOnNewWindow;
 
     this.openingTabs   = new Set();
 

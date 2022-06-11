@@ -9,6 +9,7 @@ DEFINES["MOZ_APP_MAXVERSION"] = CONFIG["MOZ_APP_MAXVERSION"]
 
 
 FINAL_TARGET_FILES.features["treestyletab@piro.sakura.ne.jp"] += [
+    "COPYING.txt",
     "manifest.json",
 ]
 
@@ -21,11 +22,11 @@ FINAL_TARGET_FILES.features["treestyletab@piro.sakura.ne.jp"]["background"] += [
     "background/commands.js",
     "background/context-menu.js",
     "background/duplicated-tab-detection.js",
+    "background/handle-group-tabs.js",
     "background/handle-misc.js",
     "background/handle-moved-tabs.js",
     "background/handle-new-tabs.js",
     "background/handle-removed-tabs.js",
-    "background/handle-tab-bunches.js",
     "background/handle-tab-focus.js",
     "background/handle-tab-multiselect.js",
     "background/handle-tree-changes.js",
@@ -87,7 +88,6 @@ FINAL_TARGET_FILES.features["treestyletab@piro.sakura.ne.jp"]["extlib"] += [
 FINAL_TARGET_FILES.features["treestyletab@piro.sakura.ne.jp"]["extlib"]["codemirror-theme"] += [
     "extlib/codemirror-theme/3024-day.css",
     "extlib/codemirror-theme/3024-night.css",
-    "extlib/codemirror-theme/abbott.css",
     "extlib/codemirror-theme/abcdef.css",
     "extlib/codemirror-theme/ambiance-mobile.css",
     "extlib/codemirror-theme/ambiance.css",
@@ -111,7 +111,6 @@ FINAL_TARGET_FILES.features["treestyletab@piro.sakura.ne.jp"]["extlib"]["codemir
     "extlib/codemirror-theme/icecoder.css",
     "extlib/codemirror-theme/idea.css",
     "extlib/codemirror-theme/isotope.css",
-    "extlib/codemirror-theme/juejin.css",
     "extlib/codemirror-theme/lesser-dark.css",
     "extlib/codemirror-theme/liquibyte.css",
     "extlib/codemirror-theme/lucario.css",
@@ -170,25 +169,19 @@ FINAL_TARGET_FILES.features["treestyletab@piro.sakura.ne.jp"]["options"] += [
 FINAL_TARGET_FILES.features["treestyletab@piro.sakura.ne.jp"]["resources"] += [
     "resources/16x16-dark.svg",
     "resources/16x16-light.svg",
-    "resources/16x16.png",
     "resources/16x16.svg",
     "resources/20x20-dark.svg",
     "resources/20x20-light.svg",
-    "resources/20x20.png",
     "resources/20x20.svg",
     "resources/24x24-dark.svg",
     "resources/24x24-light.svg",
-    "resources/24x24.png",
     "resources/24x24.svg",
     "resources/32x32-dark.svg",
     "resources/32x32-light.svg",
-    "resources/32x32.png",
     "resources/32x32.svg",
     "resources/64x64-dark.svg",
     "resources/64x64-light.svg",
-    "resources/64x64.png",
     "resources/64x64.svg",
-
     "resources/blank.html",
     "resources/group-tab.html",
     "resources/group-tab.js",
@@ -233,7 +226,6 @@ FINAL_TARGET_FILES.features["treestyletab@piro.sakura.ne.jp"]["resources"]["icon
     "resources/icons/globe-16.svg",
     "resources/icons/home.svg",
     "resources/icons/hourglass.svg",
-    "resources/icons/info.svg",
     "resources/icons/lockwise.svg",
     "resources/icons/performance.svg",
     "resources/icons/privatebrowsing-favicon.svg",
@@ -253,6 +245,7 @@ FINAL_TARGET_FILES.features["treestyletab@piro.sakura.ne.jp"]["resources"]["modu
 
 FINAL_TARGET_FILES.features["treestyletab@piro.sakura.ne.jp"]["sidebar"] += [
     "sidebar/background-connection.js",
+    "sidebar/bgcolor.js",
     "sidebar/collapse-expand.js",
     "sidebar/drag-and-drop.js",
     "sidebar/event-utils.js",
@@ -315,6 +308,7 @@ FINAL_TARGET_FILES.features["treestyletab@piro.sakura.ne.jp"]["sidebar"]["styles
 ]
 
 FINAL_TARGET_FILES.features["treestyletab@piro.sakura.ne.jp"]["sidebar"]["styles"]["proton"] += [
+    "sidebar/styles/proton/base.css",
     "sidebar/styles/proton/proton.css",
 ]
 

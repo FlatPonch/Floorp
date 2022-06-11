@@ -374,7 +374,7 @@ function updateItemsVisibility(items, { forceVisible = null, multiselected = fal
   return { updated, visibleItemsCount };
 }
 
-async function updateItems({ multiselected } = {}) {
+function updateItems({ multiselected } = {}) {
   let updated = false;
 
   const groupedItems = updateItemsVisibility(mGroupedTabItems, { multiselected });
@@ -400,7 +400,7 @@ async function updateItems({ multiselected } = {}) {
     updated = true;
 
   if (mGroupedTabItemsById['grouped:sendTreeToDevice'].lastVisible &&
-      await TabContextMenu.updateSendToDeviceItems('grouped:sendTreeToDevice'))
+      TabContextMenu.updateSendToDeviceItems('grouped:sendTreeToDevice'))
     updated = true;
 
   return updated;
@@ -532,15 +532,15 @@ async function onBookmarkItemClick(info) {
   }
 }
 
-async function onShown(info, tab) {
+function onShown(info, tab) {
   if (info.contexts.includes('tab'))
-    await onTabContextMenuShown(info, tab);
+    onTabContextMenuShown(info, tab);
   else if (info.contexts.includes('bookmark'))
     onBookmarkContextMenuShown(info);
 }
 browser.menus.onShown.addListener(onShown);
 
-async function onTabContextMenuShown(info, tab) {
+function onTabContextMenuShown(info, tab) {
   tab = tab && Tab.get(tab.id);
   const multiselected = tab && tab.$TST.multiselected;
   const contextTabs      = multiselected ? Tab.getSelectedTabs(tab.windowId) : tab ? [tab] : [];
@@ -548,7 +548,7 @@ async function onTabContextMenuShown(info, tab) {
   const subtreeCollapsed = contextTabs.length > 0 && contextTabs.some(tab => tab.$TST.subtreeCollapsed);
   const grouped          = contextTabs.length > 0 && contextTabs.some(tab => tab.$TST.isGroupTab);
 
-  let updated = await updateItems({ multiselected });
+  let updated = updateItems({ multiselected });
 
   for (const item of mTabItems) {
     let newEnabled;

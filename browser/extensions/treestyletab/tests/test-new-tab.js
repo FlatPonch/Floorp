@@ -20,7 +20,7 @@ let win;
 export async function setup() {
   win = await browser.windows.create();
   // wait until timeout the special timer which prevents grouping of new tabs
-  await wait(configs.tabBunchesDetectionDelayOnNewWindow);
+  await wait(configs.autoGroupNewTabsDelayOnNewWindow);
 }
 
 export async function teardown() {

@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
-  "version": "3.8.21",
+  "version": "3.8.2",
   "author": "YUKI \"Piro\" Hiroshi",
   "description": "__MSG_extensionDescription__",
   "permissions": [
@@ -15,33 +15,40 @@
     "sessions",
     "storage",
     "tabs",
-    "theme",
+    "theme"
+  ],
+  "optional_permissions": [
     "<all_urls>",
     "bookmarks",
     "tabHide"
   ],
   "icons": {
-    "16": "resources/16x16.png",
-    "20": "resources/20x20.png",
-    "24": "resources/24x24.png",
-    "32": "resources/32x32.png"
+    "16": "/resources/16x16.svg",
+    "20": "/resources/20x20.svg",
+    "24": "/resources/24x24.svg",
+    "32": "/resources/32x32.svg"
   },
   "background": {
-    "page": "background/background.html"
+    "page": "/background/background.html"
   },
   "browser_action": {
     "default_title": "__MSG_sidebarTitle__",
-    "default_area" : "menupanel",
     "default_icon": {
-      "16": "resources/16x16.svg",
-      "20": "resources/20x20.svg",
-      "24": "resources/24x24.svg",
-      "32": "resources/32x32.svg"
+      "16": "/resources/16x16.svg",
+      "20": "/resources/20x20.svg",
+      "24": "/resources/24x24.svg",
+      "32": "/resources/32x32.svg"
     }
   },
   "sidebar_action": {
     "default_title": "__MSG_sidebarTitle__",
-    "default_panel": "sidebar/sidebar.html",
+    "default_icon": {
+      "16": "/resources/16x16.svg",
+      "20": "/resources/20x20.svg",
+      "24": "/resources/24x24.svg",
+      "32": "/resources/32x32.svg"
+    },
+    "default_panel": "/sidebar/sidebar.html",
     "browser_style": false
   },
   "commands": {
@@ -194,23 +201,22 @@
     }
   },
   "options_ui": {
-    "page": "options/options.html",
+    "page": "/options/options.html",
     "browser_style": false
   },
   "web_accessible_resources": [
-    "resources/group-tab.html*"
+    "/resources/group-tab.html*"
   ],
   "protocol_handlers": [
-    {
-      "protocol": "ext+treestyletab",
-      "name": "Tree Style Tab",
-      "uriTemplate": "resources/protocol-handler.html?%s"
-    }
+    { "protocol":    "ext+treestyletab",
+      "name":        "Tree Style Tab",
+      "uriTemplate": "/resources/protocol-handler.html?%s" }
   ],
   "default_locale": "en",
   "applications": {
     "gecko": {
-      "id": "treestyletab@piro.sakura.ne.jp"
+      "id": "treestyletab@piro.sakura.ne.jp",
+      "strict_min_version": "67.0"
     }
   }
 }

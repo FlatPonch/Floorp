@@ -4,24 +4,20 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-tab-item-substance,
+tab-item,
 .after-tabs button,
 .after-tabs [role="button"] {
   border: 1px solid var(--tab-border);
   border-width: 1px 0;
+  margin-bottom: -1px;
   padding: 0.3em 0.25em;
 }
-tab-item,
-.after-tabs button,
-.after-tabs [role="button"] {
-  margin-bottom: -1px;
-}
 
-tab-item.pinned tab-item-substance {
+tab-item.pinned {
   border-width: 0 1px 1px 0;
 }
 
-tab-item.pinned.last-row tab-item-substance {
+tab-item.pinned.last-row {
   border-bottom-width: 0;
 }
 
@@ -37,26 +33,26 @@ tab-item.pinned.last-row tab-item-substance {
 }
 
 
-:root.left tab-item:not(.pinned) tab-item-substance,
+:root.left tab-item:not(.pinned),
 :root.left .after-tabs button:not([data-menu-ui]),
 :root.left .after-tabs [role="button"]:not([data-menu-ui]) {
   padding-right: 0.35em;
 }
-:root.left tab-item:not(.pinned)[data-parent-id] tab-item-substance {
+:root.left tab-item:not(.pinned)[data-parent-id] {
   border-left-width: 1px;
 }
 
-:root.right tab-item:not(.pinned) tab-item-substance,
+:root.right tab-item:not(.pinned),
 :root.right .after-tabs button:not([data-menu-ui]),
 :root.right .after-tabs [role="button"]:not([data-menu-ui]) {
   padding-left: 0.35em;
 }
-:root.right tab-item:not(.pinned)[data-parent-id] tab-item-substance {
+:root.right tab-item:not(.pinned)[data-parent-id] {
   border-right-width: 1px;
 }
 
-#tabbar tab-item.pinned + tab-item:not(.pinned) tab-item-substance,
-#tabbar tab-item:not(.pinned):first-of-type tab-item-substance {
+#tabbar tab-item.pinned + tab-item:not(.pinned),
+#tabbar tab-item:not(.pinned):first-of-type {
   border-top: none;
 }
 
@@ -66,10 +62,10 @@ tab-item.pinned.last-row tab-item-substance {
 
 
 /* macOS workaround */
-:root.platform-mac.left #tabbar.overflow tab-item:not(.pinned) tab-item-substance {
+:root.platform-mac.left #tabbar.overflow tab-item:not(.pinned) {
   padding-left: var(--scrollbar-placeholder-size); /* it will be enough larger than the default padding */
 }
-:root.platform-mac.right #tabbar.overflow tab-item:not(.pinned) tab-item-substance {
+:root.platform-mac.right #tabbar.overflow tab-item:not(.pinned) {
   padding-right: var(--scrollbar-placeholder-size); /* it will be enough larger than the default padding */
 }
 
@@ -136,7 +132,7 @@ tab-item tab-closebox::after {
   --multiselected-color: Highlight;
 }
 
-.mutiple-highlighted > tab-item.highlighted tab-item-substance::after {
+.mutiple-highlighted > tab-item.highlighted::after {
   background: var(--multiselected-color);
   bottom: 0;
   content: " ";

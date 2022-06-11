@@ -694,7 +694,7 @@ export function ensureLivingTab(tab) {
       (tab.$TST.element &&
        !tab.$TST.element.parentNode) ||
       !tabs.has(tab.id) ||
-      tab.$TST.removing ||
+      tab.$TST.states.has(Constants.kTAB_STATE_REMOVING) ||
       !windows.get(tab.windowId))
     return null;
   return tab;

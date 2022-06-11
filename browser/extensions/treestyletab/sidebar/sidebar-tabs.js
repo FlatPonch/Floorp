@@ -29,7 +29,6 @@ import EventListenerManager from '/extlib/EventListenerManager.js';
 
 import {
   kTAB_ELEMENT_NAME,
-  kTAB_SUBSTANCE_ELEMENT_NAME,
   TabInvalidationTarget,
   TabUpdateTarget,
 } from './components/TabElement.js';
@@ -63,8 +62,7 @@ export function getTabFromDOMNode(node, options = {}) {
     return null;
   if (!(node instanceof Element))
     node = node.parentNode;
-  const tabSubstance = node && node.closest(kTAB_SUBSTANCE_ELEMENT_NAME);
-  const tab = tabSubstance && tabSubstance.closest(kTAB_ELEMENT_NAME);
+  const tab = node && node.closest('.tab');
   if (options.force)
     return tab && tab.apiTab;
   return TabsStore.ensureLivingTab(tab && tab.apiTab);
@@ -304,7 +302,7 @@ export async function waitUntilNewTabIsMoved(tabId) {
   const timer = setTimeout(() => {
     if (mMovedNewTabResolvers.has(tabId))
       mMovedNewTabResolvers.get(tabId)();
-  }, Math.max(0, configs.tabBunchesDetectionTimeout));
+  }, Math.max(0, configs.autoGroupNewTabsTimeout));
   const promise = new Promise((resolve, _reject) => {
     mMovedNewTabResolvers.set(tabId, resolve);
   }).then(newIndex => {
@@ -325,7 +323,7 @@ function maybeNewTabIsMoved(tabId) {
     mAlreadyMovedNewTabs.add(tabId);
     setTimeout(() => {
       mAlreadyMovedNewTabs.delete(tabId);
-    }, Math.min(10 * 1000, configs.tabBunchesDetectionTimeout));
+    }, Math.min(10 * 1000, configs.autoGroupNewTabsTimeout));
   }
 }
 
@@ -460,7 +458,6 @@ async function activateRealActiveTab(windowId) {
   TabsStore.activeTabInWindow.set(windowId, tab);
   TabsInternalOperation.setTabActive(tab);
 }
-
 
 const BUFFER_KEY_PREFIX = 'sidebar-tab-';
 

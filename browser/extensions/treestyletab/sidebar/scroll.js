@@ -318,7 +318,7 @@ export async function scrollToTab(tab, options = {}) {
   // To retry "scroll to tab" behavior for such cases, we need to
   // keep "last scrolled-to tab" information until the tab is
   // actually moved.
-  await wait(configs.tabBunchesDetectionTimeout);
+  await wait(configs.autoGroupNewTabsTimeout);
   if (scrollToTab.stopped)
     return;
   const retryOptions = {
@@ -432,7 +432,6 @@ async function onWheel(event) {
   TSTAPI.notifyScrolled({
     tab,
     scrollContainer: mTabBar,
-    overflow: mTabBar.classList.contains(Constants.kTABBAR_STATE_OVERFLOW),
     event
   });
 }

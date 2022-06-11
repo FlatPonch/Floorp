@@ -1,9 +1,9 @@
 {
-  "extensionName": { "message": "Tree-shaped vertical tabs - ツリー型垂直タブ" },
+  "extensionName": { "message": "Tree Style Tab - ツリー型タブ" },
   "extensionDescription": { "message": "タブをツリー状に表示します。" },
 
-  "sidebarTitle": { "message": "ツリー型垂直タブ" },
-  "sidebarToggleDescription": { "message": "ツリー型垂直タブのサイドバーの表示・非表示を切り替える" },
+  "sidebarTitle": { "message": "ツリー型タブ" },
+  "sidebarToggleDescription": { "message": "ツリー型タブのサイドバーの表示・非表示を切り替える" },
 
   "command_tabMoveUp":             { "message": "現在のタブを単体で1つ上に移動" },
   "command_treeMoveUp":            { "message": "現在のタブとその配下のタブを1つ上に移動" },
@@ -29,25 +29,13 @@
   "command_increaseSubPanel":      { "message": "サブパネルの高さを広げる" },
   "command_decreaseSubPanel":      { "message": "サブパネルの高さを縮める" },
 
-  "tab_closebox_aria_label": { "message": "タブを閉じる #$ID$",
-    "placeholders": {
-      "id": { "content": "$1", "example": "1" }
-    }},
   "tab_closebox_tab_tooltip": { "message": "タブを閉じる" },
   "tab_closebox_tab_tooltip_multiselected": { "message": "選択されたタブを閉じる" },
   "tab_closebox_tree_tooltip": { "message": "ツリーを閉じる" },
-  "tab_soundButton_aria_label": { "message": "タブをミュート #$ID$",
-    "placeholders": {
-      "id": { "content": "$1", "example": "1" }
-    }},
   "tab_soundButton_muted_tooltip": { "message": "タブのミュートを解除" },
   "tab_soundButton_muted_tooltip_multiselected": { "message": "選択されたタブのミュートを解除" },
   "tab_soundButton_playing_tooltip": { "message": "タブをミュート" },
   "tab_soundButton_playing_tooltip_multiselected": { "message": "選択されたタブをミュート" },
-  "tab_twisty_aria_label": { "message": "ツリーを開閉 #$ID$",
-    "placeholders": {
-      "id": { "content": "$1", "example": "1" }
-    }},
   "tab_twisty_expanded_tooltip": { "message": "ツリーをたたむ" },
   "tab_twisty_collapsed_tooltip": { "message": "ツリーを展開する" },
   "tab_tree_tooltip": { "message": "$TREE$\n  ...（省略されたタブ：$COUNT$個）",
@@ -179,19 +167,19 @@
   "syncAvailable_notification_title":   { "message": "タブをTSTから他の端末に送れます" },
   "syncAvailable_notification_message": { "message": "他の端末との間でタブを送受信できます。ここをクリックして、この端末に分かりやすい名前を設定してください。" },
   "syncAvailable_notification_message_linux": { "message": "他の端末との間でタブを送受信できます。ボタンをクリックして、この端末に分かりやすい名前を設定してください。" },
-  "sentTabs_notification_title":            { "message": "\u200b" },
+  "sentTabs_notification_title":            { "message": "" },
   "sentTabs_notification_message":          { "message": "$DEVICE$ にタブを送信しました",
     "placeholders": {
       "DEVICE": { "content": "$1", "example": "Firefox on Device X" }
     }},
-  "sentTabs_notification_title_multiple":   { "message": "\u200b" },
+  "sentTabs_notification_title_multiple":   { "message": "" },
   "sentTabs_notification_message_multiple": { "message": "$DEVICE$ にタブを送信しました",
     "placeholders": {
       "DEVICE": { "content": "$1", "example": "Firefox on Device X" }
     }},
-  "sentTabsToAllDevices_notification_title":            { "message": "\u200b" },
+  "sentTabsToAllDevices_notification_title":            { "message": "" },
   "sentTabsToAllDevices_notification_message":          { "message": "すべての端末にタブを送信しました" },
-  "sentTabsToAllDevices_notification_title_multiple":   { "message": "\u200b" },
+  "sentTabsToAllDevices_notification_title_multiple":   { "message": "" },
   "sentTabsToAllDevices_notification_message_multiple": { "message": "すべての端末にタブを送信しました" },
   "receiveTabs_notification_title":            { "message": "$DEVICE$ からのタブ",
     "placeholders": {
@@ -212,24 +200,17 @@
       "REST": { "content": "$3", "example": "3" }
     }},
 
-  "sidebarPositionRighsideNotification_message":   { "message": "サイドバーが右側に置かれていることを検出しました。現在の位置に合わせて表示を切り替えますか？" },
-  "sidebarPositionRighsideNotification_rightside": { "message": "右側用の表示に切り替える" },
-  "sidebarPositionRighsideNotification_leftside":  { "message": "左側用の表示を維持する" },
-
-  "sidebarPositionOptionNotification_title":   { "message": "サイドバーの内容の表示設定を保存しました" },
-  "sidebarPositionOptionNotification_message": { "message": "サイドバーの内容の表示を変更するには、Tree-shaped vertical tabsの設定画面の「外観」を参照して下さい" },
-
-  "startup_notification_title_installed":   { "message": "Tree-shaped vertical tabsを使い始める方へ" },
+  "startup_notification_title_installed":   { "message": "Tree Style Tabを使い始める方へ" },
   "startup_notification_message_installed": { "message": "より自然な操作感を得るためには、追加の権限を許可する必要があります。ここをクリックして権限を設定してください。" },
   "startup_notification_message_installed_linux": { "message": "より自然な操作感を得るためには、追加の権限を許可する必要があります。ボタンをクリックして権限を設定してください。" },
-  "startup_notification_title_updated":     { "message": "Tree-shaped vertical tabsの動作が変わりました" },
+  "startup_notification_title_updated":     { "message": "Tree Style Tabの動作が変わりました" },
   "startup_notification_message_updated":   { "message": "操作感に影響する大きな変更がありました。ここをクリックして変更履歴を確認してください。" },
   "startup_notification_message_updated_linux":   { "message": "操作感に影響する大きな変更がありました。ボタンをクリックして変更履歴を確認してください。" },
 
-  "message_startup_description_1": { "message": "Tree-shaped vertical tabsの縦型タブバーは切り替え可能なサイドバーパネルの一つになっています。もし表示されていない場合は、" },
+  "message_startup_description_1": { "message": "Tree Style Tabの縦型タブバーは切り替え可能なサイドバーパネルの一つになっています。もし表示されていない場合は、" },
   "message_startup_description_key": { "message": "「F1」キー" },
   "message_startup_description_2": { "message": "を押すかツールバー上の「" },
-  "message_startup_description_3": { "message": "」ボタンをクリックして「ツリー型垂直タブ」サイドバーパネルを表示して下さい。" },
+  "message_startup_description_3": { "message": "」ボタンをクリックして「ツリー型タブ」サイドバーパネルを表示して下さい。" },
   "message_startup_description_sync_before": { "message": "Firefox Sync経由でのタブの他の端末への送信は、TSTが動作している端末に対してのみ行えます。事前にFirefoxの設定画面からFirefox Syncを有効化しておき、他の端末でもTSTを有効化しておいてください。また、" },
   "message_startup_description_sync_link":   { "message": "端末名は手動で設定する必要があります" },
   "message_startup_description_sync_after":  { "message": "。" },
@@ -244,7 +225,7 @@
   "message_startup_requestPermissions_allUrls":   { "message": "キーボードショートカットでのタブ切り替え中は、折りたたまれた子孫タブにはフォーカスせず、折りたたまれたツリーも展開しない" },
 
   "message_startup_userChromeCss_notify": { "message": "タブバーとサイドバーのヘッダーを隠したい場合" },
-  "message_startup_userChromeCss_description_1": { "message": "WebExtensionsの仕様上、FirefoxのタブバーとサイドバーのヘッダーはTree-shaped vertical tabsから制御できません。これらを隠したい場合は" },
+  "message_startup_userChromeCss_description_1": { "message": "WebExtensionsの仕様上、FirefoxのタブバーとサイドバーのヘッダーはTree Style Tabから制御できません。これらを隠したい場合は" },
   "message_startup_userChromeCss_description_link_label": { "message": "userChrome.cssでのカスタマイズ例" },
   "message_startup_userChromeCss_description_link_uri": { "message": "https://github.com/piroor/treestyletab/wiki/Code-snippets-for-custom-style-rules#for-userchromecss" },
   "message_startup_userChromeCss_description_2": { "message": "を参照して下さい。ただし、" },
@@ -252,12 +233,12 @@
   "message_startup_userChromeCss_description_3": { "message": "\u200b" },
 
   "api_requestedPermissions_title": { "message": "アクセス権の要求" },
-  "api_requestedPermissions_message": { "message": "⚠アドオン「$NAME$」がTree-shaped vertical tabsのAPIを経由して以下のことをしようとしています。\n\n$PERMISSIONS$\n\n許可する場合はこの通知をクリックしてアドオンに許可を与えてください。",
+  "api_requestedPermissions_message": { "message": "⚠アドオン「$NAME$」がTree Style TabのAPIを経由して以下のことをしようとしています。\n\n$PERMISSIONS$\n\n許可する場合はこの通知をクリックしてアドオンに許可を与えてください。",
     "placeholders": {
       "NAME":        { "content": "$1", "example": "foobar" },
       "PERMISSIONS": { "content": "$2", "example": "tabs" }
     }},
-  "api_requestedPermissions_message_linux": { "message": "⚠アドオン「$NAME$」がTree-shaped vertical tabsのAPIを経由して以下のことをしようとしています。\n\n$PERMISSIONS$\n\n許可する場合はボタンをクリックしてアドオンに許可を与えてください。",
+  "api_requestedPermissions_message_linux": { "message": "⚠アドオン「$NAME$」がTree Style TabのAPIを経由して以下のことをしようとしています。\n\n$PERMISSIONS$\n\n許可する場合はボタンをクリックしてアドオンに許可を与えてください。",
     "placeholders": {
       "NAME":        { "content": "$1", "example": "foobar" },
       "PERMISSIONS": { "content": "$2", "example": "tabs" }
@@ -312,7 +293,7 @@
 
 
 
-  "config_title": { "message": "Tree-shaped vertical tabsの設定" },
+  "config_title": { "message": "Tree Style Tabの設定" },
 
   "config_showExpertOptions_label": { "message": "上級者向けの設定をアンロック" },
   "config_openOptionsInTab_label": { "message": "この設定画面をより広いスペースで開く" },
@@ -322,8 +303,11 @@
   "config_sidebarPosition_caption": { "message": "サイドバーの位置に合わせたスタイル:" },
   "config_sidebarPosition_left": { "message": "左側用" },
   "config_sidebarPosition_right": { "message": "右側用" },
-  "config_sidebarPosition_auto": { "message": "サイドバーが表示された時に自動で判定" },
   "config_sidebarPosition_description": { "message": "※この設定はサイドバー自体の位置を変更しません。サイドバーをウィンドウの右側に移動するには、サイドバーのヘッダ上の切り替えメニューから「サイドバーを右側に移動」を選択して下さい。" },
+
+  "config_sidebarDirection_caption": { "message": "書字方向に合わせたスタイル:" },
+  "config_sidebarDirection_ltr": { "message": "LTR" },
+  "config_sidebarDirection_rtl": { "message": "RTL" },
 
   "config_style_caption": { "message": "テーマ" },
   "config_style_proton": { "message": "Proton" },
@@ -503,8 +487,8 @@
   "config_tabsFromSameFolderMinThresholdPercentage_before": { "message": "開かれたタブのURLのうち" },
   "config_tabsFromSameFolderMinThresholdPercentage_after": { "message":  "%以上が共通のフォルダー内にブックマークされていれば、開かれたタブすべてがそのブックマークフォルダーから開かれたと判断する" },
   "config_autoGroupNewTabsFromOthers_label": { "message": "ブックマーク以外から連続して開かれたタブも自動的にグループ化する" },
-  "config_tabBunchesDetectionDelayOnNewWindow_before": { "message": "ただし、新しいウィンドウが開かれてから" },
-  "config_tabBunchesDetectionDelayOnNewWindow_after": { "message": "ミリ秒以内に開かれたタブは「ホームページ」の一部と見なしてグループ化しない" },
+  "config_autoGroupNewTabsDelayOnNewWindow_before": { "message": "ただし、新しいウィンドウが開かれてから" },
+  "config_autoGroupNewTabsDelayOnNewWindow_after": { "message": "ミリ秒以内に開かれたタブは「ホームページ」の一部と見なしてグループ化しない" },
   "config_warnOnAutoGroupNewTabs_label": { "message": "自動的にグループ化する前に確認する" },
   "config_warnOnAutoGroupNewTabsWithListing_label": { "message": "グループ化しようとしているタブの一覧を確認のダイアログに表示する" },
 
@@ -625,7 +609,6 @@
   "config_autoExpandOnLongHoverDelay_after":  { "message": "ミリ秒以上経過したらツリーを展開する" },
   "config_autoExpandOnLongHoverRestoreIniitalState_label":  { "message": "ドラッグ操作の終了後、ツリーを折りたたんだ状態に自動的に戻す" },
   "config_autoExpandIntelligently_label":  { "message": "折りたたまれたツリーを自動展開したときに、他のツリーを自動的に折りたたむ" },
-  "config_ignoreTabDropNearSidebarArea_label":  { "message": "サイドバーの近くにタブをドロップした場合はウィンドウから切り離さない（\"privacy.resistFingerprinting\"=\"true\" に設定しているときはチェックを外すことをおすすめします）" },
 
 
   "config_more_caption": { "message": "その他..." },
@@ -660,7 +643,7 @@
   "config_scrollLines_label_before": { "message": "キーボードショートカットの「タブの一覧を数行上/下にスクロール」で" },
   "config_scrollLines_label_after":  { "message": "行分スクロールする" },
 
-  "config_userStyleRules_label": { "message": "ツリー型垂直タブが提供するページ用の追加のスタイル指定" },
+  "config_userStyleRules_label": { "message": "ツリー型タブが提供するページ用の追加のスタイル指定" },
   "config_userStyleRules_description_before": { "message": "\u200b" },
   "config_userStyleRules_description_link_label": { "message": "目的別の指定例" },
   "config_userStyleRules_description_after": { "message": "も参照して下さい。" },
@@ -693,7 +676,7 @@
   "helper_theme_list_link_uri": { "message": "https://github.com/piroor/treestyletab/wiki/Code-snippets-for-custom-style-rules#restore-old-built-in-themes" },
 
   "config_externaladdonpermissions_label": { "message": "他のアドオンからのAPI呼び出しに与える許可" },
-  "config_externaladdonpermissions_description": { "message": "ここでチェックを入れたアドオンは、Firefox自体がそのアドオンにタブの詳細情報やプライベートウィンドウのタブへのアクセスを禁止していても、<em>Tree-shaped vertical tabsの権限で</em>それらにアクセスできるようになります。<em>信用できないアドオンに対しては絶対に権限を与えないで下さい。<em>" },
+  "config_externaladdonpermissions_description": { "message": "ここでチェックを入れたアドオンは、Firefox自体がそのアドオンにタブの詳細情報やプライベートウィンドウのタブへのアクセスを禁止していても、<em>Tree Style Tabの権限で</em>それらにアクセスできるようになります。<em>信用できないアドオンに対しては絶対に権限を与えないで下さい。<em>" },
   "config_externalAddonPermissions_header_name": { "message": "アドオン名" },
   "config_externalAddonPermissions_header_permissions": { "message": "許可する特別な操作" },
   "config_externalAddonPermissions_header_incognito": { "message": "プライベートウィンドウからのメッセージを通知する" },
@@ -724,8 +707,6 @@
   "config_loggingConnectionMessages_label": { "message": "内部通信のログを収集" },
   "config_showLogsButton_label": { "message": "ログを表示" },
   "config_simulateSVGContextFill_label": { "message": "Bug 1388193およびBug 1421329を回避して擬似的にSVGアイコンを表示する（※CPU負荷が高まる可能性があります。このオプションを無効にする場合、これらのBugが修正されるまでは\"about:config\"で\"svg.context-properties.content.enabled\"を有効化する必要があります。）" },
-  "config_staticARIALabel_label": { "message": "タブ要素のARIAラベルを固定する" },
-  "config_staticARIALabel_description": { "message": "※何らかのタブ操作のあとで音声認識システムがタブ要素を見失ってしまう場合、このチェックをONにしてください。" },
   "config_useCachedTree_label": { "message": "キャッシュを使ってツリーの初期化を高速化する" },
   "config_useCachedTree_description": { "message": "※キャッシュの不整合で動作が不安定になっている場合、このチェックをOFFにして再度ONにすることでキャッシュが刷新され状況が改善するかもしれません。" },
   "config_acceleratedTabCreation_label": { "message": "新しいタブが開かれた時の処理を高速化する（※動作が不安定になります）" },
@@ -747,12 +728,12 @@
   "config_requestPermissions_bookmarks_context": { "message": "ブックマーク用のコンテキストメニューを開くことを許可する" },
   "config_requestPermissions_tabHide":   { "message": "個々のタブの表示・非表示の制御を許可する（※この操作が許可されていることを確かめるため、テスト実行前には必ずチェックボックスを一旦OFFにしてから再度ONにして下さい）" },
 
-  "config_requestPermissions_fallbackToToolbarButton_title": { "message": "ツールバーの「ツリー型垂直タブ」ボタンをクリックして下さい" },
-  "config_requestPermissions_fallbackToToolbarButton_message": { "message": "Firefoxのバグのため、権限をこの画面から要求することができません。ツールバー上の「ツリー型垂直タブ」ボタンをクリックして権限を承認して下さい。" },
+  "config_requestPermissions_fallbackToToolbarButton_title": { "message": "ツールバーの「ツリー型タブ」ボタンをクリックして下さい" },
+  "config_requestPermissions_fallbackToToolbarButton_message": { "message": "Firefoxのバグのため、権限をこの画面から要求することができません。ツールバー上の「ツリー型タブ」ボタンをクリックして権限を承認して下さい。" },
 
   "config_all_caption": { "message": "すべての設定" },
 
-  "config_terms_delimiter": { "message": "\u200b" },
+  "config_terms_delimiter": { "message": "" },
 
 
   "tabContextMenu_newTab_label":      { "message": "新しいタブ(&W)" },

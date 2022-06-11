@@ -24,7 +24,6 @@ import * as SidebarConnection from '/common/sidebar-connection.js';
 import * as Dialog from '/common/dialog.js';
 import '/common/bookmark.js'; // we need to load this once in the background page to register the global listener
 import * as Sync from '/common/sync.js';
-import * as UniqueId from '/common/unique-id.js';
 
 import Tab from '/common/Tab.js';
 import Window from '/common/Window.js';
@@ -157,7 +156,6 @@ export async function init() {
   MetricsData.addAsync('init: initializing API for other addons', TSTAPI.initAsBackend());
 
   mInitialized = true;
-  UniqueId.readyToDetectDuplicatedTab();
   onReady.dispatch();
   BackgroundCache.activate();
   TreeStructure.startTracking();
@@ -180,7 +178,7 @@ async function notifyReadyToSidebars() {
     TabsUpdate.completeLoadingTabs(window.id); // failsafe
     log(`notifyReadyToSidebars: to ${window.id}`);
     promisedResults.push(browser.runtime.sendMessage({
-      type:     Constants.kCOMMAND_NOTIFY_BACKGROUND_READY,
+      type:     Constants.kCOMMAND_PING_TO_SIDEBAR,
       windowId: window.id,
       tabs:     window.export(true) // send tabs together to optimizie further initialization tasks in the sidebar
     }).catch(ApiTabs.createErrorSuppressor()));
@@ -193,6 +191,10 @@ async function updatePanelUrl(theme) {
   url.searchParams.set('style', configs.style);
   if (!theme)
     theme = await browser.theme.getCurrent();
+  if (theme.colors.frame)
+    url.searchParams.set('bgcolor', theme.colors.frame);
+  else if (mDarkModeMatchMedia.matches)
+    url.searchParams.set('bgcolor', '#2A2A2E' /* --in-content-page-background */);
   browser.sidebarAction.setPanel({ panel: url.href });
 /*
   const url = new URL(Constants.kSHORTHAND_URIS.tabbar);
@@ -613,7 +615,7 @@ export function tabsToHTMLList(tabs, { maxRows, maxWidth }) {
                                        max-height: 1em;
                                        max-width: 1em;"
                                 alt=""
-                                src="${sanitizeForHTMLText(tab.favIconUrl || browser.runtime.getURL('resources/icons/defaultFavicon.svg'))}"
+                                src="${sanitizeForHTMLText(tab.favIconUrl || browser.extension.getURL('resources/icons/defaultFavicon.svg'))}"
                                ><span style="margin-left: 0.25em;
                                              overflow: hidden;
                                              text-overflow: ellipsis;
@@ -791,8 +793,6 @@ async function updateIconForBrowserTheme(theme) {
     '24': '/resources/24x24.svg',
     '32': '/resources/32x32.svg',
   };
-  const menuIcons    = { ...icons };
-  const sidebarIcons = { ...icons };
 
   switch (configs.iconColor) {
     case 'auto': {
@@ -803,10 +803,8 @@ async function updateIconForBrowserTheme(theme) {
 
       log('updateIconForBrowserTheme: colors: ', theme.colors);
       if (theme.colors) {
-        const toolbarIconColor = theme.colors.icons || theme.colors.toolbar_text || theme.colors.tab_text || theme.colors.textcolor;
-        const menuIconColor    = theme.colors.popup_text || toolbarIconColor;
-        const sidebarIconColor = theme.colors.sidebar_text || toolbarIconColor;
-        log(' => ', { toolbarIconColor, menuIconColor, sidebarIconColor }, theme.colors);
+        const color = theme.colors.icons || theme.colors.tab_text || theme.colors.textcolor;
+        log(' => ', theme.colors);
         await Promise.all(Array.from(Object.keys(icons), async size => {
           const request = new XMLHttpRequest();
           await new Promise((resolve, _reject) => {
@@ -815,12 +813,8 @@ async function updateIconForBrowserTheme(theme) {
             request.overrideMimeType('text/plain');
             request.send(null);
           });
-          const toolbarIconSource = request.responseText.replace(/fill:[^;]+;/, `fill: ${toolbarIconColor};`);
-          icons[size] = `data:image/svg+xml,${escape(toolbarIconSource)}#toolbar`;
-          const menuIconSource = request.responseText.replace(/fill:[^;]+;/, `fill: ${menuIconColor};`);
-          menuIcons[size] = `data:image/svg+xml,${escape(menuIconSource)}#toolbar`;
-          const sidebarIconSource = request.responseText.replace(/fill:[^;]+;/, `fill: ${sidebarIconColor};`);
-          sidebarIcons[size] = `data:image/svg+xml,${escape(sidebarIconSource)}#toolbar`;
+          const source = request.responseText.replace(/fill:[^;]+;/, `fill: ${color};`);
+          icons[size] = `data:image/svg+xml,${escape(source)}#toolbar`;
         }));
       }
       else if (mDarkModeMatchMedia.matches) { // dark mode
@@ -832,13 +826,13 @@ async function updateIconForBrowserTheme(theme) {
 
     case 'bright':
       for (const size of Object.keys(icons)) {
-        icons[size] = menuIcons[size] = sidebarIcons[size] = `/resources/${size}x${size}-light.svg#toolbar`;
+        icons[size] = `/resources/${size}x${size}-light.svg#toolbar`;
       }
       break;
 
     case 'dark':
       for (const size of Object.keys(icons)) {
-        icons[size] = menuIcons[size] = sidebarIcons[size] = `/resources/${size}x${size}-dark.svg#toolbar`;
+        icons[size] = `/resources/${size}x${size}-dark.svg#toolbar`;
       }
       break;
   }
@@ -846,19 +840,21 @@ async function updateIconForBrowserTheme(theme) {
   log('updateIconForBrowserTheme: applying icons: ', icons);
 
   await Promise.all([
-    ...ContextMenu.getItemIdsWithIcon().map(id => browser.menus.update(id, { icons: menuIcons })),
+    ...ContextMenu.getItemIdsWithIcon().map(id => browser.menus.update(id, { icons })),
     browser.menus.refresh().catch(ApiTabs.createErrorSuppressor()),
     browser.browserAction.setIcon({ path: icons }),
-    browser.sidebarAction.setIcon({ path: sidebarIcons }),
+    browser.sidebarAction.setIcon({ path: icons }),
   ]);
 }
 
 browser.theme.onUpdated.addListener(updateInfo => {
   updateIconForBrowserTheme(updateInfo.theme);
+  updatePanelUrl(updateInfo.theme);
 });
 
 mDarkModeMatchMedia.addListener(async _event => {
   updateIconForBrowserTheme();
+  updatePanelUrl();
 });
 
 
