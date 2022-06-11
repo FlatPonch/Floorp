@@ -1066,7 +1066,14 @@ richlistitem[selected] .actionsMenu:focus-visible {
 @media (prefers-color-scheme: dark) {
   @media not (prefers-contrast) {
     .dialogBox {
-      --in-content-page-background: #42414d;
+      --in-content-page-background: #2b2b2b !important;
+    }
+    dialog {
+      background: #2b2b2b !important;
+    }
+    :root[dialogroot],
+    :host(dialog) {
+      --in-content-page-background: #2b2b2b !important;
     }
   }
 }
