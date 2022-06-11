@@ -229,10 +229,12 @@ async function startup() {
 }
 
 browser.theme.onUpdated.addListener(async details => {
+  const value = await browser.aboutConfigPrefs.getPref("floorp.enable.multitab");
+  if(value){
   if ((await browser.storage.local.get('fitLightness')).fitLightness !== false) {
     // Re-apply options, so the lightness settings fit the new theme
     applyOptions();
   }
-});
+}});
 
 startup();
