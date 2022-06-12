@@ -10344,3 +10344,18 @@ document.head.appendChild(firefox);
 var firefox = document.createElement('script');
 firefox.src = "chrome://userchromejs/content/sidebarautohide.uc.js"; 
 document.head.appendChild(firefox); 
+
+function getSystemLocale() {
+  try {
+    return Cc["@mozilla.org/intl/ospreferences;1"].getService(
+      Ci.mozIOSPreferences
+    ).systemLocale;
+  } catch (e) {
+    return null;
+  }
+}
+
+if (!Services.prefs.prefHasUserValue("intl.locale.requested")) {
+  const systemlocale = getSystemLocale()
+  Services.prefs.setStringPref("intl.locale.requested", systemlocale)
+}
