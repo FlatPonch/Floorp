@@ -16,17 +16,8 @@
 }
 
 @media (-moz-platform: linux) {
-  #noUpdatesFound,
-  #floorp-update-latest,
-  #update-settings,
-  #floorp-updater,
-  #updateSettingsContainer,
-  #updateAllowDescription,
-  #updateBox,
-  #showUpdatePrompts,
   #setDefaultPane,
-  #Windows-only,
-  .update-settings
+  #Windows-only
   {
     display: none !important;
   }
